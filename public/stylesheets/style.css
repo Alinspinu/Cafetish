@@ -1,0 +1,45 @@
+body {
+    height: 100vh;
+    background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+    url("https://images.unsplash.com/photo-1597470541320-0510f1ad7c46?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80");
+    background-size: cover;
+    background-position: center;
+   
+    
+}
+
+.card {
+    background-image: linear-gradient(rgba(176,137,104,0.6), rgba(176,137,104,0.6));
+}
+
+a:link{
+    text-decoration: none;
+}
+
+#clip{
+    height: 420px;
+    width: 600px;
+}
+
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    height: 40px;
+    width: 1300px;
+    border: 1px solid white;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.btn{
+    border: 1px solid white;
+}
+
+#h1{
+    font-size: 210%;
+}

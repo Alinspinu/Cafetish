@@ -1,0 +1,38 @@
+<% layout('layouts/boilerplate') %>
+<div class="container-flex">
+<div class="row mt-2">
+    <div class="col-lg-4 offset-lg-4">
+        <div class="card bg-transparent" style="width: 22.7rem;">
+          <% if(!produs.video) {%> 
+            <div class="col-lg-6">
+              <img src="https://res.cloudinary.com/dhetxk68c/image/upload/w_360/v1668203025/ProduseI/novideo_z04vso.png" alt="">
+            </div>
+              <% } else { %>
+                <div class="col">
+                  <iframe width="360" height="360" src="<%=produs.video%>" title="cappuccino first try" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <% } %>  
+            <div class="card-body text-white">
+              <h5 class="card-title"><%=produs.nume%></h5>
+              <p class="card-text"><%= produs.descriere%> </p>
+              <form action="/meniu/cats/produs/<%=produs._id%>?_method=DELETE" method="POST">
+                <a href="/meniu" class="btn btn-primary bg-transparent">Meniu</a>
+                <% if(autUser && autUser.admin===flowerpower) { %> 
+                <a href="/meniu/cats/produs/<%=produs._id%>/edit" class="btn btn-success bg bg-transparent">Modifică</a>
+              <button class="btn btn-danger">Șterge</button>
+              <% } %> 
+              </form>
+            </div>
+          </div>
+    </div>   
+    </div>
+
+</div>
+</div>
+
+
+
+
+
+ 
+ 

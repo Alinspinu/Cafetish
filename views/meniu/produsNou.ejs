@@ -1,0 +1,48 @@
+<% layout('layouts/boilerplate') %>
+
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form action="/meniu/cats/produs/nou" method="POST" enctype="multipart/form-data" novalidate class="validated-form">
+                    <div class="input-group mb-3">
+                        <input type="text" name="produs[nume]" id="nume" class="form-control text-white bg-dark" placeholder="Denumire Produs"
+                            aria-describedby="basic-addon1" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" name="produs[gramaj]" id="gramaj" class="form-control text-white bg-dark" placeholder="Gramaj"
+                            aria-describedby="basic-addon1" required>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" name="produs[pret]" id="pret" class="form-control text-white bg-dark" placeholder="Preț"
+                            aria-describedby="basic-addon1" required>
+                    </div>
+                  
+                    <div class="input-group mb-3">
+                        <span class="input-group-text text-white bg-dark" for="video">Youtube URL</span>
+                        <input type="text" name="produs[video]" id="video" class="form-control text-white bg-dark" placeholder="Youtube URL"
+                            aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group">
+                        <!-- <span class="input-group-text text-white bg-dark" for="imagine">Imagine</span> -->
+                        <label for="imagine" class="custom-file-upload text-white bg-dark mb-2">Imagine</label>
+                        <input type="file" name="imagine" id="imagine" class="form-control form-control-color" placeholder="Poză"
+                            aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-grup mb-3">
+                        <label class="text-white bg-transparent mb-2" for="cat"> Selectează o categorie</label>
+                        <select class="form-select text-white bg-dark" name="produs[categorie]" aria-label="Default select example" id="cat">
+                          <% for(let i=0; i<cats.length; i++) {%> 
+                            <option value="<%=cats[i]._id%>"><%=cats[i].nume%></option>
+                          <% } %> 
+                          </select>
+                    </div>
+                
+                    <div class="input-group mb-3">
+                        <textarea class="form-control text-white bg-dark" name="produs[descriere]" placeholder="Descriere"></textarea>
+                    </div>
+        
+                    <button class="btn btn-dark btn-lg mt-3">Adaugă</button>
+                </form>
+            </div>
+        </div>
+    </div>

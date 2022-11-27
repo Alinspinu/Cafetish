@@ -1,0 +1,39 @@
+<% layout('layouts/boilerplate') %>
+
+  <div class="container-fluid mt-3">
+    <h1 class="text-center text-white mt-5" id="h1">Categorii de produse</h1>
+    <div class="row">
+      
+      <% cats.forEach(function(cat, i) {%>
+        <div class="col-lg-6 col-xl-4 gx-3 mt-2">
+            <a href="/meniu/cat/<%=cat._id%>">
+          <div class="card mt-3 shadow-lg bg-transparent">
+              <% if(!cat.imagine.path) {%>
+                <img class="img-fluid" 
+                  src="https://res.cloudinary.com/dhetxk68c/image/upload/w_200/v1668202831/ProduseI/downloadnoimgs_ghglfb.png"
+                  class="card-img-top" alt="">
+                <% } else {%>
+                  <img src="<%= cat.imagine.path.replace('/upload', '/upload/w_300')%> " class="card-img-top img-fluid ms-5"
+                    alt="..." id="img" style="width: 16rem;">
+                  <% } %>
+                </a>
+            <div class="card-body" id="card-body">
+              <h3 class="card-title text-white"><%=cat.nume%></h3>
+           
+            <p class="text-white">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas aspernatur totam voluptatem 
+              blanditiis voluptate tempora excepturi ipsa voluptatibus ab velit ad reiciendis, quia iusto error consequuntur doloremque nesciunt? Eius, nisi.</p>
+              <% if(autUser && autUser.admin===flowerpower){ %> 
+              <form action="/meniu/cat/<%=cat._id%>?_method=DELETE" method="POST">
+                <a href="/meniu/cats/<%=cat._id%>/edit" class="btn btn-sm btn-success bg bg-transparent">Modifică</a>
+                <button class="btn btn-secondary btn-sm bg-transparent">Delete</button>
+
+                <% } %> 
+              </form>
+            </div>
+          </div>
+        </div>
+      
+        <% }) %>
+    </div>
+</div>
+

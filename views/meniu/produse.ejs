@@ -1,0 +1,30 @@
+<% layout('layouts/boilerplate') %>
+  <div class="container-fluid">
+    <div class="row">
+      <% cat.produs.forEach(function(produs, i) {%>
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 gx-3">
+          <div class="card mt-3 shadow-md">
+            <a role="button" href="/meniu/cats/produs/<%=produs._id%>">
+              <% if(!produs.imagine.path) {%>
+                <img
+                  src="https://res.cloudinary.com/dhetxk68c/image/upload/w_200/v1668202831/ProduseI/downloadnoimgs_ghglfb.png"
+                  class="card-img-top" alt="">
+                <% } else {%>
+                  <img src="<%= produs.imagine.path.replace('/upload', '/upload/w_200')%> " class="card-img-top"
+                    alt="..." id="img">
+                  <% } %>
+                </a>
+            <div class="card-body" id="card-body">
+              <h6 class="card-title">
+                <%= produs.nume %>
+              </h6>
+              <p class="card-text">
+                <%= produs.pret%> / <%= produs.gramaj%>
+              </p>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+    </div>
+  </div>
+    

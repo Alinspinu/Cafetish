@@ -1,0 +1,41 @@
+<% layout('layouts/boilerplate') %>
+<div class="container-fluid  mt-5">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h4 class="text-white">Comandă și ridică</h4> <br>
+        <form action="/comanda" novalidate class="validated-form" method="POST">
+          <div class="input-group mb-3">
+            <input type="text" name="comanda[nume]" class="form-control text-white bg-dark" placeholder="Name" aria-describedby="basic-addon1"
+              required>
+            <div class="valid-feedback">Looks Good!!</div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="email" name="comanda[email]" class="form-control text-white bg-dark" placeholder="Email" aria-describedby="basic-addon1"
+              required>
+            <div class="valid-feedback">Looks Good!!</div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="text" name="comanda[telefon]" class="form-control text-white bg-dark" placeholder="Telefon"
+              aria-describedby="basic-addon1" required>
+            <div class="valid-feedback">Looks Good!!</div>
+          </div>
+          <div class="input-group mb-3">
+            <textarea class="form-control text-white bg-dark" name="comanda[mesaj]" placeholder="Comanda..." required></textarea>
+            <div class="valid-feedback">Looks Good!!</div>
+          </div>
+          <label for="timp" class="mb-2 text-white">În cât timp să fie gata?</label>
+          <div class="input-group">
+            <select class="form-select text-white bg-dark" type="number" name="comanda[timp]" id="timp"
+              aria-label="Example select with button addon" required>
+              <option value="5">5 Min</option>
+              <option selected value="10">10 Min</option>
+              <option value="15">15 Min</option>
+              <option value="30">30 Min</option>
+            </select>
+            <div class="valid-feedback">Looks Good!!</div>
+          </div>
+          <button class="btn btn-primary mt-3" id="btn">Comandă!</button>
+        </form>
+      </div>
+    </div>
+  </div>
