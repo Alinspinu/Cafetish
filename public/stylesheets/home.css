@@ -9,27 +9,6 @@ body {
     
 }
 
-.cover-container {
-    max-width: 60vw;
-}
-
-.nav-link {
-    padding: 0.25rem 0;
-    font-weight: 600;
-    color: rgba(255,255,255,0.8);
-    margin-left: 2rem;
-    
-}
-
-.nav-link:hover{
-    color: rgba(255,255,255,0.5);
-    
-}
-
-.nav-link.active{
-    color: white;
-    border-bottom-color: rgb(255,255,255);
-}
 
 .btn-secondary, .btn-secondary:hover{
     color: #333;
@@ -40,7 +19,7 @@ body {
 
 @media screen and (max-width: 500px) {
     .lead {
-      font-size: 20px;
+      font-size: 18px;
     }
 }
 

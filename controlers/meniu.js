@@ -1,5 +1,6 @@
 const Produs = require ('../models/produs')
 const Categorie = require('../models/categorie')
+const Cafea =require('../models/cafea')
 const { cloudinary } = require('../cloudinary');
 const ExpressError = require('../utilities/expressError');
 
@@ -155,10 +156,17 @@ module.exports.renderCafeaNou = (req, res) => {
     res.render('meniu/cafeaNou')
 }
 
-module.exports.renderCafeaEdit = async(req, res, next) => {
+// module.exports.renderCafeaEdit = async(req, res, next) => {
 
-}
+// }
 
 module.exports.cafeaNou = async(req, res, next) => {
-
+    const cafeaNou = new Cafea(req.body.cafea);
+    if(req.file){
+    cafeaNou.imagine.path = req.file.path
+    cafeaNou.imagine.filename = req.file.filename;
+    }
+    console.log(cafeaNou)
+    cafeaNou.save()
+    res.redirect('/meniu/cafea')
 }

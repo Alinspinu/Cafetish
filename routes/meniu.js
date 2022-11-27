@@ -41,9 +41,9 @@ router.route('/cats/produs/:id')
     .put(isAdmin, upload.single('imagine'), validateProdus, catchAsync(meniu.produsEdit))
     .delete(isAdmin, catchAsync(meniu.produsDelete))
 
-router.route('/cafea/:id')
-    .put(isAdmin, upload.single('cafImg'), validateCafea, catchAsync(meniu.cafeaEdit))
-    .delete(isAdmin, catchAsync(meniu.cafeaDelete))
+// router.route('/cafea/:id')
+//     .put(isAdmin, upload.single('cafImg'), validateCafea, catchAsync(meniu.cafeaEdit))
+//     .delete(isAdmin, catchAsync(meniu.cafeaDelete))
 
 router.route('/cats/produs/:id/edit')
     .get(isAdmin,catchAsync(meniu.renderProdusEdit))

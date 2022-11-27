@@ -55,7 +55,8 @@ const Joi = BaseJoi.extend(extension)
     module.exports.cafeaSchema = Joi.object({
         cafea: Joi.object({
             nume: Joi.string().required().escapeHTML(),
-            descriere: Joi.string().required().escapeHTML()
+            descriereEsp: Joi.string().required().escapeHTML(),
+            descriereFil: Joi.string().required().escapeHTML()
         }).required()
     })
  
