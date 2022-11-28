@@ -80,7 +80,10 @@ const styleSrcUrls = [
     "https://fonts.googleapis.com/",
     "https://use.fontawesome.com/",
 ];
-const fontSrcUrls = [];
+const fontSrcUrls = [
+    "https://fonts.googleapis.com/",
+    "https://fonts.gstatic.com"
+];
 app.use(
     helmet.contentSecurityPolicy({
         directives: {
