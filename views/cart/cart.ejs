@@ -1,0 +1,62 @@
+<% layout('layouts/boilerplate') %>>
+<script src="/javascripts/cart.js" defer></script> -->
+
+<div class="row mt-5 mb-2">
+    <div class="col-lg-6 offset-lg-3 text-white">
+        <i class="bi bi-cart3" style="font-size: 40px;"></i>
+        <span style="font-size: 40px;">Bunătați</span>
+    </div>
+</div>
+
+<% if(produse){%> 
+<div class="row">
+        <ul class="list-group">
+            <%produse.forEach(function(produs) { %> 
+            <li class="col-lg-6 offset-lg-3 list-group-item bg-transparent text-white">
+                <strong><%=produs.item.nume%></strong>
+                <spam class="label label-success "> <%=produs.pret%> Lei</spam>
+                <div class="counter">
+                    <input type="number" class="qty" value="<%=produs.qty%>">
+                <button class="btn btn-sm btn-danger">Șterge</button>
+                </div>
+                
+            </li>
+            <% }) %> 
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 offset-lg-3">
+        <strong class="total text-white">TOTAL <%=totalPrice%> Lei </strong>
+    </div>
+</div>
+
+<hr class="col-lg-6 offset-lg-3">
+<div class="col-lg-6 offset-lg-3 mt-2">
+    <label for="timp" class="mb-2 text-dark">În cât timp să fie gata?</label>
+    <div class="input-group">
+        <select class="form-select bg-transparent text-dark" style="border-color:black" type="number" name="comanda[timp]" id="timp"
+          aria-label="Example select with button addon" required>
+          <option value="5">5 Min</option>
+          <option selected value="10">10 Min</option>
+          <option value="15">15 Min</option>
+          <option value="30">30 Min</option>
+        </select>
+        <div class="valid-feedback">Looks Good!!</div>
+      </div>
+</div>
+<hr class="col-lg-6 offset-lg-3">
+
+<div class="row">
+    <div class="col-lg-6 offset-lg-3">
+        <a href="/order/checkout" type="button" class="btn btn-secondary">checkout</a>
+    </div>
+</div>
+<% } else {%> 
+<div class="row mt-5">
+    <div class="col-lg-6 offset-lg-3">
+        <h2>Coșul bunătăți este gol! Nu e bine mergi și pune ceva!</h2>
+    </div>
+    <% } %> 
+</div>
+

@@ -1,0 +1,27 @@
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheets/checkout.css"/>
+<script src="https://js.stripe.com/v3/"></script>
+<script src="/javascripts/checkout.js" defer></script>
+
+  <div class="container-fluid  mt-5">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h1 class="text-white">Platește</h1> <br>
+        <h3 class="text-white">Total: <%=total%> Lei</h3><br>
+  
+     
+        <!-- Display a payment form -->
+        <form id="payment-form" action="/create-payment-intent" method="POST">
+          <div id="payment-element">
+            <!--Stripe.js injects the Payment Element-->
+          </div>
+          <button id="submit">
+            <div class="spinner hidden" id="spinner"></div>
+            <span id="button-text">Pay now</span>
+          </button>
+          <div id="payment-message" class="hidden"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+

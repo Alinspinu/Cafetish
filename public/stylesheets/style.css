@@ -1,3 +1,4 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css");
 body {
     height: 100vh;
     background-image: linear-gradient(rgba(0,0,0, 0.2), rgba(0,0,0, 0.2)), linear-gradient(#83552d, 30%, #d09259, rgba(155, 116, 74, 1), #83552d);
@@ -5,8 +6,6 @@ body {
     background-position: center;
  
 }
-
-
 
 .card {
     background-image: linear-gradient(rgba(176,137,104,0.6), rgba(176,137,104,0.6));
@@ -45,11 +44,74 @@ input[type="file"] {
     font-family: Marcellus;
 }
 
-h3, p, h1, span{
+
+h3, p, h1, span, label, input, strong{
     font-family: Marcellus, sans-serif;
+}
+
+label{
+    color: black;
+    font-weight: 500;
 }
 
 .navbar, .btn{
     font-family: Marcellus;
     font-size: 20px;
+    border-color: black;
+}
+
+.counter {
+      width: 150px;
+      float: right;
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+.counter input {
+      width: 50px;
+      height: 35px;
+      border-color: white;
+      border-width: 0.5px;
+      border-radius: 17%;
+      line-height: 30px;
+      font-size: 22px;
+      text-align: center;
+      margin-right: 4px;
+      background: transparent;
+      color: #fff;
+      appearance: auto;
+      outline: 0;
+  }
+
+  input[type=number]::-webkit-inner-spin-button {
+    opacity: 0.2;
+  }
+
+
+.form-control::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: #fff;
+    opacity: 0.4;
+    font-size: small;
+}
+.form-control:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #fff;
+    opacity: 0.4;
+    font-size: small;
+    
+}
+.form-control::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #fff;
+    opacity: 0.4;
+    font-size: small;
+    
+}
+.form-control:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #fff;
+    opacity: 0.4;
+    font-size: small;
 }

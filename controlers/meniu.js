@@ -8,7 +8,7 @@ const ExpressError = require('../utilities/expressError');
 
 module.exports.renderMeniu =  async (req, res, next) => {
     const cats = await Categorie.find({})
-    res.render('meniu/meniu', {cats})
+    res.render('meniu/categorie/meniu', {cats})
 }
 
 
@@ -16,12 +16,12 @@ module.exports.renderMeniu =  async (req, res, next) => {
 
 
 module.exports.renderCatNou = (req, res) => {
-    res.render('meniu/catNou')
+    res.render('meniu/categorie/catNou')
 }
 
 module.exports.renderCatEdit =  async(req, res, next) => {
     const cat = await Categorie.findById(req.params.id)
-    res.render('meniu/editCat',{cat})
+    res.render('meniu/categori/editCat',{cat})
 }
 
 module.exports.catNou = async(req, res, next) => {
@@ -74,7 +74,7 @@ module.exports.renderProduse = async (req, res, next) => {
         path: 'produs'
     })
     if(cat){
-        return res.render('meniu/produse', {cat})
+        return res.render('meniu/produs/produse', {cat})
     } else {
         throw new ExpressError('Categoria de produse nu a fost gasită!', 404)
     }
@@ -82,12 +82,12 @@ module.exports.renderProduse = async (req, res, next) => {
 
 module.exports.renderProdusNou = async (req, res, next) => {
     const cats = await Categorie.find({})
-    res.render('meniu/produsNou', {cats})
+    res.render('meniu/produs/produsNou', {cats})
 }
 
 module.exports.renderProdusView =  async (req, res, next) => {
     const produs = await Produs.findById(req.params.id)
-    res.render('meniu/produsView',{produs})
+    res.render('meniu/produs/produsView',{produs})
 }
 
 
@@ -95,7 +95,7 @@ module.exports.renderProdusView =  async (req, res, next) => {
 module.exports.renderProdusEdit =  async(req, res, next) => {
     const cats = await Categorie.find({})
     const produs = await Produs.findById(req.params.id)
-    res.render('meniu/editProdus',{produs, cats})
+    res.render('meniu/produs/editProdus',{produs, cats})
 }
 
 
@@ -153,7 +153,7 @@ module.exports.produsDelete = async(req, res, next) => {
 }
 
 module.exports.renderCafeaNou = (req, res) => {
-    res.render('meniu/cafeaNou')
+    res.render('meniu/cafea/cafeaNou')
 }
 
 // module.exports.renderCafeaEdit = async(req, res, next) => {
@@ -162,11 +162,14 @@ module.exports.renderCafeaNou = (req, res) => {
 
 module.exports.cafeaNou = async(req, res, next) => {
     const cafeaNou = new Cafea(req.body.cafea);
-    if(req.file){
+    if(req.file) {
+        return next(new ExpressError('Cafeaua trebuie să conțină o imagine', 404))
+     } else {
     cafeaNou.imagine.path = req.file.path
     cafeaNou.imagine.filename = req.file.filename;
-    }
     console.log(cafeaNou)
-    cafeaNou.save()
+    await cafeaNou.save()
+    req.flash('success', `Felicitări! Tocmai ai adăugat: ${cafeaNou.nume}`)
+    }
     res.redirect('/meniu/cafea')
 }

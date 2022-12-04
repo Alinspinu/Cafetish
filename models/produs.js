@@ -20,7 +20,7 @@ const produsSchema = new Schema({
         filename: String
     },
     video: String,
-    pret: String,
+    pret: Number,
     descriere: String,
     categorie:
     {

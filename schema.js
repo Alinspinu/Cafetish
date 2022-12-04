@@ -30,7 +30,7 @@ const Joi = BaseJoi.extend(extension)
             // imagine: Joi.string(),
             video: Joi.string().escapeHTML(),
             categorie: Joi.string().required().escapeHTML(),
-            pret: Joi.string().required().escapeHTML(),
+            pret: Joi.number().required(),
             descriere: Joi.string().required().escapeHTML()
         }).required()
     })

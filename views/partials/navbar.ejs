@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-dark navbar-expand-lg bg-transparent mb-auto">
+<nav class="navbar navbar-dark navbar-expand-lg bg-transparent">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
           <img src="https://res.cloudinary.com/dhetxk68c/image/upload/v1669059903/ProduseI/Logo_Cafetish_Alb-02_qmietq.png" alt="Bootstrap" width="80" height="40">
@@ -13,12 +13,10 @@
               <a class="nav-link text-white" aria-current="page" href="/meniu">Meniu</a>
             </li>
             <li>
-              <a class="nav-link text-white" aria-current="page" href="/comanda/cli">Comadă și ridică</a>
+              <a class="nav-link text-white" aria-current="page" href="/order/checkout">Comadă și ridică</a>
             </li>
           </ul>
-        
           <div class="navbar-nav ms-auto">
-            <li><i class="fa-light fa-cart-shopping">dsd</i></li>
               <% if(autUser && autUser.admin===flowerpower) {%> 
             <li class="nav-item">
                 <a class="nav-link text-white" href="/comanda">Comenzi</a>
@@ -37,6 +35,14 @@
             </div>
           
           
+          <a href="/cart" class="text-white">
+            <i class="bi bi-cart3"></i>
+            Coș cu bunătăți
+            <% if(session.cart) {%> 
+            <span class="badge bg-danger"><%=session.cart.totalQty%> </span>
+            <% } %> 
+          </a>
+          
           <div class="navbar-nav ms-auto"> 
             <% if(!autUser) {%> 
             <a href="/user/login" class = "nav-link text-white">Login</a>
@@ -50,4 +56,3 @@
       </div>
   </nav>
 
-  
