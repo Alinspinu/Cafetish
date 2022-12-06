@@ -9,8 +9,27 @@ router.route('/')
     .get(isAdmin,catchAsync(comenzi.renderComenzi))
     
 router.route('/checkout')
-    .get(comenzi.renderCheckoutForm)
-    .post(comenzi.checkout)
+    .get(isLoggedIn, comenzi.renderCheckoutForm)
+    .post(isLoggedIn, catchAsync(comenzi.checkout))
+
+router.route('/add-to-cart/:id')
+    .get(catchAsync(comenzi.addToCart))
+
+router.route('/reduce-by-one/:id')
+    .get(comenzi.reduceByOne)
+
+router.route('/add-by-one/:id')
+    .get(comenzi.addByOne)
+
+router.route('/cart')
+    .get(catchAsync(comenzi.cart))
+
+router.route('/create-payment-intent')
+    .post(catchAsync(comenzi.createPaymentIntent))
+
+router.route('/success')
+    .get(isLoggedIn,comenzi.renderSuccess)
+
 
 router.route('/:id')
     .delete(isAdmin,catchAsync(comenzi.comandaDelete))

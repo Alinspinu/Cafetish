@@ -13,8 +13,6 @@ module.exports.renderMeniu =  async (req, res, next) => {
 
 
 
-
-
 module.exports.renderCatNou = (req, res) => {
     res.render('meniu/categorie/catNou')
 }

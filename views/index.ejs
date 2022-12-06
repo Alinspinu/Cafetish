@@ -29,9 +29,6 @@
                 <li class="nav-item">
                   <a class="nav-link text-white" aria-current="page" href="/meniu">Meniu</a>
                 </li>
-                <li>
-                  <a class="nav-link text-white" aria-current="page" href="/order/checkout">Comadă și ridică</a>
-                </li>
               </ul>
               <div class="navbar-nav ms-auto">
                   <% if(autUser && autUser.admin===flowerpower) {%> 
@@ -51,7 +48,7 @@
                   <% } %> 
                 </div>
               
-              <a href="/cart" class="text-white">
+              <a href="/order/cart" class="text-white">
                 <i class="bi bi-cart3"></i>
                 Coș cu bunătăți
                 <% if(session.cart) {%> 
@@ -82,8 +79,7 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+
    
     
            
@@ -93,6 +89,8 @@
     </div>
 </footer>
         
+</body>
+</html>
 
 
 

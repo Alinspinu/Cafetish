@@ -23,8 +23,8 @@ router.route('/cafea')
     .post(isAdmin, upload.single('cafImg'), validateCafea, catchAsync(meniu.cafeaNou))
 
 router.route('/cats')
-    .get(isAdmin,meniu.renderCatNou)
-    .post(isAdmin, upload.single('catImg'), validateCat, catchAsync(meniu.catNou))
+    .get(meniu.renderCatNou)
+    .post( upload.single('catImg'), validateCat, catchAsync(meniu.catNou))
     
 
 router.route('/cat/:id')
@@ -33,8 +33,8 @@ router.route('/cat/:id')
     .delete(isAdmin,catchAsync(meniu.catDelete))
 
 router.route('/cats/produs/nou')
-    .get(isAdmin,catchAsync(meniu.renderProdusNou))
-    .post(isAdmin, upload.single('imagine'), validateProdus, catchAsync((meniu.produsNou)))
+    .get(catchAsync(meniu.renderProdusNou))
+    .post( upload.single('imagine'), validateProdus, catchAsync((meniu.produsNou)))
 
 router.route('/cats/produs/:id')
     .get(catchAsync(meniu.renderProdusView))

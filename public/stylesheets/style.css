@@ -45,7 +45,7 @@ input[type="file"] {
 }
 
 
-h3, p, h1, span, label, input, strong{
+h3, h2, p, h5, h1, span, label, input, strong{
     font-family: Marcellus, sans-serif;
 }
 
@@ -68,26 +68,49 @@ label{
       align-items: center;
       justify-content: center;
   }
-.counter input {
-      width: 50px;
-      height: 35px;
-      border-color: white;
-      border-width: 0.5px;
-      border-radius: 17%;
-      line-height: 30px;
-      font-size: 22px;
-      text-align: center;
-      margin-right: 4px;
-      background: transparent;
-      color: #fff;
-      appearance: auto;
-      outline: 0;
+
+  li {
+    border: none;
   }
 
-  input[type=number]::-webkit-inner-spin-button {
-    opacity: 0.2;
+  hr{
+    color:bisque;
   }
 
+  /* .pay{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+  } */
+
+  #pay{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    color: bisque;
+    background-color: #6a994e;
+    filter: drop-shadow(0 0 0.75rem #fcbf49);
+  }
+
+  .btn {
+    border: none;
+    background-color: #d4a373;
+    filter: drop-shadow(0 0 0.5rem #fcbf49);
+    color: #432818;
+  }
+
+
+
+
+
+/* .counter a{
+    border-color: bisque;
+    color: bisque;
+} */
 
 .form-control::-webkit-input-placeholder {
     /* WebKit, Blink, Edge */

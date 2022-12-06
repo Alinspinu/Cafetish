@@ -6,10 +6,20 @@ module.exports.renderRegister = (req, res) => {
 }
 
 module.exports.registerUser = async(req, res, next) => {
+    try{
     const {email, username, password, admin = 0} = req.body;
     const user = new User({email, admin, username});
     const registeredUser = await User.register(user, password);
-    res.redirect('/meniu')
+    req.login(registeredUser, err => {
+        if(err) return next(err);
+        req.flash('success', `Bine ai venit gașcă ${user.username}!`)
+        res.redirect('/meniu')
+    })
+}catch(e){
+    req.flash('error', e.message)
+    res.redirect('/user/register')
+}
+    
 }
 
 module.exports.renderLogin = (req, res) => {
@@ -19,7 +29,8 @@ module.exports.renderLogin = (req, res) => {
 module.exports.loginUser = (req, res) => {
     const {username} = req.body
     req.flash('success', `Salut ${username}! Bine ai venit la Cafetish!`)
-    res.redirect('/meniu')
+    const redirectUrl = req.session.returnUrl || '/meniu'
+    res.redirect(redirectUrl)
 }
 
 module.exports.logout = (req, res, next) => {

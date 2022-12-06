@@ -3,7 +3,7 @@ const stripe = Stripe("pk_test_51M9k8jFFsy1gu6PU0uAH1MH09KooARZ1G45N0DpC9kXOM9w7
 
 // The items the customer wants to buy
 const items = [{ id: "xl-tshirt" }];
-
+const URL = 'http://localhost:3000/order/success'
 let elements;
 
 initialize();
@@ -15,7 +15,7 @@ document
 
 // Fetches a payment intent and captures the client secret
 async function initialize() {
-  const response = await fetch("/create-payment-intent", {
+  const response = await fetch("/order/create-payment-intent", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ items }),
@@ -24,6 +24,16 @@ async function initialize() {
 
   const appearance = {
     theme: 'stripe',
+    variables: {
+      colorPrimary: '#fff',
+      colorBackground: '#d4a373',
+      colorText: '#fff',
+      colorDanger: '#df1b41',
+      fontFamily: 'Ideal Sans, system-ui, sans-serif',
+      spacingUnit: '2px',
+      borderRadius: '4px',
+      // See all possible variables below
+    }
   };
   elements = stripe.elements({ appearance, clientSecret });
 
@@ -43,7 +53,7 @@ async function handleSubmit(e) {
     elements,
     confirmParams: {
       // Make sure to change this to your payment completion page
-      return_url: "http://localhost:3000/success.html",
+      return_url: URL,
     },
   });
   
