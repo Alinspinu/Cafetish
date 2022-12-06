@@ -112,7 +112,7 @@ app.use(
     helmet.contentSecurityPolicy({
         directives: {
             defaultSrc: [],
-            connectSrc:["http://localhost:3000/order/create-payment-intent"],
+            connectSrc:["http://localhost:3000/order/create-payment-intent",'https://cafetish.azurewebsites.net/order/create-payment-intent'],
             formAction: ["'self'", 'https://checkout.stripe.com'],
             scriptSrcAttr:["'unsafe-inline'"],
             scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
