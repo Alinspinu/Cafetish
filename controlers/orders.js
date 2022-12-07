@@ -1,13 +1,19 @@
-const Comanda = require('../models/order')
+const Order = require('../models/order')
 const Cart = require('../models/cart')
 const Produs = require('../models/produs')
+const user = require('../models/user')
 const stripe = require('stripe')("sk_test_51M9k8jFFsy1gu6PUWj7pEdeN91IDJ8yIA3nVufeJmKNclRBDvpvaVD2ZMiAQnJrAm7eRQJsdccUL24ZrcWYHceex00yRRO58ZQ")
 
 
 
 module.exports.renderComenzi = async (req, res, next) => {
-    const comenzi = await Comanda.find({})
-    res.render('order/comenzi', {comenzi})
+    const orders = await Order.find({})
+    var cart;
+    orders.forEach(order => {
+        cart = new Cart(order.cart)
+        order.items = cart.generateArray();
+   })
+    res.render('order/comenzi', {orders})
 }
 
 module.exports.renderCheckoutForm = (req, res, next) => {
@@ -22,8 +28,16 @@ module.exports.checkout = async (req, res, next) =>{
     if(!req.session.cart) {
         return res.redirect('/meniu')
     }
-    const timp = req.body.comanda.timp
-    req.session.timp = timp;
+    let cart = new Cart(req.session.cart);
+    const order = new Order({
+        user: req.user,
+        cart: cart,
+        nume: req.user.username,
+        telefon: req.user.telefon,
+        timp: req.body.timp,
+        comentarii: req.body.comentarii
+    })
+    await order.save()
   res.redirect('/order/checkout')
 }
 
@@ -46,7 +60,7 @@ module.exports.reduceByOne = (req, res, next) =>{
 
 module.exports.addByOne = (req, res, next)=>{
     const produsId = req.params.id;
-    const cart = new Cart(req.session.cart ? req.session.cart: {});
+    const cart = new Cart(req.session.cart);
     cart.addByOne(produsId)
     req.session.cart = cart;
     res.redirect('/order/cart')
@@ -74,16 +88,19 @@ module.exports.createPaymentIntent = async (req, res, next) => {
         enabled: true,
       }, 
     })
-    console.log(req.session)
+  
     res.send({
       clientSecret: paymentIntent.client_secret, 
     });
   }
 
   module.exports.renderSuccess = (req, res) =>{
-    const nume = req.session.cart.nume
-    const qty = req.session.cart.qty
+    const timp = req.session.timp
+    req.session.cart = null
+    res.render('partials/success',{timp})
+}
 
+module.exports.renderSuccesss = (req, res) => {
     const timp = req.session.timp
     req.session.cart = null
     res.render('partials/success',{timp})
@@ -92,7 +109,7 @@ module.exports.createPaymentIntent = async (req, res, next) => {
 
 module.exports.comandaDelete = async (req, res, next) => {
     const { id } = req.params;
-    await Comanda.findByIdAndDelete(id);
+    await Order.findByIdAndDelete(id);
     res.redirect('/order')
 }
 

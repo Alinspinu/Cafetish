@@ -1,3 +1,4 @@
+const { boolean } = require('joi');
 const mongoose = require('mongoose');
 const user = require('./user');
 const Schema = mongoose.Schema;
@@ -13,21 +14,22 @@ const orederSchema = new Schema ({
         type: Object,
         required: true
     },
-    nume:
+    telefon: 
     {
-        type: String, 
-        requred: true
+        type: String,
+        required: true,
     },
-    adress: 
+    comentarii: 
     {
         type: String,
         required: false
     },
+    nume: String,
     timp: Number
  
 })
 
-module.exports = mongoose.model('Comanda', orederSchema)
+module.exports = mongoose.model('Order', orederSchema)
 
 
 

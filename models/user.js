@@ -8,6 +8,12 @@ const UserSchema = new Schema({
         required: true,
         unique: true
     },
+    telefon: 
+    {
+        type: String,
+        required: true      
+    },
+    
     admin: Number
 });
 

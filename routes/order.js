@@ -30,6 +30,9 @@ router.route('/create-payment-intent')
 router.route('/success')
     .get(isLoggedIn,comenzi.renderSuccess)
 
+router.route('/successs')
+    .get(isLoggedIn,comenzi.renderSuccesss)
+
 
 router.route('/:id')
     .delete(isAdmin,catchAsync(comenzi.comandaDelete))

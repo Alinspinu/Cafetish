@@ -16,8 +16,8 @@ router.route('/login')
 router.route('/logout')
     .get(user.logout)
 
-router.route('/register/admin')
-    .post(user.makeMasterAdmin)
+// router.route('/register/admin')
+//     .post(user.makeMasterAdmin)
 
     
 module.exports = router

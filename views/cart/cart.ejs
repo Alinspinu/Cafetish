@@ -31,14 +31,12 @@
     </div>
 </div>
 
-
-
 <form action="/order/checkout" method="post">
 <hr class="col-lg-6 offset-lg-3">
 <div class="col-lg-6 offset-lg-3 mt-2">
     <label for="timp" class="mb-2 text-white">În cât timp să fie gata?</label>
     <div class="input-group">
-        <select class="form-select bg-transparent text-white" style="border-color: bisque;" type="number" name="comanda[timp]" id="timp"
+        <select class="form-select bg-transparent text-white" style="border-color: bisque;" type="number" name="timp" id="timp"
           aria-label="Example select with button addon" required>
           <option value="5">5 Min</option>
           <option selected value="10">10 Min</option>
@@ -49,13 +47,16 @@
       </div>
 </div>
 <hr class="col-lg-6 offset-lg-3">
-
+<div class="col-lg-6 offset-lg-3 mt-2">
+    <label for="comentarii" class="mb-2 text-white">Scrie-ne detalii despre comanda!</label>
+    <textarea name="comentarii"  id="comentarii" class="form-control bg-transparent text-white mb-3" placeholder="Comentarii"></textarea>
+</div>
 <div class="row">
     <div class="col-lg-6 offset-lg-3">
             <button class="btn btn-sm">Comandă</button>
-        </form>
     </div>
 </div>
+</form>
 
 <% } else {%> 
 <div class="row mt-5">

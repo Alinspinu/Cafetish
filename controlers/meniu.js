@@ -19,7 +19,7 @@ module.exports.renderCatNou = (req, res) => {
 
 module.exports.renderCatEdit =  async(req, res, next) => {
     const cat = await Categorie.findById(req.params.id)
-    res.render('meniu/categori/editCat',{cat})
+    res.render('meniu/categorie/editCat',{cat})
 }
 
 module.exports.catNou = async(req, res, next) => {
@@ -61,9 +61,6 @@ module.exports.catDelete = async (req, res, next) => {
     req.flash('success', `Felicitări! Ai șters cu succes categoria: ${cat.nume}`)
     res.redirect('/meniu');
 }
-
-
-
 
 
 

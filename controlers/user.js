@@ -7,8 +7,8 @@ module.exports.renderRegister = (req, res) => {
 
 module.exports.registerUser = async(req, res, next) => {
     try{
-    const {email, username, password, admin = 0} = req.body;
-    const user = new User({email, admin, username});
+    const {email, username, password, admin = 0, telefon} = req.body;
+    const user = new User({email, admin, username, telefon});
     const registeredUser = await User.register(user, password);
     req.login(registeredUser, err => {
         if(err) return next(err);
@@ -45,8 +45,8 @@ module.exports.logout = (req, res, next) => {
 }
 
 module.exports.makeMasterAdmin = async(req, res) => {
-    const {email, username, password, admin = 1} = req.body;
-    const user = new User({email, admin, username});
+    const {email, username, password, admin = 1, telefon} = req.body;
+    const user = new User({email, admin, username, telefon});
     const registeredUser = await User.register(user, password);
     res.redirect('/meniu')
 }

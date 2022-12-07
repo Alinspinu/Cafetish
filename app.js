@@ -112,6 +112,7 @@ app.use(
     helmet.contentSecurityPolicy({
         directives: {
             defaultSrc: [],
+            mediaSrc:['https://res.cloudinary.com/'],
             connectSrc:["http://localhost:3000/order/create-payment-intent",'https://cafetish.azurewebsites.net/order/create-payment-intent'],
             formAction: ["'self'", 'https://checkout.stripe.com'],
             scriptSrcAttr:["'unsafe-inline'"],
@@ -145,7 +146,6 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-    console.log(req.session)
     res.locals.flowerpower = 1;
     res.locals.autUser = req.user;
     res.locals.success = req.flash('success');
@@ -160,6 +160,8 @@ app.get('/', (req, res)=>{
 app.use('/meniu', meniuRoutes);
 app.use('/order', comandaRoutes);
 app.use('/user', userRoutes);
+
+app.get('')
 
  
 
