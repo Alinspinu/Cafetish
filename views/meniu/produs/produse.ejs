@@ -21,8 +21,8 @@
               <p class="card-text">
                 <%= produs.descriere%>
               </p>
-              <form action="/order/add-to-cart/<%=produs._id%>" method="get">
-                <button class="btn btn-sm bg-transparent" name ="addButton" >Adaugă</button>
+              <form action="/order/add-to-cart/<%=produs._id%>" method="POST">
+                <button class="btn btn-sm btn-success" name ="addButton" >Adaugă</button>
               </form>
 
             </div>

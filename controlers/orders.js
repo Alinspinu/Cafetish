@@ -2,6 +2,7 @@ const Order = require('../models/order')
 const Cart = require('../models/cart')
 const Produs = require('../models/produs')
 const user = require('../models/user')
+const { findByIdAndUpdate } = require('../models/user')
 const stripe = require('stripe')("sk_test_51M9k8jFFsy1gu6PUWj7pEdeN91IDJ8yIA3nVufeJmKNclRBDvpvaVD2ZMiAQnJrAm7eRQJsdccUL24ZrcWYHceex00yRRO58ZQ")
 
 
@@ -37,6 +38,8 @@ module.exports.checkout = async (req, res, next) =>{
         timp: req.body.timp,
         comentarii: req.body.comentarii
     })
+    req.session.cart.orderId = order.id
+    console.log(req.session.cart)
     await order.save()
   res.redirect('/order/checkout')
 }
@@ -47,7 +50,7 @@ module.exports.addToCart = async(req, res, next) => {
     const produs = await Produs.findById(produsId)
     cart.add(produs, produs.id)
     req.session.cart = cart;
-    res.redirect('back')
+    res.redirect('back');
 }
 
 module.exports.reduceByOne = (req, res, next) =>{
@@ -94,16 +97,20 @@ module.exports.createPaymentIntent = async (req, res, next) => {
     });
   }
 
-  module.exports.renderSuccess = (req, res) =>{
-    const timp = req.session.timp
+  module.exports.renderSuccess = async (req, res, next) =>{
+    const order = await Order.findById(req.session.cart.orderId)
+    order.payd = 'YES'
+    await order.save()
     req.session.cart = null
-    res.render('partials/success',{timp})
+    res.render('partials/success', {order})
 }
 
-module.exports.renderSuccesss = (req, res) => {
-    const timp = req.session.timp
+module.exports.renderSuccesss = async(req, res, next) => {
+    const order = await Order.findById(req.session.cart.orderId)
+    order.payd = 'NO'
+    await order.save()
     req.session.cart = null
-    res.render('partials/success',{timp})
+    res.render('partials/success', {order})
 }
 
 

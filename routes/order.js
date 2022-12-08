@@ -13,13 +13,13 @@ router.route('/checkout')
     .post(isLoggedIn, catchAsync(comenzi.checkout))
 
 router.route('/add-to-cart/:id')
-    .get(catchAsync(comenzi.addToCart))
+    .post(catchAsync(comenzi.addToCart))
 
 router.route('/reduce-by-one/:id')
-    .get(comenzi.reduceByOne)
+    .post(comenzi.reduceByOne)
 
 router.route('/add-by-one/:id')
-    .get(comenzi.addByOne)
+    .post(comenzi.addByOne)
 
 router.route('/cart')
     .get(catchAsync(comenzi.cart))
@@ -28,10 +28,10 @@ router.route('/create-payment-intent')
     .post(catchAsync(comenzi.createPaymentIntent))
 
 router.route('/success')
-    .get(isLoggedIn,comenzi.renderSuccess)
+    .get(isLoggedIn,catchAsync(comenzi.renderSuccess))
 
 router.route('/successs')
-    .get(isLoggedIn,comenzi.renderSuccesss)
+    .get(isLoggedIn,catchAsync(comenzi.renderSuccesss))
 
 
 router.route('/:id')

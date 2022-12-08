@@ -137,6 +137,7 @@ app.use(
 
 app.use(flash());
 
+app.disable('etag');
 app.use(session(sessionConfig));
 app.use(passport.initialize());
 app.use(passport.session());

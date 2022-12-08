@@ -1,23 +1,27 @@
 <% layout('layouts/boilerplate') %>
 <!-- <script src="/javascripts/cart.js" defer></script>  -->
 <div class="row mt-5 mb-2">
-    <div class="col-lg-6 offset-lg-3 text-white">
-        <span style="font-size: 40px;">Bunătați</span>
+    <div class="col-lg-6 offset-lg-3 text-white" style="text-align: center;">
+        <p class="lead fs-3">Bunătațile se ridică din locație!</p>
     </div>
 </div>
 
 <% if(session.cart){%> 
 <div class="row">
-        <ul class="list-group">
+        <ul class="list-group col-lg-6 offset-lg-3">
             <%produse.forEach(function(produs) { %> 
-            <li class="col-lg-6 offset-lg-3 list-group-item bg-transparent text-white border-white" style="--bs-border-opacity: .3;">
+            <li class="list-group-item bg-transparent text-white border-white" style="--bs-border-opacity: .3;">
                 <span class="badge bg-success mx-1"><%=produs.qty%> </span>
                 <strong><%=produs.item.nume%></strong>
                 <spam class="label label-success "> <%=produs.pret%> Lei</spam>
                 <img src="<%=produs.img%>" style="width: 60px; height: 50px;" class="" alt="">
                 <div class="counter">
-                    <a href="/order/reduce-by-one/<%=produs.item._id%>" type="button" class="btn btn-sm mx-2">-1</a>
-                    <a href="/order/add-by-one/<%=produs.item._id%>" type="button" class="btn btn-sm mx-2">+1</a>
+                    <form action="/order/reduce-by-one/<%=produs.item._id%>" method="POST">
+                        <button class="btn btn-sm mx-2">-1</button>
+                    </form> 
+                    <form action="/order/add-by-one/<%=produs.item._id%>" method="POST">
+                        <button class="btn btn-sm mx-2">+1</button>
+                    </form> 
                 </div>
             </li>
             <% }) %> 

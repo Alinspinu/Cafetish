@@ -61,7 +61,7 @@ label{
 }
 
 .counter {
-      width: 150px;
+      width: 60px;
       float: right;
       margin-left: auto;
       display: flex;
@@ -77,13 +77,6 @@ label{
     color:bisque;
   }
 
-  /* .pay{
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-  } */
 
   #pay{
     margin-top: 20px;
@@ -102,6 +95,7 @@ label{
     filter: drop-shadow(0 0 0.5rem #fcbf49);
     color: #432818;
   }
+
 
 
 

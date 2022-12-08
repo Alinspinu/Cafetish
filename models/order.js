@@ -24,6 +24,7 @@ const orederSchema = new Schema ({
         type: String,
         required: false
     },
+    payd: String,
     nume: String,
     timp: Number
  
