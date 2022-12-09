@@ -96,9 +96,15 @@ label{
     color: #432818;
   }
 
+ #detaliiCafea {
+    font-size: 1.2rem;
+    color:bisque;
+    cursor:pointer;
+}
 
-
-
+#detaliiCafea:hover{
+    color:#fcbf49;
+}
 
 
 

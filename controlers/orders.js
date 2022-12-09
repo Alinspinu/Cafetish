@@ -113,7 +113,6 @@ module.exports.renderSuccesss = async(req, res, next) => {
     res.render('partials/success', {order})
 }
 
-
 module.exports.comandaDelete = async (req, res, next) => {
     const { id } = req.params;
     await Order.findByIdAndDelete(id);

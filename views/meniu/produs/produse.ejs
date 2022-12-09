@@ -19,10 +19,20 @@
                 <%= produs.nume %>
               </h3>
               <p class="card-text">
-                <%= produs.descriere%>
+                <%=produs.descriere%> <br>
+                <a href="" id="detaliiCafea">Info cafea!</a>
               </p>
               <form action="/order/add-to-cart/<%=produs._id%>" method="POST">
-                <button class="btn btn-sm btn-success" name ="addButton" >Adaugă</button>
+                <select class="form-select form-select-sm mb-3 bg-transparent text-white" aria-label=".form-select-sm example">
+                  <option selected>Alege cafeaua</option>
+                  <option value="1">Brazilia Pedra Grande</option>
+                  <option value="2">Etiopia Beshasha + 2 Lei</option>
+                  <option value="3">Etiopia Danisa + 3 Lei</option>
+                  <option value="4">Costa Rica Tarrazu + 4 Lei</option>
+                </select>
+                <div class="d-grid gap-2">
+                <button class="btn btn-sm btn-success me-3" name ="addButton" >Adaugă</button>
+              </div>
               </form>
 
             </div>
