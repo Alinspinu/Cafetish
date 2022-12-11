@@ -106,6 +106,25 @@ label{
     color:#fcbf49;
 }
 
+/* 
+div {
+    width: 100%; 
+  } */
+  
+  div.overFlow {
+    white-space: nowrap; 
+    width: 250px; 
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  div.overFlow:hover {
+    white-space: normal; 
+    overflow: visible;
+    width: 100%; 
+  }
+
 
 
 

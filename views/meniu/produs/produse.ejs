@@ -18,10 +18,14 @@
               <h3 class="card-title">
                 <%= produs.nume %>
               </h3>
-              <p class="card-text">
-                <%=produs.descriere%> <br>
+              <div class="overFlow">
+             
+                <%=produs.descriere%>
+              
+              </div>
+                 <br>
                 <a href="" id="detaliiCafea">Info cafea!</a>
-              </p>
+             
               <form action="/order/add-to-cart/<%=produs._id%>" method="POST">
                 <select class="form-select form-select-sm mb-3 bg-transparent text-white" aria-label=".form-select-sm example">
                   <option selected>Alege cafeaua</option>
