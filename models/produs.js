@@ -19,18 +19,13 @@ const produsSchema = new Schema({
         path: String,
         filename: String
     },
-    video: String,
+    cafea: String,
     pret: Number,
     descriere: String,
     categorie:
     {
         type: Schema.Types.ObjectId,
         ref: 'categorie'
-    },
-    author:
-    {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
     }
 
 })

@@ -3,6 +3,7 @@ const Categorie = require('../models/categorie')
 const Cafea =require('../models/cafea')
 const { cloudinary } = require('../cloudinary');
 const ExpressError = require('../utilities/expressError');
+const cafea = require('../models/cafea');
 
 
 
@@ -68,6 +69,7 @@ module.exports.renderProduse = async (req, res, next) => {
     const cat = await Categorie.findById(req.params.id).populate({
         path: 'produs'
     })
+    req.session.catId = cat.id
     if(cat){
         return res.render('meniu/produs/produse', {cat})
     } else {
@@ -119,7 +121,6 @@ module.exports.produsNou = async(req, res, next) => {
 module.exports.produsEdit =async(req, res, next) => {
     const {id} = req.params;
     const produs = await Produs.findByIdAndUpdate(id, {...req.body.produs});
-    console.log(req.body)
     if(req.body.produs.video.length < 30){
         const videoUrlBase = "https://www.youtube.com/embed/"
         const autoplay ="?autoplay=1"
@@ -147,24 +148,55 @@ module.exports.produsDelete = async(req, res, next) => {
     res.redirect('/meniu');
 }
 
-module.exports.renderCafeaNou = (req, res) => {
-    res.render('meniu/cafea/cafeaNou')
+
+module.exports.renderCafea = async(req, res, next) => {
+    const cafele = await Cafea.find({});
+    const catId = req.session.catId;
+    res.render('meniu/cafea/show', {cafele, catId});
 }
 
-// module.exports.renderCafeaEdit = async(req, res, next) => {
 
-// }
+module.exports.renderCafeaNou = (req, res) => {
+    res.render('meniu/cafea/cafeaNou');
+}
+
+module.exports.renderCafeaEdit = async(req, res, next) => {
+    const cafea = await Cafea.findById(req.params.id);
+    res.render('meniu/cafea/cafeaEdit', {cafea});
+}
+
+module.exports.cafeaEdit = async(req, res, next) => {
+   const {id} = req.params;
+   const cafea = await Cafea.findByIdAndUpdate(id, {...req.body.cafea})
+   if(req.files){
+    const imagini = req.files.map(f=>({path: f.path, filename: f.filename}))
+    cafea.imagini.push(...imagini);
+   }
+   await cafea.save()
+   res.redirect('/meniu/cafea')
+}
 
 module.exports.cafeaNou = async(req, res, next) => {
     const cafeaNou = new Cafea(req.body.cafea);
-    if(req.file) {
+    if(!req.files) {
         return next(new ExpressError('Cafeaua trebuie să conțină o imagine', 404))
      } else {
-    cafeaNou.imagine.path = req.file.path
-    cafeaNou.imagine.filename = req.file.filename;
+    cafeaNou.imagini = req.files.map(f => ({path: f.path, filename: f.filename}))
     console.log(cafeaNou)
     await cafeaNou.save()
     req.flash('success', `Felicitări! Tocmai ai adăugat: ${cafeaNou.nume}`)
-    }
+     }
     res.redirect('/meniu/cafea')
+}
+
+module.exports.cafeaDelete = async(req, res, next) => {
+    const {id} = req.params;
+    const cafea = await Cafea.findOne({_id: id})
+    const {imagini} = cafea;
+    const nume = imagini.map(f=>({filename: f.filename}))
+    for(let filename of nume) {
+        await cloudinary.uploader.destroy(filename.filename)
+    } 
+    await Cafea.findByIdAndDelete(id)
+    res.redirect('back')
 }

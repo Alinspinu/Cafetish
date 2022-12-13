@@ -1,0 +1,38 @@
+<%layout('layouts/boilerplate') %>
+<% cafele.forEach((cafea, i) => {%> 
+<div class="card mb-3 mx-auto shadow-lg bg-transparent" style="max-width: 1000px;">
+    <div class="row">
+      <div class="col-md-7">
+            <div id="carouselExampleControls<%=i%>" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <% cafea.imagini.forEach((img, i) => {%> 
+                  <div class="carousel-item <%= i=== 0 ? 'active' : '' %>">
+                    <img src="<%=img.path%>" class="d-block card-img w-100 img-fluid" alt="...">
+                  </div>
+                  <% }) %>  
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls<%=i%>" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls<%=i%>" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+              
+      </div>
+      <div class="col-md-5">
+        <div class="card-body">
+          <h3 class="color1 card-title"><%=cafea.nume%> </h3>
+          <p class="color card-text"> <%=cafea.descriere%></p>
+          <a href="/meniu/cat/<%=catId%>" class="btn btn-sm">Inapoi la meniu</a> <br>
+          <% if(autUser && autUser.admin===flowerpower) {%> 
+            <form action="/meniu/cafea/<%=cafea.id%>?_method=DELETE" method="POST"><button class="btn btn-sm my-4 me-2">Delete</button>
+          <a href="/meniu/cafea/<%=cafea.id%>/edit" class="btn btn-sm">Edit</a></form>
+          <% } %> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <% }) %> 

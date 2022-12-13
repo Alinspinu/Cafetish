@@ -6,7 +6,14 @@ module.exports = function Cart(oldCart) {
     this.add = function(item, id) {
         let storedItem = this.items[id];
         if(!storedItem) {
-            storedItem = this.items[id] = {item: item, qty: 0, pret: 0, img: item.imagine.path, nume: item.nume };
+            storedItem = this.items[id] = 
+            {
+                item: item, 
+                qty: 0, 
+                pret: 0, 
+                img: item.imagine.path, 
+                nume: item.nume, 
+            };
         }
         storedItem.qty++;
         storedItem.pret = storedItem.item.pret*storedItem.qty;

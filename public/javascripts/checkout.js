@@ -25,11 +25,11 @@ async function initialize() {
   const appearance = {
     theme: 'stripe',
     variables: {
-      colorPrimary: '#fff',
-      colorBackground: '#d4a373',
-      colorText: '#fff',
+      colorPrimary: '#ede0d4',
+      colorBackground: '#ffd7ba',
+      colorText: '#432818',
       colorDanger: '#df1b41',
-      fontFamily: 'Ideal Sans, system-ui, sans-serif',
+      fontFamily: 'Marcellus, system-ui, sans-serif',
       spacingUnit: '2px',
       borderRadius: '4px',
       // See all possible variables below

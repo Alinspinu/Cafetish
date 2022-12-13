@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
         
-                <form action="/meniu/cafea" method="POST" enctype="multipart/form-data" novalidate class="validated-form">
+                <form action="/meniu/cafea-nou" method="POST" enctype="multipart/form-data" novalidate class="validated-form">
                     <div class="input-group mb-3">
                         <input type="text" name="cafea[nume]" id="nume" class="form-control text-white bg-dark" placeholder="Denumire Cafea"
                             aria-describedby="basic-addon1" required>
@@ -13,14 +13,12 @@
                         <!-- <span class="input-group-text text-white bg-dark" for="imagine">Imagine</span> -->
                         <label for="cafImg" class="custom-file-upload text-white bg-dark mb-2">Imagine</label>
                         <input type="file" name="cafImg" id="cafImg" class="form-control form-control-color" placeholder="Poză"
-                            aria-describedby="basic-addon1">
+                            aria-describedby="basic-addon1" multiple>
                     </div>
                     <div class="input-group mb-3">
-                        <textarea class="form-control text-white bg-dark" name="cafea[descriereEsp]" placeholder="Descriere Espresso" required></textarea>
+                        <textarea class="form-control text-white bg-dark" name="cafea[descriere]" placeholder="Descriere" required></textarea>
                     </div>
-                    <div class="input-group mb-3">
-                        <textarea class="form-control text-white bg-dark" name="cafea[descriereFil]" placeholder="Descriere Filtru" required></textarea>
-                    </div>
+    
                     <button class="btn btn-primary mt-3">Adaugă</button>
                 </form>
             </div>

@@ -3,33 +3,30 @@
     <div class="row">
         <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
             <div class="card shadow-lg bg-transparent">
-               <div class="card-body text-white">
-                <img src="https://images.unsplash.com/photo-1533414417583-f0ab99151186?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Y2FtcGZpcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60" 
+               <div class="card-body">
+                <img src="https://res.cloudinary.com/dhetxk68c/image/upload/v1670970378/ProduseI/logInV1_mhdpcj.png" 
                     alt="" class="card-img-top">
-                    <h5 class="card-title">Register</h5>
+                    <h5 class="card-title color">Register</h5>
                     <form action="/user/register" method = "POST" class = "validated-form" novalidate>
                         <div class="mb-3">
-                            <!-- <label class="form-label text-white" for="username">Username</label> -->
-                            <input class="form-control bg-transparent text-white" style="border-color:bisque;"type="text" placeholder="Username" name="username" id="username" autofocus required>
+                           
+                            <input class="form-control bg-transparent color"type="text" placeholder="Username" name="username" id="username" autofocus required>
+                            <div class="valid-feedback color">Looks Good!!</div>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control bg-transparent color"type="email" placeholder="Email" name="email" id="email" required>
+                            <div class="valid-feedback">Looks Good!!</div>
+                        </div>
+                        <div class="mb-3">    
+                            <input class="form-control bg-transparent color"type="text" placeholder="Telefon" name="telefon" id="telefon" required>
                             <div class="valid-feedback">Looks Good!!</div>
                         </div>
                         <div class="mb-3">
-                            <!-- <label class="form-label text-white" for="email">Email</label> -->
-                            <input class="form-control bg-transparent text-white" style="border-color:bisque;"type="email" placeholder="Email" name="email" id="email" required>
-                            <div class="valid-feedback">Looks Good!!</div>
-                        </div>
-                        <div class="mb-3">
-                            <!-- <label class="form-label text-white" for="email">Email</label> -->
-                            <input class="form-control bg-transparent text-white" style="border-color:bisque;"type="text" placeholder="Telefon" name="telefon" id="telefon" required>
-                            <div class="valid-feedback">Looks Good!!</div>
-                        </div>
-                        <div class="mb-3">
-                            <!-- <label class="form-label text-white" for="password">Password</label> -->
-                            <input class="form-control bg-transparent text-white" style="border-color:bisque;"type="password" placeholder="Password" name="password" id="password" required>
+                            <input class="form-control bg-transparent color"type="password" placeholder="Password" name="password" id="password" required>
                             <div class="valid-feedback">Looks Good!!</div>
                         </div>           
                         <div class="d-grid gap-2">
-                            <button class="btn btn-sm" style="background-color: #6a994e; border-color:bisque;">Register</button>
+                            <button class="btn btn-sm">Register</button>
                         </div>
                         
                     </form>

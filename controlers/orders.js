@@ -39,7 +39,6 @@ module.exports.checkout = async (req, res, next) =>{
         comentarii: req.body.comentarii
     })
     req.session.cart.orderId = order.id
-    console.log(req.session.cart)
     await order.save()
   res.redirect('/order/checkout')
 }
@@ -48,9 +47,23 @@ module.exports.addToCart = async(req, res, next) => {
     const produsId = req.params.id;
     const cart = new Cart(req.session.cart ? req.session.cart: {});
     const produs = await Produs.findById(produsId)
+    if(req.body.cafea){
+        const cafeaP = parseFloat(req.body.cafea.slice(8))
+        const cafeaN = req.body.cafea.slice(0, 8)
+        const produsCafea = new Produs({
+            nume: produs.nume+' '+cafeaN,
+            pret: produs.pret + cafeaP,
+            imagine: produs.imagine,
+            cafea: req.body.cafea,
+        })
+        cart.add(produsCafea, produsCafea.id)
+        req.session.cart = cart;
+        res.redirect('back');
+    } else {
     cart.add(produs, produs.id)
     req.session.cart = cart;
     res.redirect('back');
+    }
 }
 
 module.exports.reduceByOne = (req, res, next) =>{

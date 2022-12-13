@@ -6,20 +6,20 @@
   <div class="container-fluid  mt-5">
     <div class="row pe-0">
       <div class="col-lg-6 offset-lg-3">
-        <h1 class="text-white">Platește</h1> <br>
-        <p class="lead text-white">Comanda se ridică din locație!</p>
-        <span class="text-white" style="font-size:26px;">Total: <%=total%> Lei</span>
+        <h1 class="color">Plăteste</h1> <br>
+        <p class="lead color">Comanda se ridică din locație!</p>
+        <span class="color" style="font-size:26px;">Total: <%=total%> Lei</span>
        
         <!-- Display a payment form -->
         <form id="payment-form" class="px-0 py-0" action="/order/create-payment-intent" method="POST">
           <div id="payment-element">
             <!--Stripe.js injects the Payment Element-->
           </div>
-          <button id="submit" style="background-color:#6a994e;filter: drop-shadow(0 0 0.75rem #fcbf49); color: bisque">
+          <button class="btn btn-sm" id="submit">
             <div class="spinner hidden" id="spinner"></div>
-            <span id="button-text">Plătește cu cardul</span>
+            <span  class ="btn bg-transparent" style="border:none;"id="button-text">Plătește cu cardul</span>
           </button>
-          <a href="/order/successs" type="button" class="btn btn-sm btn-success mb-2" id="pay">Plătește în locație</a>
+          <a href="/order/successs" type="button" class="btn btn-sm mb-2" id="pay">Plătește în locație</a>
           <div id="payment-message" class="hidden"></div>
         </form>
       </div>

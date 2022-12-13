@@ -3,12 +3,13 @@ const Categorie = require('./models/categorie');
 const Conamda = require('./models/order')
 const Cafea = require('./models/cafea')
 const {produsSchema, catSchema, comandaSchema, cafeaSchema} = require('./schema.js')
+const Url = require('./models/url')
 const ExpressError = require('./utilities/expressError')
 
 
 
 
-module.exports.isLoggedIn = (req, res, next) => {
+module.exports.isLoggedIn = async(req, res, next) => {
     if(!req.isAuthenticated()) {
         req.session.returnUrl = req.originalUrl
         req.flash('error', 'Trebuie sa fii logat')

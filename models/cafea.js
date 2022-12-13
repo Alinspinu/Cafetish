@@ -3,12 +3,14 @@ const Schema = mongoose.Schema;
 
 const cafeaSchema = new Schema({
     nume: String,
-    descriereEsp: String,
-    descriereFil: String,
-    imagine: {
-        path: String,
-        filename: String
-    },
+    descriere: String,
+    imagini:
+    [ 
+        {
+            path: String,
+            filename: String
+        }
+    ],
     produs: 
     {
         type: Schema.Types.ObjectId,

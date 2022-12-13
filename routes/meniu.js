@@ -19,8 +19,13 @@ router.route('/')
     .get(catchAsync(meniu.renderMeniu))
 
 router.route('/cafea')
+    .get(meniu.renderCafea)
+
+
+router.route('/cafea-nou')
     .get(isAdmin, meniu.renderCafeaNou)
-    .post(isAdmin, upload.single('cafImg'), validateCafea, catchAsync(meniu.cafeaNou))
+    .post(isAdmin, upload.array('cafImg'), validateCafea, catchAsync(meniu.cafeaNou))
+
 
 router.route('/cats')
     .get(meniu.renderCatNou)
@@ -41,9 +46,10 @@ router.route('/cats/produs/:id')
     .put(isAdmin, upload.single('imagine'), validateProdus, catchAsync(meniu.produsEdit))
     .delete(isAdmin, catchAsync(meniu.produsDelete))
 
-// router.route('/cafea/:id')
-//     .put(isAdmin, upload.single('cafImg'), validateCafea, catchAsync(meniu.cafeaEdit))
-//     .delete(isAdmin, catchAsync(meniu.cafeaDelete))
+router.route('/cafea/:id')
+    .put(isAdmin, upload.array('cafImg'), validateCafea, catchAsync(meniu.cafeaEdit))
+    .delete(isAdmin, catchAsync(meniu.cafeaDelete))
+
 
 router.route('/cats/produs/:id/edit')
     .get(isAdmin,catchAsync(meniu.renderProdusEdit))
