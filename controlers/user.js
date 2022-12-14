@@ -1,5 +1,6 @@
 const User = require('../models/user')
 const Url = require('../models/url')
+const localStorage = require("localStorage")
 
 
 module.exports.renderRegister = (req, res) => {
@@ -8,17 +9,21 @@ module.exports.renderRegister = (req, res) => {
 
 module.exports.registerUser = async(req, res, next) => {
     try{
-    // const redirectUrl = await Url.find({})
-    // const redirectTo = redirectUrl[0].url
-    // const id = redirectUrl[0]._id
-    // await Url.findByIdAndDelete(id)
     const {email, username, password, admin = 0, telefon} = req.body;
     const user = new User({email, admin, username, telefon});
     const registeredUser = await User.register(user, password);
     req.login(registeredUser, err => {
         if(err) return next(err);
+    const returnUrl = localStorage.getItem('url');
+    if(localStorage.getItem('cart')){
+    const cart =JSON.parse(localStorage.getItem('cart'));
+    req.session.cart = cart;
+    localStorage.removeItem('cart');
+    }
+    // console.log(req.session.cart)
+    // console.log(returnUrl)
     req.flash('success', `Bine ai venit gașcă ${user.username}!`)
-    res.redirect('/meniu')
+    res.redirect(returnUrl)
     })
 }catch(e){
     req.flash('error', e.message)
@@ -31,11 +36,18 @@ module.exports.renderLogin = (req, res) => {
     res.render('user/login')
 }
 
-module.exports.loginUser = (req, res) => {
+module.exports.loginUser = (req, res, next) => {
     const {username} = req.body
-    req.flash('success', `Salut ${username}! Bine ai venit la Cafetish!`)
-    const redirectUrl = req.session.returnUrl || '/meniu'
-    res.redirect(redirectUrl)
+    if(localStorage.getItem('cart')){
+    const cart =JSON.parse(localStorage.getItem('cart'));
+    req.session.cart = cart;
+    localStorage.removeItem('cart');
+    }
+    const returnUrl = localStorage.getItem('url')
+    // console.log(req.session)
+    // console.log(returnUrl)
+    req.flash('success', `Salut ${username}! Bine ai venit la Cafetish!`);
+    res.redirect(returnUrl)
 }
 
 module.exports.logout = (req, res, next) => {

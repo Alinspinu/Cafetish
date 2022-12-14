@@ -40,6 +40,7 @@ module.exports.checkout = async (req, res, next) =>{
     })
     req.session.cart.orderId = order.id
     await order.save()
+    console.log(order)
   res.redirect('/order/checkout')
 }
 

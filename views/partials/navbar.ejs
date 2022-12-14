@@ -4,10 +4,11 @@
         <a class="navbar-brand" href="/">
           <img src="https://res.cloudinary.com/dhetxk68c/image/upload/v1670955190/ProduseI/Untitled_design_rcrcy6.png" alt="Bootstrap" width="100" height="50">
         </a>
+        <a class="nav-link nav-color d-lg-none" aria-current="page" href="/meniu">Meniu</a>
         <a href="/order/cart" class="nav-color">
           <i class="bi bi-cart3 d-lg-none" ></i>
           <% if(session.cart) {%> 
-          <span class="badge bg-danger d-lg-none"><%=session.cart.totalQty%> </span>
+          <span class="badge d-lg-none">x<%=session.cart.totalQty%> </span>
           <% } %> 
         </a>
         <button class="navbar-toggler bg-transparent"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,6 +20,13 @@
               <a class="nav-link nav-color" aria-current="page" href="/meniu">Meniu</a>
             </li>
           </ul>
+          <a href="/order/cart" class="nav-color ms-3">
+            Coș
+            <i class="bi bi-cart3 nav-color"></i>
+            <% if(session.cart) {%> 
+            <span class="badge">x<%=session.cart.totalQty%> </span>
+            <% } %> 
+            </a>
           <div class="navbar-nav ms-auto">
             <% if(autUser && autUser.admin===flowerpower) {%> 
             <li class="nav-item">
@@ -37,13 +45,7 @@
               <% } %> 
             </div>
           
-            <a href="/order/cart" class="nav-color">
-              <i class="bi bi-cart3 nav-color"></i>
-              Coș cu bunătăți
-              <% if(session.cart) {%> 
-              <span class="badge">x<%=session.cart.totalQty%> </span>
-              <% } %> 
-       
+           
           
           <div class="navbar-nav ms-auto"> 
             <% if(!autUser) {%> 

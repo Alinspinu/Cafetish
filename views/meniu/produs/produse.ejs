@@ -4,7 +4,6 @@
       <% cat.produs.forEach(function(produs, i) {%>
         <div class="col-lg-6 col-xl-4 col-xxl-3 gx-3 mt-2">
           <div class="card mt-3 shadow-lg bg-transparent h-100">
-            <a role="button" href="/meniu/cats/produs/<%=produs._id%>">
               <% if(!produs.imagine.path) {%>
                 <img
                   src="https://res.cloudinary.com/dhetxk68c/image/upload/w_150/v1668202831/ProduseI/downloadnoimgs_ghglfb.png"
@@ -13,10 +12,10 @@
                   <img src="<%= produs.imagine.path.replace('/upload', '/upload/w_500')%> " class="img-fluid" alt="..."
                     id="img">
                   <% } %>
-            </a>
             <div class="card-body" id="card-body"> 
           
               <span class="color1 fs-3"><%=produs.nume%></span> 
+              <a href="/meniu" ><span class="color1 ms-5">Meniu</span></a>
               <br>
               <span class="color1 fs-6"><%=produs.pret%> Lei / <%=produs.gramaj%> </span>
             
