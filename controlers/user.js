@@ -14,16 +14,15 @@ module.exports.registerUser = async(req, res, next) => {
     const registeredUser = await User.register(user, password);
     req.login(registeredUser, err => {
         if(err) return next(err);
-    const returnUrl = localStorage.getItem('url');
+        
     if(localStorage.getItem('cart')){
-    const cart =JSON.parse(localStorage.getItem('cart'));
+    const cart = JSON.parse(localStorage.getItem('cart'));
     req.session.cart = cart;
     localStorage.removeItem('cart');
+    console.log(req.session)
     }
-    // console.log(req.session.cart)
-    // console.log(returnUrl)
     req.flash('success', `Bine ai venit gașcă ${user.username}!`)
-    res.redirect(returnUrl)
+    res.redirect('/meniu')
     })
 }catch(e){
     req.flash('error', e.message)
@@ -39,15 +38,12 @@ module.exports.renderLogin = (req, res) => {
 module.exports.loginUser = (req, res, next) => {
     const {username} = req.body
     if(localStorage.getItem('cart')){
-    const cart =JSON.parse(localStorage.getItem('cart'));
+    const cart = JSON.parse(localStorage.getItem('cart'));
     req.session.cart = cart;
     localStorage.removeItem('cart');
     }
-    const returnUrl = localStorage.getItem('url')
-    // console.log(req.session)
-    // console.log(returnUrl)
     req.flash('success', `Salut ${username}! Bine ai venit la Cafetish!`);
-    res.redirect(returnUrl)
+    res.redirect('/meniu')
 }
 
 module.exports.logout = (req, res, next) => {

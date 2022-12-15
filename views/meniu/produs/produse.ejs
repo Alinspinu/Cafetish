@@ -15,12 +15,11 @@
             <div class="card-body" id="card-body"> 
           
               <span class="color1 fs-3"><%=produs.nume%></span> 
-              <a href="/meniu" ><span class="color1 ms-5">Meniu</span></a>
               <br>
               <span class="color1 fs-6"><%=produs.pret%> Lei / <%=produs.gramaj%> </span>
             
               <div class="overFlow">
-                <span class="color" style="font-size:15px;"><%=produs.descriere%></span> 
+                <span class="color" style="font-size:15px;"><%=produs.descriere%></span> <br>
                 <%if(cat.nume === "Espresso World" || cat.nume === "Black and White" || cat.nume === "Filter Coffee") {%> 
                   <a href="/meniu/cafea" id="detaliiCafea">Despre cafea!</a>
                   <% } %> 

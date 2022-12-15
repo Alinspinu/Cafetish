@@ -12,11 +12,11 @@ const ExpressError = require('./utilities/expressError')
 
 module.exports.isLoggedIn = async(req, res, next) => {
     if(!req.isAuthenticated()) {
-        req.session.returnUrl = req.originalUrl
         localStorage.setItem('url', req.originalUrl)
         if(req.session.cart){
         localStorage.setItem('cart', JSON.stringify(req.session.cart))
         }
+        console.log(req.session.cart)
         req.flash('error', 'Trebuie sa fii logat')
         return res.redirect('/user/login');
     }

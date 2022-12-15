@@ -1,8 +1,9 @@
-const Order = require('../models/order')
-const Cart = require('../models/cart')
-const Produs = require('../models/produs')
-const user = require('../models/user')
-const { findByIdAndUpdate } = require('../models/user')
+const localStorage = require('localStorage');
+const Order = require('../models/order');
+const Cart = require('../models/cart');
+const Produs = require('../models/produs');
+const user = require('../models/user');
+const { findByIdAndUpdate } = require('../models/user');
 const stripe = require('stripe')("sk_test_51M9k8jFFsy1gu6PUWj7pEdeN91IDJ8yIA3nVufeJmKNclRBDvpvaVD2ZMiAQnJrAm7eRQJsdccUL24ZrcWYHceex00yRRO58ZQ")
 
 
@@ -18,7 +19,7 @@ module.exports.renderComenzi = async (req, res, next) => {
 }
 
 module.exports.renderCheckoutForm = (req, res, next) => {
-    if(!req.session.cart){
+    if(!req.session.cart) {
         return res.redirect('/meniu')
     }
     let cart = new Cart(req.session.cart);
@@ -29,6 +30,7 @@ module.exports.checkout = async (req, res, next) =>{
     if(!req.session.cart) {
         return res.redirect('/meniu')
     }
+    console.log(req.session)
     let cart = new Cart(req.session.cart);
     const order = new Order({
         user: req.user,
@@ -38,9 +40,10 @@ module.exports.checkout = async (req, res, next) =>{
         timp: req.body.timp,
         comentarii: req.body.comentarii
     })
-    req.session.cart.orderId = order.id
+    req.session.orderId = order.id
     await order.save()
-    console.log(order)
+    // console.log(order)
+
   res.redirect('/order/checkout')
 }
 
@@ -112,7 +115,7 @@ module.exports.createPaymentIntent = async (req, res, next) => {
   }
 
   module.exports.renderSuccess = async (req, res, next) =>{
-    const order = await Order.findById(req.session.cart.orderId)
+    const order = await Order.findById(req.session.orderId)
     order.payd = 'YES'
     await order.save()
     req.session.cart = null
@@ -120,7 +123,7 @@ module.exports.createPaymentIntent = async (req, res, next) => {
 }
 
 module.exports.renderSuccesss = async(req, res, next) => {
-    const order = await Order.findById(req.session.cart.orderId)
+    const order = await Order.findById(req.session.orderId)
     order.payd = 'NO'
     await order.save()
     req.session.cart = null
