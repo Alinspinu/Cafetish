@@ -9,7 +9,7 @@ const mongoose = require('mongoose')
 const methodOverride = require('method-override');
 const app = express();
 const ejsMate = require('ejs-mate')
-const session =require('express-session')
+const session =require('express-session');
 const flash =require('connect-flash');
 const User = require('./models/user');
 const Produs = require('./models/produs')
@@ -90,7 +90,8 @@ const scriptSrcUrls = [
     "https://cdnjs.cloudflare.com/",
     "https://cdn.jsdelivr.net",
     "https://code.jquery.com",
-    "https://js.stripe.com/v3/"
+    "https://js.stripe.com/v3/",
+    "https://maps.googleapis.com/"
 ];
 const styleSrcUrls = [
     "https://kit-free.fontawesome.com/",
@@ -102,6 +103,7 @@ const styleSrcUrls = [
     "https://api.tiles.mapbox.com/",
     "https://fonts.googleapis.com/",
     "https://use.fontawesome.com/",
+    
 ];
 const fontSrcUrls = [
     "https://fonts.googleapis.com/",
@@ -113,7 +115,10 @@ app.use(
         directives: {
             defaultSrc: [],
             mediaSrc:['https://res.cloudinary.com/'],
-            connectSrc:["http://localhost:3000/order/create-payment-intent",'https://cafetish.azurewebsites.net/order/create-payment-intent'],
+            connectSrc:[
+                "http://localhost:3000/order/create-payment-intent",
+                'https://cafetish.azurewebsites.net/order/create-payment-intent',
+                "https://maps.googleapis.com/"],
             formAction: ["'self'", 'https://checkout.stripe.com'],
             scriptSrcAttr:["'unsafe-inline'"],
             scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
@@ -128,6 +133,8 @@ app.use(
                 "https://res.cloudinary.com/dhetxk68c/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
                 "https://images.unsplash.com/",
                 "https://q.stripe.com",
+                "https://maps.gstatic.com/",
+                "https://maps.googleapis.com"
             ],
             fontSrc: ["'self'", ...fontSrcUrls],
         },

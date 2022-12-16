@@ -1,8 +1,8 @@
 
-<nav class="navbar navbar-dark navbar-expand-lg bg-transparent">
+<nav id="mainNav"class="navbar navbar-dark navbar-expand-lg fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
-          <img src="https://res.cloudinary.com/dhetxk68c/image/upload/v1670955190/ProduseI/Untitled_design_rcrcy6.png" alt="Bootstrap" width="100" height="50">
+          <img src="https://res.cloudinary.com/dhetxk68c/image/upload/v1669060120/ProduseI/Logo_Cafetish-02-negru_zhchuk.png" alt="Bootstrap" width="70" height="35">
         </a>
         <a class="nav-link nav-color d-lg-none" aria-current="page" href="/meniu">Meniu</a>
         <a href="/order/cart" class="nav-color">
@@ -59,5 +59,15 @@
         </div>
       </div>
   </nav>
+  <div class="col-12" style="height:120px;"></div>
+
+  <script>
+    $(function(){
+      $(document).scroll(function(){
+        var $nav = $("#mainNav")
+        $nav.toggleClass("scrolled", $(this).scrollTop()>$nav.height())
+    })
+    })
+  </script>
 
 

@@ -42,7 +42,7 @@ module.exports.loginUser = (req, res, next) => {
     req.session.cart = cart;
     localStorage.removeItem('cart');
     }
-    req.flash('success', `Salut ${username}! Bine ai venit la Cafetish!`);
+    req.flash('success', `Salut ${username}! Bine ai revenit!`);
     res.redirect('/meniu')
 }
 

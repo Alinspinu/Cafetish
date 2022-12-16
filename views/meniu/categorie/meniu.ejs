@@ -1,40 +1,48 @@
 <% layout('layouts/boilerplate') %>
   <div class="container-fluid mt-3">
-    <h1 class="text-center color1 mt-5" id="h1">Descoperă...</h1>
-    <div class="row row-cols-1 row-cols-md-2 g-4">
-      <% cats.forEach(function(cat, i) {%>
-        <div class="col-lg-6 col-xl-4 col-xxl-3 gx-3 mt-2">
-          <a href="/meniu/cat/<%=cat._id%>">
-            <div class="card mt-3 shadow-lg bg-transparent h-100">
-              <% if(!cat.imagine.path) {%>
-                <img class="img-fluid"
-                  src="https://res.cloudinary.com/dhetxk68c/image/upload/w_200/v1668202831/ProduseI/downloadnoimgs_ghglfb.png"
-                  class="card-img-top" alt="">
-                <% } else {%>
-                  <img src="<%= cat.imagine.path.replace('/upload', '/upload/w_300')%> " class="card-img-top img-fluid"
-                    alt="..." id="img" crossorigin="anonymous">
-                  <% } %>
-          </a>
-          <div class="card-body" id="card-body ">
-            <h3 class="card-title color1">
-              <%=cat.nume%>
-            </h3>
-            <p class="color">
-              <%=cat.descriere%>
-            </p>
-            <% if(autUser && autUser.admin===flowerpower){ %>
-              <form action="/meniu/cat/<%=cat._id%>?_method=DELETE" method="POST">
-                <a href="/meniu/cats/<%=cat._id%>/edit"
-                  class="btn btn-sm mt-auto">Modifică</a>
-                <button class="btn btn-sm mt-auto">Delete</button>
-              </form>
-              <% } %>
-
+    <h1 class="text-center color1 mt-4" id="h1">Descoperă cafeaua de specialitate prin produsele tale preferate...</h1>
+<% cats.forEach(function(cat, i) {%>
+    <%if(i%2===0) { %> 
+ <section class="container-fluid px-0">
+  <div class="row align-items-center mb-3">
+      <div class="col-md-6 order-1">
+        <img src="<%= cat.imagine.path.replace('/upload', '/upload/w_650')%> " class="img-fluid shadow-lg rounded mb-3" alt="..."
+        id="img">
+      </div>
+      <div class="col-md-6 order-2 mb-2">
+        <div class="row justify-content-center">
+          <div class="col-10">
+            <span class="color1 fs-2"><%=cat.nume%></span> 
+              <br>
+              <span class="color" style="font-size:22px;"><%=cat.descriere%></span> <br>
+                  <div class="d-grid gap-2">
+                    <a href="/meniu/cat/<%=cat._id%>"class="btn btn-sm" name ="addButton">Intră la produse</a>
+                  </div>
           </div>
         </div>
-
-    </div>
-
-    <% }) %>
+      </div>
   </div>
+</section>
+<% } else{ %> 
+<section class="container-fluid px-0">
+  <div class="row align-items-center mb-3">
+      <div class="col-md-6 order-1 order-md-2">
+        <img src="<%= cat.imagine.path.replace('/upload', '/upload/w_650')%> " class="img-fluid shadow-lg rounded mb-3" alt="..."
+        id="img">
+      </div>
+      <div class="col-md-6 order-2 order-md-1 mb-2">
+        <div class="row justify-content-center">
+          <div class="col-10">
+            <span class="color1 fs-2"><%=cat.nume%></span> 
+              <br>
+              <span class="color" style="font-size:22px;"><%=cat.descriere%></span> <br>
+                  <div class="d-grid gap-2">
+                    <a href="/meniu/cat/<%=cat._id%>" class="btn btn-sm" name ="addButton">Intră la produse</a>
+                  </div>
+          </div>
+        </div>
+      </div>
   </div>
+</section>
+<% } %> 
+  <% }) %> 

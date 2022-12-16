@@ -16,8 +16,7 @@ module.exports.isLoggedIn = async(req, res, next) => {
         if(req.session.cart){
         localStorage.setItem('cart', JSON.stringify(req.session.cart))
         }
-        console.log(req.session.cart)
-        req.flash('error', 'Trebuie sa fii logat')
+        req.flash('error', 'Trebuie sa fii în gașcă')
         return res.redirect('/user/login');
     }
     next();

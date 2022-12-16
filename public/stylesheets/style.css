@@ -1,13 +1,13 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css");
 body {
     height: 100vh;
-    background-image: linear-gradient(rgba(0,0,0, 0.3), rgba(0,0,0, 0.3)), linear-gradient(#9c6644, 30%, #eda268, #9c6644);
+    /* background-image: linear-gradient(rgba(0,0,0, 0.3), rgba(0,0,0, 0.3)), linear-gradient(#9c6644, 30%, #eda268, #9c6644); */
     background-size: cover;
     background-position: center;
  
 }
 
-.card {
+.img-fluid {
     background-image: linear-gradient(rgba(249, 206, 163, 0.4), rgba(176,137,104,0.3));
 }
 
@@ -52,7 +52,7 @@ input[type="file"] {
 }
 
 
-h3, h2, p, h5, h1, span, label, input, strong{
+h3, h2, p, h5, h1, span, label, input, strong, a{
     font-family: Marcellus, sans-serif;
 }
 
@@ -68,7 +68,15 @@ label{
 }
 
 .nav-color{
-  color:#ffd7ba;
+  color:#432818;
+}
+
+.navbar.scrolled{
+  background-color: rgba(212, 162, 118, 0.9);
+}
+
+.navbar, .footer {
+  background-color: rgba(212, 162, 118, 0.5);
 }
 
 .counter {
@@ -112,7 +120,7 @@ label{
 
  #detaliiCafea {
     font-size: 1.2rem;
-    color:#ffedd8;
+    color:#43281c;
     cursor:pointer;
 }
 #detaliiCafea:hover{
@@ -125,35 +133,20 @@ label{
   color:#432818;
 }
 
-/* .border{
-  border-color:#432818;
-} */
-
-/*   
-div.overFlow {
-    color: #ede0d4;
-    font-size: 30px;
-    line-height: 70%;
-    white-space: nowrap; 
-    width: 250px; 
-    display: inline-block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-family: Marcellus, sans-serif;
-  }
-  
-div.overFlow:hover {
-    white-space: normal; 
-    overflow: visible;
-    width: 100%; 
-  } */
-
 .color{
-    color: #ffd7ba;
+    color: #432818;
   }
 
 .color1{
-  color:#ede0d4;
+  color:#432818;
+}
+
+.alert{
+  background-color: #ede0d4;
+  color: #432818;
+  font-family: Marcellus, sans-serif;
+  font-size: 20px;
+
 }
 
 #cafea{
@@ -168,6 +161,7 @@ div.overFlow:hover {
   color:#ffd7ba;
 }
 
+
   
 
 
@@ -175,27 +169,28 @@ div.overFlow:hover {
 
 .form-control::-webkit-input-placeholder {
     /* WebKit, Blink, Edge */
-    color: #ffd7ba;
+    color: #432818;;
     opacity: 0.6;
     font-size: 17px;
 }
 .form-control:-moz-placeholder {
     /* Mozilla Firefox 4 to 18 */
-    color: #ffd7ba;
+    color: #432818;;
     opacity: 0.6;
     font-size: 17px;
     
 }
 .form-control::-moz-placeholder {
     /* Mozilla Firefox 19+ */
-    color: #ffd7ba;
+    color: #432818;;
     opacity: 0.6;
     font-size: 17px;
     
 }
 .form-control:-ms-input-placeholder {
     /* Internet Explorer 10-11 */
-    color: #ffd7ba;
+    color: #432818;;
     opacity: 0.6;
     font-size: 17px;
 }
+
