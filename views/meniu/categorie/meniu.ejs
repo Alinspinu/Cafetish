@@ -1,23 +1,23 @@
 <% layout('layouts/boilerplate') %>
   <div class="container-fluid mt-3">
-    <h1 class="text-center color1 mt-4" id="h1">Descoperă cafeaua de specialitate prin produsele tale preferate...</h1>
+    <h1 class="text-center color1 my-4" id="h1">Descoperă cafeaua de specialitate prin produsele tale preferate...</h1>
 <% cats.forEach(function(cat, i) {%>
     <%if(i%2===0) { %> 
  <section class="container-fluid px-0">
   <div class="row align-items-center mb-3">
-      <div class="col-md-6 order-1">
-        <img src="<%= cat.imagine.path.replace('/upload', '/upload/w_650')%> " class="img-fluid shadow-lg rounded mb-3" alt="..."
+      <div class="col-md-4 order-1">
+        <img src="<%= cat.imagine.path.replace('/upload', '/upload/w_600')%> " class="img-fluid shadow-lg rounded mb-3" alt="..."
         id="img">
       </div>
-      <div class="col-md-6 order-2 mb-2">
+      <div class="col-md-8 order-2 mb-2">
         <div class="row justify-content-center">
           <div class="col-10">
             <span class="color1 fs-2"><%=cat.nume%></span> 
               <br>
               <span class="color" style="font-size:22px;"><%=cat.descriere%></span> <br>
-                  <div class="d-grid gap-2">
-                    <a href="/meniu/cat/<%=cat._id%>"class="btn btn-sm" name ="addButton">Intră la produse</a>
-                  </div>
+                  <!-- <div class="d-grid gap-2"> -->
+                    <a href="/meniu/cat/<%=cat._id%>"class="btn btn-sm mt-3" name ="addButton">Descoperă...</a>
+                  <!-- </div> -->
           </div>
         </div>
       </div>
@@ -26,19 +26,19 @@
 <% } else{ %> 
 <section class="container-fluid px-0">
   <div class="row align-items-center mb-3">
-      <div class="col-md-6 order-1 order-md-2">
-        <img src="<%= cat.imagine.path.replace('/upload', '/upload/w_650')%> " class="img-fluid shadow-lg rounded mb-3" alt="..."
+      <div class="col-md-4 order-1 order-md-2">
+        <img src="<%= cat.imagine.path.replace('/upload', '/upload/w_600')%> " class="img-fluid shadow-lg rounded mb-3" alt="..."
         id="img">
       </div>
-      <div class="col-md-6 order-2 order-md-1 mb-2">
+      <div class="col-md-8 order-2 order-md-1 mb-2">
         <div class="row justify-content-center">
           <div class="col-10">
             <span class="color1 fs-2"><%=cat.nume%></span> 
               <br>
               <span class="color" style="font-size:22px;"><%=cat.descriere%></span> <br>
-                  <div class="d-grid gap-2">
-                    <a href="/meniu/cat/<%=cat._id%>" class="btn btn-sm" name ="addButton">Intră la produse</a>
-                  </div>
+                  <!-- <div class="d-grid gap-2"> -->
+                    <a href="/meniu/cat/<%=cat._id%>" class="btn btn-sm mt-3" name ="addButton">Descoperă...</a>
+                  <!-- </div> -->
           </div>
         </div>
       </div>

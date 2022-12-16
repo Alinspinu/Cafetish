@@ -23,10 +23,10 @@ a:link{
 a:hover{
   color:#ffedd8;
 }
-.nav-link:hover{
+.nav-link, .bi-cart3:hover{
   color:#ffedd8;
 }
- 
+
 #clip{
     height: 420px;
     width: 600px;
@@ -48,13 +48,13 @@ input[type="file"] {
 
 #h1{
     font-size: 210%;
-    font-family: Marcellus;
 }
 
 
-h3, h2, p, h5, h1, span, label, input, strong, a{
-    font-family: Marcellus, sans-serif;
+h3, h2, p, h5, h1, span, label, input, strong, a, select, textarea{
+    font-family: Inconsolata, monospace;
 }
+
 
 label{
     /* color: White; */
@@ -62,7 +62,7 @@ label{
 }
 
 .navbar, .btn{
-    font-family: Marcellus;
+    font-family: Inconsolata, monospace;
     font-size: 20px;
     border-color: black;
 }
@@ -109,7 +109,7 @@ label{
 
 
   .btn {
-    border-color: #432818;
+    border: none;
     background-color: #d4a373;
     color: #432818;
   }
@@ -144,7 +144,7 @@ label{
 .alert{
   background-color: #ede0d4;
   color: #432818;
-  font-family: Marcellus, sans-serif;
+  font-family: Inconsolata, monospace;
   font-size: 20px;
 
 }
@@ -158,11 +158,16 @@ label{
 }
 
 #comentarii{
-  color:#ffd7ba;
+  color:#432818;
 }
 
-
-  
+/* 
+  @media (max-width: 800px) {
+      .footHide{
+        display: none;
+      }
+    
+  } */
 
 
 /* placeholder text area color */
