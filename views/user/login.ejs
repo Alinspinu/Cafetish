@@ -1,29 +1,25 @@
-<% layout('layouts/boilerplate') %><div class="container justify-content-center align-items-center mt-5">
+<% layout('layouts/boilerplate') %>
+<div class="container justify-content-center align-items-center mt-2">
     <div class="row">
-        <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
-            <div class="card shadow-lg bg-transparent">
-               <div class="card-body">
-                <img src="https://res.cloudinary.com/dhetxk68c/image/upload/v1670970378/ProduseI/logInV1_mhdpcj.png" 
-                    alt="" class="card-img-top">
-                <h5 class="card-title color">Login</h5>
+        <div class="col-lg-6 offset-lg-3">
+                <h1 class="text-center color mb-2">Login</h1>
                 <form action="/user/login" method = "POST" class = "validated-form" novalidate>
-                    <div class="mb-3">
-                    
-                        <input class="form-control bg-transparent color" type="text" name="username" id="username" placeholder="Username" autofocus required>
+                    <label class="my-3 fs-5"for="username">Username</label> 
+                    <div class="mb-3 input-group-lg">
+                        <input class="form-control bg-transparent color" type="text" name="username" id="username" autofocus required>
                         <div class="valid-feedback">Looks Good!!</div>
                     </div>
-                    <div class="mb-3">
-                        <input class="form-control bg-transparent color" type="password" name="password" id="password" placeholder="Password"required>
+                    <label class="my-3 fs-5"for="password">Password</label>
+                    <div class="mb-3 input-group-lg">
+                        <input class="form-control bg-transparent color" type="password" name="password" id="password" required>
                         <div class="valid-feedback">Looks Good!!</div>
                     </div>
-                    <div class="d-grid gap-2">
-                    <button class="btn btn-sm">Log In</button>
-                    </div>
-                    <div class="d-grid gap-2">
-                    <a href="/user/register" type="button" class="btn btn-sm mt-2">Register</a>
-                </div>
+                        <button class="btn btn-sm mt-4">Log In</button>
                 </form>
-               </div>
+                <div class="mt-5"style="height:200px;">
+                <h4 class="color mt-3">Nou la Cafetish?</h4>
+                <p class="color">Înscrie-te în gașcă și bucurăte de cele mai bune oferte.</p>
+                <a href="/user/register" type="button" class="btn" id="btnRegister">Register</a>
             </div>
         </div>
     </div>

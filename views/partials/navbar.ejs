@@ -1,12 +1,12 @@
 
-<nav id="mainNav"class="navbar navbar-dark navbar-expand-lg fixed-top">
+<nav id="mainNav"class="navbar navbar-white navbar-expand-lg fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
           <img src="https://res.cloudinary.com/dhetxk68c/image/upload/v1669060120/ProduseI/Logo_Cafetish-02-negru_zhchuk.png" alt="Bootstrap" width="70" height="35">
         </a>
         <a class="nav-link nav-color d-lg-none" aria-current="page" href="/meniu">Meniu</a>
         <a href="/order/cart" class="nav-color">
-          <i class="bi bi-cart3 d-lg-none" ></i>
+          <i class="bi color bi-cart3 d-lg-none"></i>
           <% if(session.cart) {%> 
           <span class="badge d-lg-none">x<%=session.cart.totalQty%> </span>
           <% } %> 
@@ -20,9 +20,10 @@
               <a class="nav-link nav-color" aria-current="page" href="/meniu">Meniu</a>
             </li>
           </ul>
-          <a href="/order/cart" class="nav-color ms-3">
+          
+          <a href="/order/cart" class="nav-color ms-5">
+            <i class="bi color bi-cart3 nav-color"></i>
             Coș
-            <i class="bi bi-cart3 nav-color"></i>
             <% if(session.cart) {%> 
             <span class="badge">x<%=session.cart.totalQty%> </span>
             <% } %> 

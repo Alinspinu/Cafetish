@@ -7,7 +7,8 @@
     </div>
 </div>
 <div class="row">
-        <ul class="list-group col-lg-6 offset-lg-3">
+    <div class="col-lg-6 offset-lg-3 mt-2">
+        <ul class="list-group mb-2">
             <%produse.forEach(function(produs) { %> 
             <li class="list-group-item bg-transparent color" id="cart" style="--bs-border-opacity: .3;">
                 <span class="badge mx-1"><%=produs.qty%>x</span>
@@ -28,36 +29,29 @@
                 <strong class="total fs-4" style="color: #432818;;">TOTAL <%=totalPrice%> Lei </strong>
             </li>
         </ul>
-    </div>
-</div>
 
+        <form action="/order/checkout" method="POST">
 
-<form action="/order/checkout" method="post">
-<div class="col-lg-6 offset-lg-3 mt-2">
-    <label for="timp" class="mb-2 color">În cât timp să fie gata?</label>
-    <div class="input-group">
-        <select class="form-select bg-transparent color" type="number" name="timp" id="timp"
-          aria-label="Example select with button addon" required>
-          <option value="5">5 Min</option>
-          <option selected value="10">10 Min</option>
-          <option value="15">15 Min</option>
-          <option value="30">30 Min</option>
-        </select>
-        <div class="valid-feedback">Looks Good!!</div>
-      </div>
-</div>
-<div class="col-lg-6 offset-lg-3 mt-2">
-    <label for="comentarii" class="mb-2 color">Scrie-ne detalii despre comanda!</label>
-    <textarea name="comentarii"  id="comentarii" class="form-control bg-transparent color1 mb-3" placeholder="Comentarii"></textarea>
-</div>
-<div class="row">
-    <div class="col-lg-6 offset-lg-3">
-        <div class="d-grid gap-2">
-            <button class="btn">Comandă</button>
+            <label for="timp" class="my-2 color">În cât timp să fie gata?</label>
+            <div class="input-group">
+                <select class="form-select bg-transparent color mb-2" type="number" name="timp" id="timp"
+                        aria-label="Example select with button addon" required>
+                    <option value="5">5 Min</option>
+                    <option selected value="10">10 Min</option>
+                    <option value="15">15 Min</option>
+                    <option value="30">30 Min</option>
+                 </select>
+                <div class="valid-feedback">Looks Good!!</div>
             </div>
+
+            <label for="comentarii" class="my-2 color">Scrie-ne detalii despre comanda!</label>
+            <textarea name="comentarii"  id="comentarii" class="form-control bg-transparent color1 mb-3" placeholder="Comentarii"></textarea>
+            <button class="btn mt-4">Comandă</button>  
+        </form>
     </div>
 </div>
-</form>
+
+<div style="height:80px;"></div>
 
 <% } else {%> 
 <div class="row mt-5">

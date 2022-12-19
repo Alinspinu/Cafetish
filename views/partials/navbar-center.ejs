@@ -1,8 +1,15 @@
 
-<nav class="navbar navbar-dark navbar-expand-lg bg-transparent mb-auto">
+<nav class="navbar navbar-white navbar-expand-lg mb-auto">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
-          <img src="https://res.cloudinary.com/dhetxk68c/image/upload/v1670955190/ProduseI/Untitled_design_rcrcy6.png" alt="Bootstrap" width="80" height="40">
+          <img src="https://res.cloudinary.com/dhetxk68c/image/upload/v1669060120/ProduseI/Logo_Cafetish-02-negru_zhchuk.png" alt="Bootstrap" width="80" height="40">
+        </a>
+        <a class="nav-link nav-color d-lg-none" aria-current="page" href="/meniu">Meniu</a>
+        <a href="/order/cart" class="nav-color">
+          <i class="bi bi-cart3 color d-lg-none" ></i>
+          <% if(session.cart) {%> 
+          <span class="badge d-lg-none">x<%=session.cart.totalQty%> </span>
+          <% } %> 
         </a>
         <button class="navbar-toggler bg-transparent"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -13,8 +20,15 @@
               <a class="nav-link nav-color" aria-current="page" href="/meniu">Meniu</a>
             </li>
           </ul>
+          <a href="/order/cart" class="nav-color ms-3">
+            Coș
+            <i class="bi color bi-cart3 nav-color"></i>
+            <% if(session.cart) {%> 
+            <span class="badge">x<%=session.cart.totalQty%> </span>
+            <% } %> 
+            </a>
           <div class="navbar-nav ms-auto">
-              <% if(autUser && autUser.admin===flowerpower) {%> 
+            <% if(autUser && autUser.admin===flowerpower) {%> 
             <li class="nav-item">
                 <a class="nav-link nav-color" href="/order">Comenzi</a>
               </li>
@@ -25,20 +39,13 @@
                 <ul class="dropdown-menu bg-transparent">
                   <li><a class="dropdown-item nav-color" href="/meniu/cats">Categorie Produse</a></li>
                   <li><a class="dropdown-item nav-color" href="/meniu/cats/produs/nou">Produse</a></li>
-                  <li><a class="dropdown-item nav-color" href="/meniu/cafea">Cafea</a></li>
+                  <li><a class="dropdown-item nav-color" href="/meniu/cafea-nou">Cafea</a></li>
                 </ul>
               </li>
               <% } %> 
             </div>
           
-          
-          <a href="/order/cart" class="nav-color">
-            <i class="bi bi-cart3"></i>
-            Coș cu bunătăți
-            <% if(session.cart) {%> 
-            <span class="badge bg-danger"><%=session.cart.totalQty%> </span>
-            <% } %> 
-          </a>
+           
           
           <div class="navbar-nav ms-auto"> 
             <% if(!autUser) {%> 

@@ -1,26 +1,37 @@
 <% layout('layouts/boilerplate') %>
 
     <div class="container-fluid">
+        <h1 class="text-center">Adaugă Cafea</h1>
         <div class="row">
             <div class="col-md-6 offset-md-3">
         
                 <form action="/meniu/cafea-nou" method="POST" enctype="multipart/form-data" novalidate class="validated-form">
+                    <label class="fs-5" for="nume">Denumire</label>
                     <div class="input-group mb-3">
                         <input type="text" name="cafea[nume]" id="nume" class="form-control text-white bg-dark" placeholder="Denumire Cafea"
                             aria-describedby="basic-addon1" required>
                     </div>
+                    <label for="cafImg" class="fs-5">Adaugă</label>
                     <div class="input-group">
-                        <!-- <span class="input-group-text text-white bg-dark" for="imagine">Imagine</span> -->
                         <label for="cafImg" class="custom-file-upload text-white bg-dark mb-2">Imagine</label>
                         <input type="file" name="cafImg" id="cafImg" class="form-control form-control-color" placeholder="Poză"
                             aria-describedby="basic-addon1" multiple>
                     </div>
+                    <label class="fs-5"for="descriere">Descriere Cafea</label>
                     <div class="input-group mb-3">
-                        <textarea class="form-control text-white bg-dark" name="cafea[descriere]" placeholder="Descriere" required></textarea>
+                        <textarea class="form-control text-white bg-dark" id="descriere" name="cafea[descriere]" placeholder="Descriere" required></textarea>
                     </div>
-    
-                    <button class="btn btn-primary mt-3">Adaugă</button>
+                    <label class="fs-5" for="profilEsp">Profil Gust Espresso</label>
+                    <div class="input-group mb-3">
+                        <textarea class="form-control text-white bg-dark" id="profilEsp" name="cafea[profilEsp]" placeholder="Descriere"></textarea>
+                    </div>
+                    <label class="fs-5" for="profilFil">Profil Gust Espresso</label>
+                    <div class="input-group mb-3">
+                        <textarea class="form-control text-white bg-dark" id="profilFil" name="cafea[profilFil]" placeholder="Descriere"></textarea>
+                    </div>
+                    <button class="btn btn-primary">Adaugă</button>
                 </form>
+                <div style="height: 60px;"></div>
             </div>
     
         </div>
