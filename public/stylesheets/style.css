@@ -4,11 +4,6 @@ body {
     /* background-image: linear-gradient(rgba(0,0,0, 0.3), rgba(0,0,0, 0.3)), linear-gradient(#9c6644, 30%, #eda268, #9c6644); */
     background-size: cover;
     background-position: center;
- 
-}
-
-.img-fluid {
-    background-image: linear-gradient(rgba(249, 206, 163, 0.4), rgba(176,137,104,0.3));
 }
 
 #username, #password, #telefon, #email{
@@ -19,13 +14,18 @@ body {
 a:link{
     text-decoration: none;
 }
+.copyright{
+  font-family: Inconsolata;
+  font-size: 24px;
+  font-weight: 300;
+}
 
 a:hover{
-  color:#ffedd8;
+  color:#99582a;
 }
 
 .nav-link:hover{
-  color:#ffedd8;
+  color:#99582a;
 }
 
 .nav-color{
@@ -40,13 +40,21 @@ a:hover{
 }
 
 .navbar.scrolled{
-background-color: rgba(212, 162, 118, 0.9);
+background-color: rgba(212, 162, 118, 0);
 }
 
 .navbar{
-background-color: rgba(212, 162, 118, 0.6);
+background-color: rgba(212, 162, 118, 0);
+font-weight: 500;
 }
 
+.fw500{
+  font-weight: 500;
+}
+
+.fw400{
+  font-weight: 400;
+}
 
 #clip{
     height: 420px;
@@ -83,7 +91,7 @@ h3, h2, h4, p, h5, h1, span, label, input, strong, a, select, textarea{
 }
 
 .bi:hover{
-  color:#ffedd8;
+  color:#99582a;
 }
 
 label{
@@ -183,12 +191,25 @@ label{
   color:#432818;
 }
 
-
+#footCont{
+  height: 200px;
+}
   @media (max-width: 768px) {
       .footHide{
         display: none;
       }
     
+  }
+  @media (max-width: 760px) {
+    #footCont{
+      height: 100px;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .nav-hide{
+      display: none;
+    }
   }
 
 

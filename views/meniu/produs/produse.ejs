@@ -6,16 +6,16 @@
         <div class="row align-items-center mb-3">
             <div class="col-md-4 order-1">
               <a href="/meniu/cafea">
-              <img src="<%= produs.imagine.path.replace('/upload', '/upload/w_650')%> " class="img-fluid shadow-lg rounded mb-3" alt="..."
+              <img src="<%= produs.imagine.path.replace('/upload', '/upload/w_650')%> " class="img-fluid mb-3" alt="..."
               id="img">
             </a>
             </div>
             <div class="col-md-8 order-2 mb-2">
               <div class="row justify-content-center">
-                <div class="col-lg-10 shadow-sm">
-                  <span class="color fs-2"><%=produs.nume%></span> 
+                <div class="col-lg-10 descriere">
+                  <span class="color fw500 fs-2"><%=produs.nume%></span> 
                     <br>
-                  <span class="color fs-4"><%=produs.pret%> Lei / <%=produs.gramaj%> </span> <br>
+                  <span class="color fw400 fs-4"><%=produs.pret%> Lei / <%=produs.gramaj%> </span> <br>
                     <span class="color" style="font-size:18px;"><%=produs.descriere%></span> <br>
                     <%if(cat.nume === "Lumea lui Espresso" || cat.nume === "Prin cafeaua Lactee" || cat.nume === "Cafeaua la filtru") {%> 
                       <div class="row">
@@ -28,7 +28,7 @@
                               <option value="Danisa  3">Etiopia Danisa + 3 Lei</option>
                               <option value="Tarrazu 4">Costa Rica Tarrazu + 4 Lei</option>
                             </select>
-                              <button class="btn btn-sm mb-3 me-3" name ="addButton" >Adaugă</button>   
+                              <button class="btn btn-sm fw400 mb-3 me-3" name ="addButton" >Adaugă</button>   
                               <a href="/meniu/cafea" id="detaliiCafea">Despre cafea!</a>                   
                           </form>
                         </div>
@@ -55,16 +55,16 @@
         <div class="row align-items-center mb-3">
             <div class="col-md-4 order-1 order-md-2">
               <a href="/meniu/cafea">
-              <img src="<%= produs.imagine.path.replace('/upload', '/upload/w_650')%> " class="img-fluid shadow-lg rounded mb-3" alt="..."
-              id="img">
+              <img src="<%= produs.imagine.path.replace('/upload', '/upload/w_650')%> " class="img-fluid mb-3" alt="..."
+              id="img1">
               </a>
             </div>
             <div class="col-md-8 order-2 order-md-1 mb-2">
               <div class="row justify-content-center">
-                <div class="col-lg-10 shadow-sm">
-                  <span class="color fs-2"><%=produs.nume%></span> 
+                <div class="col-lg-10 descriere">
+                  <span class="color fw500 fs-2"><%=produs.nume%></span> 
                     <br>
-                  <span class="color fs-4"><%=produs.pret%> Lei / <%=produs.gramaj%> </span> <br>
+                  <span class="color fw400 fs-4"><%=produs.pret%> Lei / <%=produs.gramaj%> </span> <br>
                     <span class="color" style="font-size:18px;"><%=produs.descriere%></span> <br>
                     <%if(cat.nume === "Lumea lui Espresso" || cat.nume === "Prin cafeaua Lactee" || cat.nume === "Cafeaua la filtru") {%> 
                       <div class="row">

@@ -1,5 +1,5 @@
 <%layout('layouts/boilerplate') %>
-<h1 class="text-center">Descoperă originea cafelelor</h1>
+<h1 class="text-center fw400">Descoperă originea cafelelor</h1>
   <% cafele.forEach((cafea, i) => {%> 
     <% if(i%2===0){ %> 
       <section class="container-fluid px-0">
@@ -9,7 +9,7 @@
                     <div class="carousel-inner">
                         <% cafea.imagini.forEach((img, i) => {%> 
                       <div class="carousel-item <%= i=== 0 ? 'active' : '' %>">
-                        <img src="<%=img.path.replace('/upload','/upload/w_500')%>" class="rounded img-fluid" alt="...">
+                        <img src="<%=img.path.replace('/upload','/upload/w_500')%>" class="img-fluid" alt="...">
                       </div>
                       <% }) %>  
                     </div>
@@ -25,8 +25,8 @@
           </div>
           <div class="col-md-8 order-2">
             <div class="row justify-content-center">
-                <div class="col-lg-10 shadow-sm">
-                  <h3 class="color"><%=cafea.nume%> </h3>
+                <div class="col-lg-10">
+                  <h3 class="color fw500 my-3"><%=cafea.nume%> </h3>
                   <p class="color" style="font-size:19px;"> <%=cafea.descriere%></p>
                   <a href="/meniu/cat/<%=catId%>" class="btn mb-3 btn-sm">Inapoi la meniu</a> <br>
                   <% if(autUser && autUser.admin===flowerpower) {%> 
@@ -48,7 +48,7 @@
                       <div class="carousel-inner">
                           <% cafea.imagini.forEach((img, i) => {%> 
                         <div class="carousel-item <%= i=== 0 ? 'active' : '' %>">
-                          <img src="<%=img.path.replace('/upload', '/upload/w_400')%>" class="rounded img-fluid" alt="...">
+                          <img src="<%=img.path.replace('/upload', '/upload/w_400')%>" class=" img-fluid" alt="...">
                         </div>
                         <% }) %>  
                       </div>
@@ -64,8 +64,8 @@
             </div>
             <div class="col-md-8 order-2 order-md-1">
               <div class="row justify-content-center">
-                  <div class="col-lg-10 shadow-sm">
-                    <h3 class="color"><%=cafea.nume%> </h3>
+                  <div class="col-lg-10">
+                    <h3 class="color fw500 my-3"><%=cafea.nume%> </h3>
                     <p class="color"style="font-size:19px;"> <%=cafea.descriere%></p>
                     <a href="/meniu/cat/<%=catId%>" class="btn mb-3 btn-sm">Inapoi la meniu</a> <br>
                     <% if(autUser && autUser.admin===flowerpower) {%> 
