@@ -117,7 +117,8 @@ app.use(
             connectSrc:[
                 "http://localhost:3000/order/create-payment-intent",
                 'https://cafetish.azurewebsites.net/order/create-payment-intent',
-                "http://localhost:3000/"
+                "http://localhost:3000/",
+                "https://cafetish.com"
             ],
             formAction: ["'self'", 'https://checkout.stripe.com'],
             scriptSrcAttr:["'unsafe-inline'"],
