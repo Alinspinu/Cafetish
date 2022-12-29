@@ -1,6 +1,10 @@
 const output = document.querySelector('.output')
-const urlID = window.location.href.slice(27,51)
-const url = `https://cafetish.com/user/${urlID}/api`
+const urlIdLcl = window.location.href.slice(27,51)
+const urlId = window.location.href.slice(26,50)
+const url = `https://cafetish.com/user/${urlId}/api` 
+const urlLocal = `http://localhost:3000/user/${urlIdLcl}/api`
+console.log(url)
+
 
 
 
