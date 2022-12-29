@@ -9,18 +9,20 @@
         <h1 class="color">Plătește</h1> <br>
         <p class="lead color">Comanda se ridică din locație!</p>
         <span class="color" style="font-size:26px;">Total: <%=total%> Lei</span>
-       
+       <!-- <% if(total>50){%>  -->
         <!-- Display a payment form -->
         <form id="payment-form" class="px-0 py-0" action="/order/create-payment-intent" method="POST">
-          <div id="payment-element">
+          <div id="payment-element" style="display:;">
             <!--Stripe.js injects the Payment Element-->
           </div>
           <button class="btn btn-sm" id="submit">
             <div class="spinner hidden" id="spinner"></div>
             <span  class ="btn bg-transparent" style="border:none;"id="button-text">Plătește cu cardul</span>
           </button>
+          <!-- <% } else { %>  -->
           <a href="/order/successs" type="button" class="btn btn-sm mb-2" id="pay">Plătește în locație</a>
           <div id="payment-message" class="hidden"></div>
+          <!-- <% } %>  -->
         </form>
       </div>
     </div>

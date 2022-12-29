@@ -35,6 +35,7 @@ router.route('/successs')
 
 
 router.route('/:id')
+    .post(isAdmin, catchAsync(comenzi.conadaLivrat))
     .delete(isAdmin,catchAsync(comenzi.comandaDelete))
 
 

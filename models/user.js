@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const order = require('./order')
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const UserSchema = new Schema({
@@ -13,6 +14,13 @@ const UserSchema = new Schema({
         type: String,
         required: true      
     },
+    order:
+[
+    {
+        type: Schema.Types.ObjectId,
+        ref: 'Order'
+    },
+],
     
     admin: Number
 });

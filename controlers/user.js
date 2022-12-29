@@ -1,6 +1,8 @@
 const User = require('../models/user')
 const Url = require('../models/url')
 const localStorage = require("localStorage")
+const Cart = require('../models/cart');
+const Order = require('../models/order');
 
 
 module.exports.renderRegister = (req, res) => {
@@ -42,6 +44,8 @@ module.exports.loginUser = (req, res, next) => {
     req.session.cart = cart;
     localStorage.removeItem('cart');
     }
+    req.session.userId = req.user._id
+    console.log(req.session.userId)
     req.flash('success', `Salut ${username}! Bine ai revenit!`);
     res.redirect('/meniu')
 }
@@ -57,12 +61,28 @@ module.exports.logout = (req, res, next) => {
 
 }
 
+module.exports.renderShowPage = async(req, res, next) => {
+    const user = await User.findOne({_id: req.params.id}).populate({
+        path:'order'
+    })
+    const orders = user.order
+    res.render('user/show', {orders, user})
+
+}
+
+module.exports.apiShowPage = async(req, res, next) => {
+    const user = await User.findOne({_id: req.params.id}).populate({
+        path:'order'
+    })
+    const orders = user.order
+ 
+    res.json({orders})
+}
+
 module.exports.makeMasterAdmin = async(req, res) => {
     const {email, username, password, admin = 1, telefon} = req.body;
     const user = new User({email, admin, username, telefon});
     const registeredUser = await User.register(user, password);
     res.redirect('/meniu')
 }
-
-
 

@@ -50,6 +50,7 @@
                 <li><a href="/user/login" class ="nav-link nav-color">Login</a></li>
                 <li><a href="/user/register" class ="nav-link nav-color">Register</a></li>
                   <% } else{%> 
+                  <li><a href="/user/<%=session.userId%>/show" class ="nav-link"><i class="bi bi-person">Cont</i></a></li>
                 <li><a href="/user/logout" class ="nav-link nav-color">Logout</a></li>
                   <% } %> 
             </ul>
@@ -62,15 +63,15 @@
   <div class="col-11 offset-1">
   <hr>
 </div>
-  <div class="col-12" style="height:30px;"></div>
+  <div class="col-12" style="height:10px;"></div>
 
-  <script>
+  <!-- <script>
     $(function(){
       $(document).scroll(function(){
         var $nav = $("#mainNav")
         $nav.toggleClass("scrolled", $(this).scrollTop()>$nav.height())
     })
     })
-  </script>
+  </script> -->
 
 

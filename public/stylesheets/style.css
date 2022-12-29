@@ -6,6 +6,15 @@ body {
     background-position: center;
 }
 
+.hrMargin {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.pointer:hover{
+  cursor: pointer;
+}
+
 #username, #password, #telefon, #email{
   border-color:rgba(67, 40, 24, 0.2);
   color:#432818;
@@ -14,6 +23,10 @@ body {
 a:link{
     text-decoration: none;
 }
+/* .output{
+  border: 1px solid #99582a;
+  border-radius: 3px;
+} */
 .copyright{
   font-family: Inconsolata;
   font-size: 24px;
@@ -48,13 +61,6 @@ background-color: rgba(212, 162, 118, 0);
 font-weight: 500;
 }
 
-.fw500{
-  font-weight: 500;
-}
-
-.fw400{
-  font-weight: 400;
-}
 
 #clip{
     height: 420px;
@@ -80,14 +86,25 @@ input[type="file"] {
 }
 
 
-h3, h2, h4, p, h5, h1, span, label, input, strong, a, select, textarea{
+h3, h2, h4, p, h5, h1, span, label, input, strong, a, select, textarea, i{
     font-family: Inconsolata, monospace;
     font-weight: 300;
 }
 
+.fw500{
+  font-weight: 500;
+}
+
+.fw400{
+  font-weight: 400;
+}
+
 .bi{
-  color:#90624e;
-  font-size: 25px;
+  font-family: Inconsolata, monospace;
+  color:#432818;
+  font-size: 20px;
+  font-weight: 500;
+  font-style: normal;
 }
 
 .bi:hover{

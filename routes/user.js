@@ -3,7 +3,14 @@ const router = express.Router();
 const user = require('../controlers/user')
 const passport = require('passport')
 
-const catchAsync = require('../utilities/catchasync')
+const catchAsync = require('../utilities/catchasync');
+const { isLoggedIn } = require('../middleware');
+
+router.route('/:id/show')
+    .get(isLoggedIn, user.renderShowPage)
+
+router.route('/:id/api')
+    .get(isLoggedIn, user.apiShowPage)
 
 router.route('/register')
     .get(user.renderRegister)

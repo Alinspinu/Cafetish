@@ -50,6 +50,7 @@
                 <li><a href="/user/login" class ="nav-link nav-color">Login</a></li>
                 <li><a href="/user/register" class ="nav-link nav-color">Register</a></li>
                   <% } else{%> 
+                  <li><a href="/user/<%=session.userId%>/show"class ="nav-link"><i class="bi bi-person">Cont</i></a></li>
                 <li><a href="/user/logout" class ="nav-link nav-color">Logout</a></li>
                   <% } %> 
             </ul>

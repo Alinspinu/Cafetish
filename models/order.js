@@ -7,8 +7,10 @@ const orederSchema = new Schema ({
     user: 
     {
         type: Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'User'
     },
+    date: String,
+    time: String,
     cart:
     {
         type: Object,
@@ -26,7 +28,8 @@ const orederSchema = new Schema ({
     },
     payd: String,
     nume: String,
-    timp: Number
+    timp: Number,
+    livrat: String,
  
 })
 
