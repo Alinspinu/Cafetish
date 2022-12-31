@@ -8,7 +8,8 @@ const Cart = require('../models/cart');
 const User = require('../models/user')
 const Produs = require('../models/produs');
 const user = require('../models/user');
-const stripe = require('stripe')(process.env.STRIPE_SECRET)
+const GiftCard = require('../models/GiftCard')
+const stripe = require('stripe')(process.env.STRIPE_TEST_SECRET)
 
 
 
@@ -21,6 +22,7 @@ module.exports.renderComenzi = async (req, res, next) => {
         cart = new Cart(order.cart)
         order.items = cart.generateArray();
    })
+   
 
     res.render('order/comenzi', {orders})
 }
@@ -47,9 +49,33 @@ module.exports.checkout = async (req, res, next) =>{
         minute: '2-digit',
         second: '2-digit',
     })
+if(req.body.voucher){
+    try{
+        const card = await GiftCard.findOne({_id: req.body.voucher})
+        req.session.val = card.valoare
+        } catch (e){
+        req.flash('error', 'Cod Invalid')
+        res.redirect('back')
+        }
+    }
     const user = await User.findById(req.user.id)
     let cart = new Cart(req.session.cart);
-    console.log(cart)
+    if(req.session.val) {
+        cart.totalPrice = cart.totalPrice - req.session.val
+        req.session.val = null
+        if(cart.totalPrice < 0){
+            req.session.difCard = cart.totalPrice * -1
+            cart.totalPrice = 0
+            const card = await GiftCard.findOne({_id: req.body.voucher})
+            card.valoare = req.session.difCard
+            await card.save()
+            req.flash('success', `Mai ai ${req.session.difCard} Lei pe cardul cadou`)
+        } else {
+            await GiftCard.findByIdAndDelete(req.body.voucher)
+            req.flash('success', 'Cardul cadou a fost golit cu succes')
+        }
+        req.session.cart = cart
+    }
     const order = new Order({
         user: req.user,
         cart: cart,
@@ -65,8 +91,15 @@ module.exports.checkout = async (req, res, next) =>{
     user.order.push(order)
     await order.save()
     await user.save()
-  res.redirect('/order/checkout')
+    console.log(order.cart.totalPrice)
+    if(order.cart.totalPrice === 0) {
+        res.redirect('/order/success')
+    } else {
+        res.redirect('/order/checkout')
+    }
 }
+
+
 
 module.exports.addToCart = async(req, res, next) => {
     const produsId = req.params.id;
@@ -90,10 +123,10 @@ module.exports.addToCart = async(req, res, next) => {
         cart.add(produs, produs.id)
         req.session.cart = cart;
         res.redirect('back')
-    }else {
+    } else {
     cart.add(produs, produs.id)
     req.session.cart = cart;
-    res.redirect('back');
+    res.redirect('back')
     }
 }
 
@@ -142,8 +175,21 @@ module.exports.createPaymentIntent = async (req, res, next) => {
 
   module.exports.renderSuccess = async (req, res, next) =>{
     const order = await Order.findById(req.session.orderId)
+    if(req.session.giftId){
+    const giftCard = new GiftCard({
+        nume: 'Gift Card',
+        pret: 100,
+        valoare: 100,
+        imagine: 'https://res.cloudinary.com/dhetxk68c/image/upload/v1672427780/ProduseI/Card_Cadou_1_j7gcfe.png'
+    })
+    const user = await User.findById(req.user._id)
+    user.giftCard.push(giftCard)
+    giftCard.save();
+    user.save();
+  }
     order.payd = 'YES'
     await order.save()
+    req.session.giftId = null
     req.session.cart = null
     res.render('partials/success', {order})
 }

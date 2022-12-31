@@ -1,5 +1,4 @@
 const User = require('../models/user')
-const Url = require('../models/url')
 const localStorage = require("localStorage")
 const Cart = require('../models/cart');
 const Order = require('../models/order');
@@ -72,11 +71,12 @@ module.exports.renderShowPage = async(req, res, next) => {
 
 module.exports.apiShowPage = async(req, res, next) => {
     const user = await User.findOne({_id: req.params.id}).populate({
-        path:'order'
-    })
+        path:'order giftCard'
+        })
     const orders = user.order
+    const giftCard = user.giftCard
  
-    res.json({orders})
+    res.json({orders, giftCard})
 }
 
 module.exports.makeMasterAdmin = async(req, res) => {

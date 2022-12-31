@@ -1,9 +1,9 @@
-const output = document.querySelector('.output')
-const urlIdLcl = window.location.href.slice(27,51)
-const urlId = window.location.href.slice(26,50)
-const url = `https://cafetish.com/user/${urlId}/api` 
-const urlLocal = `http://localhost:3000/user/${urlIdLcl}/api`
-console.log(url)
+const output = document.querySelector('.output');
+const output1 = document.querySelector('.output1');
+const urlIdLcl = window.location.href.slice(27,51);
+const urlId = window.location.href.slice(26,50);
+const url = `https://cafetish.com/user/${urlId}/api`; 
+const urlLocal = `http://localhost:3000/user/${urlIdLcl}/api`;
 
 
 
@@ -12,12 +12,12 @@ console.log(url)
 window.addEventListener('DOMContentLoaded', (event)=> {
     fetch(url).then(res => res.json()).then((data) => {
         if(data){
+            console.log(data)
             var cart;
             data.orders.slice().reverse().forEach((el, i) => {
                 cart = new Cart(el.cart)
                 el.items = cart.generateArray();
                 const div = document.createElement('div')
-                div.classList.add('div')
                 const spam = document.createElement('span')
                 spam.innerHTML = `<hr class="hrMargin"> ${el.date}| ${el.time}| Total:${el.cart.totalPrice} Lei<br><hr class="hrMargin">`
                 spam.classList.add("fs-6", "fw400", 'pointer')
@@ -25,8 +25,6 @@ window.addEventListener('DOMContentLoaded', (event)=> {
                 div.append(spam)
                 function addListner(){
                     spam.addEventListener('click', e => {
-                            const hr = document.querySelector('hr')
-                            // hr.remove()
                             const divRow = document.createElement('div');
                             const div1 = document.createElement('div');
                             const div2 = document.createElement('div');
@@ -55,10 +53,54 @@ window.addEventListener('DOMContentLoaded', (event)=> {
                 }
                 addListner()
             });
+            if(data.giftCard){
+                for(let item of data.giftCard) {
+                        console.log(item)
+                        const divGift = document.createElement('div')
+                        const spam1 = document.createElement('span')
+                        spam1.innerHTML = `<hr class="hrMargin">${item.nume} / ${item.valoare} Lei <br><hr class="hrMargin">`
+                        spam1.classList.add("fs-6", "fw400", 'pointer')
+                        output1.append(divGift)
+                        divGift.append(spam1)
+                        function addListnerQ(){
+                            spam1.addEventListener('click', e => {
+                                const divRow1 = document.createElement('div');
+                                const div3 = document.createElement('div');
+                                const div4 = document.createElement('div');
+                                divRow1.classList.add('row','123');
+                                div3.classList.add('col-7');
+                                div4.classList.add('col-4', 'position-relative');
+                                divGift.append(divRow1);
+                                divRow1.append(div3);
+                                divRow1.append(div4);
+                                const closeButtonQ = document.createElement('i')
+                                closeButtonQ.innerHTML = "<br>"
+                                closeButtonQ.classList.add('bi','bi-x','position-absolute','top-50','start-50', 'translate-middle', 'fs-3', 'pointer')
+                                div4.append(closeButtonQ)
+                                const qr = document.createElement('img')
+                                const id = document.createElement('span')
+                                id.classList.add('cod')
+                                id.innerHTML = `<br>${item._id}`
+                                qr.src = `https://api.qrserver.com/v1/create-qr-code/?data=${item._id}&size=60x60`
+                                qr.classList.add('ms-5','pointer')
+                                div3.append(qr)
+                                div3.append(id)
+                                closeButtonQ.addEventListener('click', e => {
+                                    divRow1.parentNode.removeChild(divRow1)
+                                    addListnerQ()
+                                })
+                            
+                            }, {once: true, passive: true})
+                        }
+                        addListnerQ()
+                    
+                }
+            
+            }
         }
     })
+    
 })
-
 
 function Cart(oldCart) {
     this.items = oldCart.items || {};

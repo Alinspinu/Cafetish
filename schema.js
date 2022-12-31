@@ -27,8 +27,6 @@ const Joi = BaseJoi.extend(extension)
         produs: Joi.object({
             nume: Joi.string().required().escapeHTML(),
             gramaj: Joi.string().required().escapeHTML(),
-            // imagine: Joi.string(),
-            video: Joi.string().escapeHTML(),
             categorie: Joi.string().required().escapeHTML(),
             pret: Joi.number().required(),
             descriere: Joi.string().required().escapeHTML()

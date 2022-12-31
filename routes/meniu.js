@@ -14,9 +14,12 @@ const Produs = require('../models/produs');
 const { isLoggedIn, isAdmin, validateCat, validateProdus, validateCafea} = require('../middleware')
 const catchAsync = require('../utilities/catchasync')
 
-const cpUpload = 
+
 router.route('/')
     .get(catchAsync(meniu.renderMeniu))
+
+router.route('/giftCard')
+    .post(isLoggedIn, catchAsync(meniu.giftCard))
 
 router.route('/cafea')
     .get(meniu.renderCafea)

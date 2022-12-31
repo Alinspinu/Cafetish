@@ -21,6 +21,13 @@ const UserSchema = new Schema({
         ref: 'Order'
     },
 ],
+    giftCard:
+[
+    {
+        type: Schema.Types.ObjectId,
+        ref: 'GiftCard'
+    }
+],
     
     admin: Number
 });

@@ -29,7 +29,7 @@ const meniuRoutes = require('./routes/meniu')
 const comandaRoutes = require('./routes/order')
 const userRoutes = require('./routes/user')
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET)
+const stripe = require('stripe')(process.env.STRIPE_TEST_SECRET)
 
 const dbUrl = 'mongodb://cafetish-server:AkS60a3xnmjpAQ8pR7yyzZJEYWX4aR3OHFdtVdivIG0xOoG73Z3TxPZ2nOvaGIBGLCeyeO5hCza5ACDbwiTUlA==@cafetish-server.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@cafetish-server' ||'mongodb://localhost:27017/Cafetish';
 mongoose.connect(dbUrl);
@@ -134,6 +134,7 @@ app.use(
                 "https://res.cloudinary.com/dhetxk68c/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
                 "https://images.unsplash.com/",
                 "https://q.stripe.com",
+                "https://api.qrserver.com"
             ],
             fontSrc: ["'self'", ...fontSrcUrls],
         },

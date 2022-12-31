@@ -4,6 +4,10 @@ const Cafea =require('../models/cafea')
 const { cloudinary } = require('../cloudinary');
 const ExpressError = require('../utilities/expressError');
 const cafea = require('../models/cafea');
+const GiftCard = require('../models/GiftCard');
+const user = require('../models/user');
+const User = require('../models/user')
+const Cart = require('../models/cart')
 
 
 
@@ -105,10 +109,10 @@ module.exports.produsNou = async(req, res, next) => {
     const produsNou = new Produs(req.body.produs);
     produsNou.imagine.path = path;
     produsNou.imagine.filename = filename;
-    const videoUrlBase ="https://www.youtube.com/embed/"
-    const autoplay ="?autoplay=1"
-    const videoId = req.body.produs.video.slice(17)
-    produsNou.video = videoUrlBase.concat(videoId, autoplay)
+    // const videoUrlBase ="https://www.youtube.com/embed/"
+    // const autoplay ="?autoplay=1"
+    // const videoId = req.body.produs.video.slice(17)
+    // produsNou.video = videoUrlBase.concat(videoId, autoplay)
     cat.produs.push(produsNou);
     await produsNou.save();
     await cat.save();
@@ -121,12 +125,12 @@ module.exports.produsNou = async(req, res, next) => {
 module.exports.produsEdit =async(req, res, next) => {
     const {id} = req.params;
     const produs = await Produs.findByIdAndUpdate(id, {...req.body.produs});
-    if(req.body.produs.video.length < 30){
-        const videoUrlBase = "https://www.youtube.com/embed/"
-        const autoplay ="?autoplay=1"
-        const videoId = req.body.produs.video.slice(17)
-        produs.video = videoUrlBase.concat(videoId, autoplay)
-    }
+    // if(req.body.produs.video.length < 30){
+    //     const videoUrlBase = "https://www.youtube.com/embed/"
+    //     const autoplay ="?autoplay=1"
+    //     const videoId = req.body.produs.video.slice(17)
+    //     produs.video = videoUrlBase.concat(videoId, autoplay)
+    // }
     if(req.file){
     produs.imagine.path = req.file.path
     produs.imagine.filename = req.file.filename
@@ -198,5 +202,19 @@ module.exports.cafeaDelete = async(req, res, next) => {
         await cloudinary.uploader.destroy(filename.filename)
     } 
     await Cafea.findByIdAndDelete(id)
+    res.redirect('back')
+}
+
+module.exports.giftCard = async(req, res, next) => {
+    const giftCard = new GiftCard({
+        nume: 'Gift Card',
+        pret: 100,
+        valoare: 100,
+        imagine: 'https://res.cloudinary.com/dhetxk68c/image/upload/v1672427780/ProduseI/Card_Cadou_1_j7gcfe.png'
+    })
+    const cart = new Cart(req.session.cart ? req.session.cart: {});
+    cart.add(giftCard, giftCard._id);
+    req.session.cart = cart;
+    req.session.giftId = giftCard._id
     res.redirect('back')
 }

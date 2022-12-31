@@ -3,7 +3,8 @@ const stripe = Stripe("pk_live_51M9k8jFFsy1gu6PUgVOlcBaao0oajDPLeH4uid7E8yfK2rV5
 
 // The items the customer wants to buy
 const items = [{ id: "xl-tshirt" }];
-const URL = 'http://localhost:3000/order/success'
+const urlLocal = 'http://localhost:3000/order/success'
+const URL = 'https://cafetish.com/order/success'
 let elements;
 
 initialize();

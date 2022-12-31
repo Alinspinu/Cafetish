@@ -3,8 +3,8 @@
   <div class="row">
       <div class="col-lg-6 offset-md-3">
           <h1 class="color fw400">Mulțumin!</h1>
-          <p class="lead color">Comanda ta va fi gata în <%= order.timp %>  minute <br>Te așteptăm! </p>
-          <a href="/meniu" class="btn btn-lg fw500" id="btn">Meniu</a>
+          <p class="lead color">Comanda ta va fi gata în <%= order.timp %>  minute <br>Te așteptăm! <br> Între timp, intră pe pagina ta de profil unde poți vedea istoricul comenzilor și cardurile tale.</p>
+          <a href="/user/<%=session.userId%>/show" class="btn btn-lg fw500" id="btn">Cont</a>
 
       </div>
   </div>

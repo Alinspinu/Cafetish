@@ -2,14 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 const User = require('../models/user')
 
-const imagineSchema = new Schema({
-    path: String,
-    filename: String
-});
 
-imagineSchema.virtual('thumb').get(function () {
-    return this.path.replace('/upload', '/upload/w_250');
-})
 
 const produsSchema = new Schema({
     nume: String,
@@ -22,6 +15,7 @@ const produsSchema = new Schema({
     cafea: String,
     pret: Number,
     descriere: String,
+    cod: String,
     categorie:
     {
         type: Schema.Types.ObjectId,

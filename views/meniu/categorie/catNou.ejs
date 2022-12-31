@@ -1,22 +1,21 @@
 <% layout('layouts/boilerplate') %>
-
+<h1 class="text-center mb-2 fw400 color">Categorie nou</h1>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-        
                 <form action="/meniu/cats" method="POST" enctype="multipart/form-data" novalidate class="validated-form">
                     <div class="input-group mb-3">
-                        <input type="text" name="categorie[nume]" id="nume" class="form-control text-white bg-dark" placeholder="Denumire Categorie"
+                        <input type="text" name="categorie[nume]" id="nume" class="form-control color bg-transparent" placeholder="Denumire Categorie"
                             aria-describedby="basic-addon1" required>
                     </div>
                     <div class="input-group">
                         <!-- <span class="input-group-text text-white bg-dark" for="imagine">Imagine</span> -->
-                        <label for="catImg" class="custom-file-upload text-white bg-dark mb-2">Imagine</label>
+                        <label for="catImg" class="custom-file-upload color bg-transparent mb-2">Imagine</label>
                         <input type="file" name="catImg" id="catImg" class="form-control form-control-color" placeholder="Poză"
                             aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group mb-3">
-                        <textarea class="form-control text-white bg-dark" name="categorie[descriere]" placeholder="Descriere" required></textarea>
+                        <textarea class="form-control color bg-transparent" name="categorie[descriere]" placeholder="Descriere" required></textarea>
                     </div>
                     <button class="btn btn-primary mt-3">Adaugă</button>
                 </form>

@@ -14,6 +14,7 @@ router.route('/:id/api')
 
 router.route('/register')
     .get(user.renderRegister)
+    // .post(user.makeMasterAdmin)
     .post(catchAsync(user.registerUser))
 
 router.route('/login')
