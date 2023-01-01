@@ -9,7 +9,7 @@ const User = require('../models/user')
 const Produs = require('../models/produs');
 const user = require('../models/user');
 const GiftCard = require('../models/GiftCard')
-const stripe = require('stripe')(process.env.STRIPE_TEST_SECRET)
+const stripe = require('stripe')(process.env.STRIPE_SECRET)
 
 
 
