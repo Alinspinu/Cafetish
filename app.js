@@ -29,6 +29,7 @@ const MongoDbStore = require('connect-mongo');
 const meniuRoutes = require('./routes/meniu')
 const comandaRoutes = require('./routes/order')
 const userRoutes = require('./routes/user')
+const legalRoutes = require('./routes/legal')
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET)
 
@@ -215,6 +216,7 @@ app.get('/', (req, res)=>{
 app.use('/meniu', meniuRoutes);
 app.use('/order', comandaRoutes);
 app.use('/user', userRoutes);
+app.use('/legal', legalRoutes)
 
 app.get('')
 
