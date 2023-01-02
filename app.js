@@ -20,6 +20,7 @@ const { storage, cloudinary } = require('./cloudinary');
 const upload = multer({storage});
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+const FbStrategy = require('passport-facebook')
 const ExpressError = require('./utilities/expressError')
 const helmet = require('helmet')
 const MongoDbStore = require('connect-mongo');
@@ -91,6 +92,7 @@ const scriptSrcUrls = [
     "https://cdn.jsdelivr.net",
     "https://code.jquery.com",
     "https://js.stripe.com/v3/",
+    "https://connect.facebook.net",
 ];
 const styleSrcUrls = [
     "https://kit-free.fontawesome.com/",
@@ -118,14 +120,23 @@ app.use(
                 "http://localhost:3000/order/create-payment-intent",
                 'https://cafetish.azurewebsites.net/order/create-payment-intent',
                 "http://localhost:3000/",
-                "https://cafetish.com"
+                "https://cafetish.com",
+                "https://connect.facebook.net",
+                "https://www.facebook.com"
             ],
             formAction: ["'self'", 'https://checkout.stripe.com'],
             scriptSrcAttr:["'unsafe-inline'"],
             scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
             styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
             workerSrc: ["'self'", "blob:"],
-            frameSrc: ["'self'", "blob:", "data:", "https://www.youtube.com", "https://js.stripe.com"],
+            frameSrc: [
+                "'self'", 
+                "blob:",
+                "data:", 
+                "https://www.youtube.com",
+                "https://js.stripe.com",
+                "https://www.facebook.com",
+            ],
             objectSrc: [],
             imgSrc: [
                 "'self'",
@@ -134,7 +145,9 @@ app.use(
                 "https://res.cloudinary.com/dhetxk68c/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
                 "https://images.unsplash.com/",
                 "https://q.stripe.com",
-                "https://api.qrserver.com"
+                "https://api.qrserver.com",
+                "https://www.facebook.com",
+                "https://platform-lookaside.fbsbx.com",
             ],
             fontSrc: ["'self'", ...fontSrcUrls],
         },
@@ -150,8 +163,42 @@ app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate())); 
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.use(new FbStrategy({
+    clientID: process.env.FACEBOOK_APP_ID,
+    clientSecret: process.env.FACEBOOK_APP_SECRET,
+    callbackURL: 'http://localhost:3000/user/FbLogin',
+    profileFields: ['name', 'email', 'picture','displayName']
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    User.findOne({facebookId: profile.id}, function(err, user){
+        if(user){
+            console.log(profile)
+        cb(err, user)
+        }else {
+            console.log(profile.photos[0].value)
+                const user = new User({
+                facebookId: profile.id,
+                facebookName: profile.name.givenName + ' ' + profile.name.familyName,
+                facebookPic: profile.photos[0].value,
+                email: profile.emails[0].value
+
+            });
+            user.save()
+                cb(err, user)
+                console.log(user);
+                
+        }
+    })
+  }
+));
+
+passport.serializeUser(function(user, done) {
+    done(null, user);
+  });
+  
+  passport.deserializeUser(function(user, done) {
+    done(null, user);
+  });
 
 app.use((req, res, next) => {
     res.locals.flowerpower = 1;

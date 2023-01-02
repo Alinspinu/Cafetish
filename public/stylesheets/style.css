@@ -5,9 +5,15 @@ body {
     background-size: cover;
     background-position: center;
 }
-#voucher{
+#voucher, #telefon{
   border-radius: 5px;
   border: 1px solid #432818;
+}
+
+.fbImg{
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
 }
 
 .cod{
@@ -31,7 +37,7 @@ body {
   height: 180px;
 }
 
-#username, #password, #telefon, #email{
+#username, #password, #email{
   border-color:rgba(67, 40, 24, 0.2);
   color:#432818;
 }
@@ -161,6 +167,13 @@ label{
     background-color: #ffd7ba;
   }
 
+  #fbBtn {
+    background-color: #0466c8;
+    color: white;
+    font-family: Helvetica, sans-serif;
+    font-weight: 600;
+  }
+
 
   .btn {
     border: none;
@@ -227,6 +240,13 @@ label{
 #footCont{
   height: 200px;
 }
+
+@media (max-width: 992px) {
+  .showDiv{
+    margin-top: 20px;
+  }
+}
+
   @media (max-width: 768px) {
       .footHide{
         display: none;

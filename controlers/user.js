@@ -20,7 +20,6 @@ module.exports.registerUser = async(req, res, next) => {
     const cart = JSON.parse(localStorage.getItem('cart'));
     req.session.cart = cart;
     localStorage.removeItem('cart');
-    console.log(req.session)
     }
     req.flash('success', `Bine ai venit gașcă ${user.username}!`)
     res.redirect('/meniu')
@@ -44,7 +43,6 @@ module.exports.loginUser = (req, res, next) => {
     localStorage.removeItem('cart');
     }
     req.session.userId = req.user._id
-    console.log(req.session.userId)
     req.flash('success', `Salut ${username}! Bine ai revenit!`);
     res.redirect('/meniu')
 }

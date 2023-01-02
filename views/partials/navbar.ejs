@@ -12,7 +12,13 @@
       <% } %> 
     </a>
     <button class="navbar-toggler bg-transparent"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <% if(session.passport){%> 
+      <%if(session.passport.user.facebookPic){%>
+            <img src="<%=session.passport.user.facebookPic%>" alt="">
+        <%} else {%> 
       <i class="bi bi-person"></i>
+      <% } %> 
+      <% } %> 
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
@@ -50,7 +56,12 @@
                 <li><a href="/user/login" class ="nav-link nav-color">Login</a></li>
                 <li><a href="/user/register" class ="nav-link nav-color">Register</a></li>
                   <% } else{%> 
-                  <li><a href="/user/<%=session.userId%>/show" class ="nav-link"><i class="bi bi-person">Cont</i></a></li>
+                  <li><a href="/user/<%=session.passport.user._id%>/show" class ="nav-link color">
+                    <% if(session.passport.user.facebookPic) {%>
+                    <img class ='fbImg img-fluid'src="<%=session.passport.user.facebookPic%>" alt=""> Cont
+                  <%} else {%> 
+                    <i class="bi bi-person">Cont</i></a></li>
+                    <% } %> 
                 <li><a href="/user/logout" class ="nav-link nav-color">Logout</a></li>
                   <% } %> 
             </ul>

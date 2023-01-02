@@ -13,6 +13,7 @@ const Cart = require('../models/cart')
 
 module.exports.renderMeniu =  async (req, res, next) => {
     const cats = await Categorie.find({})
+    console.log(req.session)
     res.render('meniu/categorie/meniu', {cats})
 }
 

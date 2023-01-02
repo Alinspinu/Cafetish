@@ -10,7 +10,7 @@ const urlLocal = `http://localhost:3000/user/${urlIdLcl}/api`;
 
 
 window.addEventListener('DOMContentLoaded', (event)=> {
-    fetch(urlLocal).then(res => res.json()).then((data) => {
+    fetch(url).then(res => res.json()).then((data) => {
         if(data){
             console.log(data)
             var cart;

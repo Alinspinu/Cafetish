@@ -58,7 +58,10 @@ if(req.body.voucher){
         res.redirect('back')
         }
     }
-    const user = await User.findById(req.user.id)
+    
+
+    const user = await User.findById(req.user._id)
+    // console.log(req.user)
     let cart = new Cart(req.session.cart);
     if(req.session.val) {
         cart.totalPrice = cart.totalPrice - req.session.val
@@ -79,14 +82,15 @@ if(req.body.voucher){
     const order = new Order({
         user: req.user,
         cart: cart,
-        nume: req.user.username,
-        telefon: req.user.telefon,
+        nume: req.user.username || req.user.facebookName,
+        telefon: req.body.telefon,
         timp: req.body.timp,
         comentarii: req.body.comentarii,
         date: currentDate,
         time: currentTime,
         livrat: 'Nu'
     })
+    console.log(order)
     req.session.orderId = order.id
     user.order.push(order)
     await order.save()
