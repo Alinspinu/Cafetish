@@ -166,7 +166,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.use(new FbStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: 'http://localhost:3000/user/FbLogin',
+    callbackURL: 'https://cafetish.com' || 'http://localhost:3000/user/FbLogin',
     profileFields: ['name', 'email', 'picture','displayName']
   },
   function(accessToken, refreshToken, profile, cb) {
