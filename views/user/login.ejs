@@ -1,27 +1,30 @@
 <% layout('layouts/boilerplate') %>
-<div class="container justify-content-center align-items-center mt-2">
-    <div class="row">
-        <div class="col-lg-6 offset-lg-3">
+    <div class="container justify-content-center align-items-center mt-2">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
                 <h1 class="text-center color mb-2">Login</h1>
-                <form action="/user/login" method = "POST" class = "validated-form" novalidate>
-                    <label class="my-3 fs-5"for="username">Username</label> 
+                <form action="/user/login" method="POST" class="validated-form" novalidate>
+                    <label class="my-3 fs-5" for="username">Username</label>
                     <div class="mb-3 input-group-lg">
-                        <input class="form-control bg-transparent color" type="text" name="username" id="username" autofocus required>
+                        <input class="form-control bg-transparent color" type="text" name="username" id="username"
+                            autofocus required>
                         <div class="valid-feedback">Looks Good!!</div>
                     </div>
-                    <label class="my-3 fs-5"for="password">Password</label>
+                    <label class="my-3 fs-5" for="password">Password</label>
                     <div class="mb-3 input-group-lg">
-                        <input class="form-control bg-transparent color" type="password" name="password" id="password" required>
+                        <input class="form-control bg-transparent color" type="password" name="password" id="password"
+                            required>
                         <div class="valid-feedback">Looks Good!!</div>
                     </div>
-                        <button class="btn btn-sm mt-4">Log In</button> <a href="/user/login/facebook" id="fbBtn" class="btn ms-4 mt-4">Facebook Log In</a>
+                    <button class="btn btn-sm me-4">Log In</button> <br>
+                    <a href="/user/login/google" type="button"  class="btn loginBtn loginBtn--google mt-3">Google Log In</a> <br>
+                    <a href="/user/login/facebook" type="button" class="btn loginBtn loginBtn--facebook mt-3">Facebook Log In</a><br>
                 </form>
-                <div class="mt-5"style="height:200px;">
-                <h4 class="color mt-3">Nou la Cafetish?</h4>
-                <p class="color">Înscrie-te în gașcă și bucurăte de cele mai bune oferte.</p>
-                <a href="/user/register" type="button" class="btn" id="btnRegister">Register</a>
+                <div class="mt-5" style="height:200px;">
+                    <h4 class="color mt-3">Nou la Cafetish?</h4>
+                    <p class="color">Înscrie-te în gașcă și bucurăte de cele mai bune oferte.</p>
+                    <a href="/user/register" type="button" class="btn" id="btnRegister">Register</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
-

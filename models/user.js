@@ -6,32 +6,51 @@ const findOrCreate = require('mongoose-findorcreate')
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const UserSchema = new Schema({
-    email:{
-        type: String,
-        unique: true
-    },
-    order:
-[
-    {
-        type: Schema.Types.ObjectId,
-        ref: 'Order'
-    },
-],
-    giftCard:
-[
-    {
-        type: Schema.Types.ObjectId,
-        ref: 'GiftCard'
-    }
-],
+//     email:{
+//         type: String,
+//         unique: false,
+//         index: false
+//     },
+//     order:
+// [
+//     {
+//         type: Schema.Types.ObjectId,
+//         ref: 'Order'
+//     },
+// ],
+//     giftCard:
+// [
+//     {
+//         type: Schema.Types.ObjectId,
+//         ref: 'GiftCard'
+//     }
+// ],
     
-    admin: Number,
-    facebookId: String,
-    facebookName: String,
-    facebookPic: String,
-});
+//     admin: Number,
 
-UserSchema.plugin(passportLocalMongoose)
+    // facebookId: {
+    //     type: String,
+    //     unique: false,
+    //     index: false
+    // },
+    googleId: {
+        type: String,
+        unique: false,
+        index: false
+    }, 
+    // onlineName:{
+    //     type: String,
+    //     unique: false,
+    //     index: false
+    // },
+    // onlinePic:{
+    //     type: String,
+    //     unique: false,
+    //     index: false
+    // } 
+})
+
+UserSchema.plugin(passportLocalMongoose, {usernameUnique: false})
 UserSchema.plugin(findOrCreate)
     
 

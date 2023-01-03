@@ -13,8 +13,8 @@
     </a>
     <button class="navbar-toggler bg-transparent"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <% if(session.passport){%> 
-      <%if(session.passport.user.facebookPic){%>
-            <img src="<%=session.passport.user.facebookPic%>" alt="">
+      <%if(session.passport.user.onlinePic){%>
+            <img src="<%=session.passport.user.onlinePic%>" alt="">
         <%} else {%> 
       <i class="bi bi-person"></i>
       <% } %> 
@@ -57,8 +57,8 @@
                 <li><a href="/user/register" class ="nav-link nav-color">Register</a></li>
                   <% } else{%> 
                   <li><a href="/user/<%=session.passport.user._id%>/show" class ="nav-link color">
-                    <% if(session.passport.user.facebookPic) {%>
-                    <img class ='fbImg img-fluid'src="<%=session.passport.user.facebookPic%>" alt=""> Cont
+                    <% if(session.passport.user.onlinePic) {%>
+                    <img class ='fbImg img-fluid'src="<%=session.passport.user.onlinePic%>" alt=""> Cont
                   <%} else {%> 
                     <i class="bi bi-person">Cont</i></a></li>
                     <% } %> 

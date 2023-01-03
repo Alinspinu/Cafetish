@@ -8,15 +8,27 @@ const catchAsync = require('../utilities/catchasync');
 const { isLoggedIn } = require('../middleware');
 
 router.route('/login/facebook')
-    .get(passport.authenticate('facebook', {scope: ('email, public_profile')}));
+    .get(passport.authenticate('facebook', { scope: ('email, public_profile') }));
 
 router.route('/FbLogin')
     .get(passport.authenticate('facebook', { failureRedirect: '/user/login', failureMessage: true }),
-    function(req, res) {
-        req.flash('success', `Salut ${req.user.facebookName}! Bine ai venit!`)
-        res.redirect('/meniu');
-        
-    });
+        function (req, res) {
+            req.flash('success', `Salut ${req.user.onlineName}! Bine ai venit!`)
+            res.redirect('/meniu');
+
+        });
+
+
+router.route('/login/google')
+    .get(passport.authenticate('google', { scope: ['profile', 'email'] }))
+
+router.route('/gogLogin')
+    .get(passport.authenticate('google', { failureRedirect: '/user/login', failureMessage: true }),
+        function (req, res) {
+            req.flash('success', `Salut ${req.user.onlineName}! Bine ai venit!`)
+            res.redirect('/meniu');
+        });
+
 
 router.route('/:id/show')
     .get(isLoggedIn, user.renderShowPage)
@@ -31,7 +43,7 @@ router.route('/register')
 
 router.route('/login')
     .get(user.renderLogin)
-    .post(passport.authenticate('local',{failureFlash: true, failureRedirect: '/user/login', keepSessionInfo: true}), user.loginUser)
+    .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/user/login', keepSessionInfo: true }), user.loginUser)
 
 router.route('/logout')
     .get(user.logout)
@@ -39,5 +51,5 @@ router.route('/logout')
 // router.route('/register/admin')
 //     .post(user.makeMasterAdmin)
 
-    
+
 module.exports = router

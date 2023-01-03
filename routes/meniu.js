@@ -4,7 +4,6 @@ const multer = require('multer')
 const {storage} = require('../cloudinary');
 const upload = multer({storage})
 
-
 const ExpressError = require('../utilities/expressError');
 const { produsSchema } = require('../schema.js');
 

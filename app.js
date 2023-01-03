@@ -1,4 +1,4 @@
-if(process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
 
@@ -9,18 +9,19 @@ const mongoose = require('mongoose')
 const methodOverride = require('method-override');
 const app = express();
 const ejsMate = require('ejs-mate')
-const session =require('express-session');
-const flash =require('connect-flash');
+const session = require('express-session');
+const flash = require('connect-flash');
 const User = require('./models/user');
 const Produs = require('./models/produs')
 const Cart = require('./models/cart')
-const Comanda =require('./models/order')
+const Comanda = require('./models/order')
 const multer = require('multer');
 const { storage, cloudinary } = require('./cloudinary');
-const upload = multer({storage});
+const upload = multer({ storage });
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const FbStrategy = require('passport-facebook')
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const ExpressError = require('./utilities/expressError')
 const helmet = require('helmet')
 const MongoDbStore = require('connect-mongo');
@@ -33,9 +34,9 @@ const legalRoutes = require('./routes/legal')
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET)
 
-const dbUrl = 'mongodb://cafetish-server:AkS60a3xnmjpAQ8pR7yyzZJEYWX4aR3OHFdtVdivIG0xOoG73Z3TxPZ2nOvaGIBGLCeyeO5hCza5ACDbwiTUlA==@cafetish-server.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@cafetish-server' ||'mongodb://localhost:27017/Cafetish';
+const dbUrl = 'mongodb+srv://Alin:espsOCn7sllc@cluster0.459nok3.mongodb.net/?retryWrites=true&w=majority'
 mongoose.connect(dbUrl);
- 
+
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -99,13 +100,13 @@ const styleSrcUrls = [
     "https://kit-free.fontawesome.com/",
     "https://stackpath.bootstrapcdn.com/",
     'https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css',
-    "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css", 
+    "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css",
     "https://api.mapbox.com/",
     "https://kit-free.fontawesome.com/",
     "https://api.tiles.mapbox.com/",
     "https://fonts.googleapis.com/",
     "https://use.fontawesome.com/",
-    
+
 ];
 const fontSrcUrls = [
     "https://fonts.googleapis.com/",
@@ -116,8 +117,8 @@ app.use(
     helmet.contentSecurityPolicy({
         directives: {
             defaultSrc: [],
-            mediaSrc:['https://res.cloudinary.com/'],
-            connectSrc:[
+            mediaSrc: ['https://res.cloudinary.com/'],
+            connectSrc: [
                 "http://localhost:3000/order/create-payment-intent",
                 'https://cafetish.azurewebsites.net/order/create-payment-intent',
                 "http://localhost:3000/",
@@ -126,14 +127,14 @@ app.use(
                 "https://www.facebook.com"
             ],
             formAction: ["'self'", 'https://checkout.stripe.com'],
-            scriptSrcAttr:["'unsafe-inline'"],
+            scriptSrcAttr: ["'unsafe-inline'"],
             scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
             styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
             workerSrc: ["'self'", "blob:"],
             frameSrc: [
-                "'self'", 
+                "'self'",
                 "blob:",
-                "data:", 
+                "data:",
                 "https://www.youtube.com",
                 "https://js.stripe.com",
                 "https://www.facebook.com",
@@ -149,6 +150,9 @@ app.use(
                 "https://api.qrserver.com",
                 "https://www.facebook.com",
                 "https://platform-lookaside.fbsbx.com",
+                "https://lh3.googleusercontent.com/",
+                "https://upload.wikimedia.org",
+                "https://s3-us-west-2.amazonaws.com/",
             ],
             fontSrc: ["'self'", ...fontSrcUrls],
         },
@@ -162,44 +166,42 @@ app.disable('etag');
 app.use(session(sessionConfig));
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate())); 
+passport.use(new LocalStrategy(User.authenticate()));
 
 passport.use(new FbStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: 'https://cafetish.com/user/FbLogin',
-    profileFields: ['name', 'email', 'picture','displayName']
-  },
-  function(accessToken, refreshToken, profile, cb) {
-    User.findOne({facebookId: profile.id}, function(err, user){
-        if(user){
-            console.log(profile)
-        cb(err, user)
-        }else {
-            console.log(profile.photos[0].value)
-                const user = new User({
-                facebookId: profile.id,
-                facebookName: profile.name.givenName + ' ' + profile.name.familyName,
-                facebookPic: profile.photos[0].value,
-                email: profile.emails[0].value
-
-            });
-            user.save()
-                cb(err, user)
-                console.log(user);
-                
-        }
-    })
-  }
+    callbackURL: 'http://localhost:3000/user/FbLogin',
+    profileFields: ['name', 'email', 'picture', 'displayName']
+},
+    function (accessToken, refreshToken, profile, cb) {
+        User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+               return cb(err, user);
+        })
+    }
 ));
 
-passport.serializeUser(function(user, done) {
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: "http://localhost:3000/user/gogLogin"
+},
+    function (accessToken, refreshToken, profile, cb) {
+        console.log(profile)
+        User.findOrCreate({ googleId: profile.id }, function (err, user) {
+            return cb(err, user)
+        });
+    }
+));
+
+
+passport.serializeUser(function (user, done) {
     done(null, user);
-  });
-  
-  passport.deserializeUser(function(user, done) {
+});
+
+passport.deserializeUser(function (user, done) {
     done(null, user);
-  });
+});
 
 app.use((req, res, next) => {
     res.locals.flowerpower = 1;
@@ -210,7 +212,7 @@ app.use((req, res, next) => {
     next();
 })
 
-app.get('/', (req, res)=>{
+app.get('/', (req, res) => {
     res.render('index')
 })
 app.use('/meniu', meniuRoutes);
@@ -220,16 +222,16 @@ app.use('/legal', legalRoutes)
 
 app.get('')
 
- 
+
 
 // app.all('*', (err, req, res, next) => {
 //     next(new ExpressError('page not found', 404))
 // })
 
 app.use((err, req, res, next) => {
-    const {statusCode = 500} = err;
-    if(!err.message) err.message = 'O Noo! Something went wrong!'
-    res.status(statusCode).render('error',{err}) 
+    const { statusCode = 500 } = err;
+    if (!err.message) err.message = 'O Noo! Something went wrong!'
+    res.status(statusCode).render('error', { err })
 })
 
 const port = process.env.PORT || 3000
