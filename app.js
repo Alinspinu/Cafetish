@@ -68,11 +68,6 @@ const sessionConfig = {
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
-    // cookie: {
-    //     httpOnly: true,
-    //     autoRemove: 'interval',
-    //     autoRemoveInterval: 10
-    // }
 }
 
 // const sessionConfig = {
@@ -175,23 +170,21 @@ const baseUrl = 'https://cafetish.com/user/'
 passport.use(new FbStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: `${baseUrl}FbLogin`,
+    callbackURL: `${baseUrlLocal}FbLogin`,
     profileFields: ['name', 'email', 'picture', 'displayName']
 },
     function (accessToken, refreshToken, profile, cb) {
-        User.findOne({ facebookId: profile.id }, function (err, user) {
-            if(user){
-               return cb(err, user);
-            }else{
-                const newUser = new User({
-                    facebookId: profile.id,
-                    email: profile.emails[0].value,
-                    onlineName: profile.displayName,
-                    onlinePic: profile.photos[0].value
-                })
-                newUser.save()
-                return cb(err, user)
-            }
+        const newUser = User.findOrCreate({
+            facebookId: profile.id,
+            onlineName: profile.displayName,
+            email: profile.emails[0].value
+        }, function (err, user) {
+            if (user.onlinePic) {
+                return cb(err, user);
+            } else {
+                user.onlinePic = profile.photos[0].value
+                user.save()
+            } return cb(err, user)
         })
     }
 ));
@@ -200,24 +193,18 @@ passport.use(new FbStrategy({
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: `${baseUrl}gogLogin`
+    callbackURL: `${baseUrlLocal}gogLogin`
 },
     function (accessToken, refreshToken, profile, cb) {
-        console.log(profile)
-        User.findOne({ googleId: profile.id }, function (err, user) {
-            if(user){
-            return cb(err, user)
-            } else {
-                const newUser = new User({
-                    googleId: profile.id,
-                    email: profile.emails[0].value,
-                    onlineName: profile.displayName,
-                    onlinePic: profile.photos[0].value
-                })
-                newUser.save()
-                console.log(newUser)
+        User.findOrCreate({ 
+            googleId: profile.id,
+            onlineName: profile.displayName,
+            email:profile.emails[0].value,
+            onlinePic: profile.photos[0].value
+        }, function (err, user) {
+            
                 return cb(err, user)
-            }
+    
         });
     }
 ));
