@@ -170,7 +170,7 @@ const baseUrl = 'https://cafetish.com/user/'
 passport.use(new FbStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: `${baseUrlLocal}FbLogin`,
+    callbackURL: `${baseUrl}FbLogin`,
     profileFields: ['name', 'email', 'picture', 'displayName']
 },
     function (accessToken, refreshToken, profile, cb) {
@@ -193,18 +193,15 @@ passport.use(new FbStrategy({
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: `${baseUrlLocal}gogLogin`
+    callbackURL: `${baseUrl}gogLogin`
 },
     function (accessToken, refreshToken, profile, cb) {
         User.findOrCreate({ 
             googleId: profile.id,
             onlineName: profile.displayName,
             email:profile.emails[0].value,
-            onlinePic: profile.photos[0].value
-        }, function (err, user) {
-            
+            onlinePic: profile.photos[0].value}, function (err, user) {
                 return cb(err, user)
-    
         });
     }
 ));
