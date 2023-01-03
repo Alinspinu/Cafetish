@@ -34,7 +34,7 @@ const legalRoutes = require('./routes/legal')
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET)
 
-const dbUrl = 'mongodb+srv://Alin:espsOCn7sllc@cluster0.459nok3.mongodb.net/?retryWrites=true&w=majority'
+const dbUrl = 'mongodb://cafetish-server:AkS60a3xnmjpAQ8pR7yyzZJEYWX4aR3OHFdtVdivIG0xOoG73Z3TxPZ2nOvaGIBGLCeyeO5hCza5ACDbwiTUlA==@cafetish-server.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@cafetish-server'
 mongoose.connect(dbUrl);
 
 
