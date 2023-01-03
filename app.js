@@ -168,28 +168,56 @@ app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 
+const baseUrlLocal = 'http://localhost:3000/user/'
+const baseUrl = 'https://cafetish.com/user/'
+
+
 passport.use(new FbStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: 'http://localhost:3000/user/FbLogin',
+    callbackURL: `${baseUrl}FbLogin`,
     profileFields: ['name', 'email', 'picture', 'displayName']
 },
     function (accessToken, refreshToken, profile, cb) {
-        User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+        User.findOne({ facebookId: profile.id }, function (err, user) {
+            if(user){
                return cb(err, user);
+            }else{
+                const newUser = new User({
+                    facebookId: profile.id,
+                    email: profile.emails[0].value,
+                    onlineName: profile.displayName,
+                    onlinePic: profile.photos[0].value
+                })
+                newUser.save()
+                return cb(err, user)
+            }
         })
     }
 ));
 
+
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/user/gogLogin"
+    callbackURL: `${baseUrl}gogLogin`
 },
     function (accessToken, refreshToken, profile, cb) {
         console.log(profile)
-        User.findOrCreate({ googleId: profile.id }, function (err, user) {
+        User.findOne({ googleId: profile.id }, function (err, user) {
+            if(user){
             return cb(err, user)
+            } else {
+                const newUser = new User({
+                    googleId: profile.id,
+                    email: profile.emails[0].value,
+                    onlineName: profile.displayName,
+                    onlinePic: profile.photos[0].value
+                })
+                newUser.save()
+                console.log(newUser)
+                return cb(err, user)
+            }
         });
     }
 ));
