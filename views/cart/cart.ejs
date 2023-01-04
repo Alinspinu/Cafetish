@@ -30,7 +30,7 @@
             </li>
         </ul>
 
-        <form action="/order/checkout" method="POST">
+        <form action="/order/checkout" method="POST" novalidate class="validated-form">
 
             <label for="timp" class="my-2 color">În cât timp să fie gata?</label>
             <div class="input-group">
@@ -43,9 +43,11 @@
                  </select>
                 <div class="valid-feedback">Looks Good!!</div>
             </div>
-            <label for="telefon" class="color">Lasă-ne un numar de telefon!</label>
-            <input type="text" id="telefon" name="telefon" class="input-group" placeholder="Telefon">
-
+            <label for="telefon" class="color form-label">Lasă-ne un numar de telefon!</label>
+            <div class="input-group">
+            <input type="text" id="telefon" name="telefon" class="form-control" placeholder="Telefon" required>
+            <div class="valid-feedback">Looks Good!!</div>
+        </div>
             <label for="comentarii" class="my-2 color">Scrie-ne detalii despre comanda!</label>
             <textarea name="comentarii"  id="comentarii" class="form-control bg-transparent color1 mb-1" placeholder="Comentarii"></textarea>
             <label for="voucher" class="color">Ai un Git Card?</label>

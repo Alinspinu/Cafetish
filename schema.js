@@ -54,8 +54,8 @@ const Joi = BaseJoi.extend(extension)
         cafea: Joi.object({
             nume: Joi.string().required().escapeHTML(),
             descriere: Joi.string().required().escapeHTML(),
-            profilEsp: Joi.string(),
-            profilFil: Joi.string()
+            // profilEsp: Joi.string(),
+            // profilFil: Joi.string()
         }).required()
     })
  

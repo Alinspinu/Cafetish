@@ -72,6 +72,7 @@ module.exports.renderProduse = async (req, res, next) => {
     const cat = await Categorie.findById(req.params.id).populate({
         path: 'produs'
     })
+    console.log(cat.nume)
     req.session.catId = cat.id
     if (cat) {
         return res.render('meniu/produs/produse', { cat })
@@ -82,6 +83,7 @@ module.exports.renderProduse = async (req, res, next) => {
 
 module.exports.renderProdusNou = async (req, res, next) => {
     const cats = await Categorie.find({})
+    console.
     res.render('meniu/produs/produsNou', { cats })
 }
 

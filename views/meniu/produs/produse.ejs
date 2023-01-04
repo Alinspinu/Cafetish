@@ -3,7 +3,7 @@
         <% cat.produs.forEach(function(produs, i) {%>
           <%if(i%2===0) { %> 
        <section class="container-fluid px-0">
-        <div class="row align-items-center mb-3">
+        <div class="row align-items-center mb-2">
             <div class="col-md-4 order-1">
               <a href="/meniu/cafea">
               <img src="<%= produs.imagine.path.replace('/upload', '/upload/w_650')%> " class="img-fluid mb-3" alt="..."
@@ -17,7 +17,7 @@
                     <br>
                   <span class="color fw400 fs-4"><%=produs.pret%> Lei / <%=produs.gramaj%> </span> <br>
                     <span class="color" style="font-size:18px;"><%=produs.descriere%></span> <br>
-                    <%if(cat.nume === "Lumea lui Espresso" || cat.nume === "Prin cafeaua Lactee" || cat.nume === "Cafeaua la filtru") {%> 
+                    <%if(cat.nume === "Lumea lui Espresso " || cat.nume === "Cu Lapte" || cat.nume === "Cafeaua la filtru") {%> 
                       <div class="row">
                         <div class="col-lg-6">
                           <form action="/order/add-to-cart/<%=produs._id%>" method="POST">
@@ -52,7 +52,7 @@
       </section>
       <% } else{ %> 
       <section class="container-fluid px-0">
-        <div class="row align-items-center mb-3">
+        <div class="row align-items-center mb-2">
             <div class="col-md-4 order-1 order-md-2">
               <a href="/meniu/cafea">
               <img src="<%= produs.imagine.path.replace('/upload', '/upload/w_650')%> " class="img-fluid mb-3" alt="..."
@@ -66,7 +66,7 @@
                     <br>
                   <span class="color fw400 fs-4"><%=produs.pret%> Lei / <%=produs.gramaj%> </span> <br>
                     <span class="color" style="font-size:18px;"><%=produs.descriere%></span> <br>
-                    <%if(cat.nume === "Lumea lui Espresso" || cat.nume === "Prin cafeaua Lactee" || cat.nume === "Cafeaua la filtru") {%> 
+                    <%if(cat.nume === "Cu Lapte" || cat.nume === "Cafeaua la filtru" || cat.nume === "Lumea lui Espresso ") {%> 
                       <div class="row">
                         <div class="col-lg-6">
                           <form action="/order/add-to-cart/<%=produs._id%>" method="POST">
@@ -107,7 +107,7 @@
       <div class="row">
           <form action="/meniu/giftCard" method="POST">
             <div class="col-lg-6 offset-lg-3">
-              <div class="row">
+              <div class="row mt-5">
                 <div class="col-lg-6 order-2 order-lg-1">
                   <h3 class="fw500 color">Cadrd Cadou</h3>
                   <span class="color fs-4 fw400 text-center">100 de Lei</span><br>
@@ -116,8 +116,8 @@
                 
               </div>
               <div class="col-lg-6 order-1 order-lg-2">
-                <img src="https://res.cloudinary.com/dhetxk68c/image/upload/v1672430557/ProduseI/Card_Cadou_2_wmxsvr.png" 
-                class="img-fluid pointer mb-2" id="imgCard" alt="">
+                <img src="https://res.cloudinary.com/dhetxk68c/image/upload/v1672780921/ProduseI/Card_Cadou_3_eksmtx.png" 
+                class="img-fluid shadow-lg pointer mb-2" id="imgCard" alt="">
               </div>
             </div>
           

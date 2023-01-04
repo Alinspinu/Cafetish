@@ -61,7 +61,6 @@ if(req.body.voucher){
     
 
     const user = await User.findById(req.user._id)
-    // console.log(req.user)
     let cart = new Cart(req.session.cart);
     if(req.session.val) {
         cart.totalPrice = cart.totalPrice - req.session.val
@@ -90,12 +89,10 @@ if(req.body.voucher){
         time: currentTime,
         livrat: 'Nu'
     })
-    console.log(order)
     req.session.orderId = order.id
     user.order.push(order)
     await order.save()
     await user.save()
-    console.log(order.cart.totalPrice)
     if(order.cart.totalPrice === 0) {
         res.redirect('/order/success')
     } else {
@@ -217,6 +214,5 @@ module.exports.conadaLivrat = async (req, res, next) => {
     const order = await Order.findById(id)
     order.livrat = "Da"
     await order.save()
-    console.log(order)
     res.redirect('/order')
 }

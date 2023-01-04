@@ -1,28 +1,28 @@
 <% layout('layouts/boilerplate') %>
-<script src="/javascripts/show.js" defer></script>
+  <script src="/javascripts/show.js" defer></script>
 
-<div class="row">
+  <div class="row">
     <div class="col-lg-4">
-        <h3 class="fs-3">Datele contului</h3>
-        <div class="mt-1"> 
-            <span class="ms-1"> Nume:</strong> <%=user.username || user.onlineName%></span> <br>
-            <span class="ms-1">Email: <%=user.email%></span> <br>
-            <span class="ms-1">Telefon: <%=user.telefon%></span>
-        </div>
+      <h3 class="fs-3">Datele contului</h3>
+      <div class="mt-1">
+        <span class="ms-1"> Nume:</strong>
+          <%=user.username || user.onlineName%>
+        </span> <br>
+        <span class="ms-1">Email: <%=user.email%></span> <br>
+        <span class="ms-1">Telefon: <%=user.telefon%></span>
+      </div>
     </div>
     <div class="showDiv col-lg-4">
-        <h3 class="fs-3">Comenzile tale</h3>
+      <h3 class="fs-3">Comenzile tale</h3>
       <div class="output">
 
       </div>
     </div>
     <div class="showDiv col-lg-4">
-        <h3 class="fs-3">Cardurile tale</h3>
+      <h3 class="fs-3">Cardurile tale</h3>
       <div class="output1">
 
       </div>
     </div>
 
-</div>
-
-
+  </div>

@@ -1,24 +1,26 @@
-
-<nav id="mainNav"class="navbar navbar-white navbar-expand-lg">
+<nav id="mainNav" class="navbar navbar-white navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
-      <img src="https://res.cloudinary.com/dhetxk68c/image/upload/v1669060120/ProduseI/Logo_Cafetish-02-negru_zhchuk.png" alt="Bootstrap" width="80" height="40">
+      <img
+        src="https://res.cloudinary.com/dhetxk68c/image/upload/v1669060120/ProduseI/Logo_Cafetish-02-negru_zhchuk.png"
+        alt="Bootstrap" width="80" height="40">
     </a>
     <a class="nav-link nav-color d-lg-none" aria-current="page" href="/meniu">Meniu</a>
     <a href="/order/cart" class="nav-color">
-      <i class="bi bi-cart3 color d-lg-none" ></i>
-      <% if(session.cart) {%> 
-      <span class="badge d-lg-none">x<%=session.cart.totalQty%> </span>
-      <% } %> 
+      <i class="bi bi-cart3 color d-lg-none"></i>
+      <% if(session.cart) {%>
+        <span class="badge d-lg-none">x<%=session.cart.totalQty%> </span>
+        <% } %>
     </a>
-    <button class="navbar-toggler bg-transparent"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <% if(session.passport){%> 
-      <%if(session.passport.user.onlinePic){%>
-            <img src="<%=session.passport.user.onlinePic%>" alt="">
-        <%} else {%> 
-      <i class="bi bi-person"></i>
-      <% } %> 
-      <% } %> 
+    <button class="navbar-toggler bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <% if(session.passport){%>
+        <%if(session.passport.user.onlinePic){%>
+          <img src="<%=session.passport.user.onlinePic%>" alt="">
+          <%} else {%>
+            <i class="bi bi-person"></i>
+            <% } %>
+              <% } %>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
@@ -26,20 +28,21 @@
           <a class="nav-hide nav-link nav-color" aria-current="page" href="/meniu">Meniu</a>
         </li>
       </ul>
-      <a href="/order/cart" class="fw500 nav-hide nav-color ms-3">
+      <a href="/order/cart" class="fw500 nav-hide nav-link nav-color ms-3">
         Coș
         <i class="bi color bi-cart3 nav-color"></i>
-        <% if(session.cart) {%> 
-        <span class="badge">x<%=session.cart.totalQty%> </span>
-        <% } %> 
-        </a>
+        <% if(session.cart) {%>
+          <span class="badge">x<%=session.cart.totalQty%> </span>
+          <% } %>
+      </a>
       <div class="navbar-nav ms-auto">
-        <% if(autUser && autUser.admin===flowerpower) {%> 
-        <li class="nav-item">
+        <% if(autUser && autUser.admin===flowerpower) {%>
+          <li class="nav-item">
             <a class="nav-link nav-color" href="/order">Comenzi</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle nav-color" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle nav-color" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
               Adaugă
             </a>
             <ul class="dropdown-menu bg-transparent">
@@ -48,35 +51,36 @@
               <li><a class="dropdown-item nav-color" href="/meniu/cafea-nou">Cafea</a></li>
             </ul>
           </li>
-          <% } %> 
-        </div>
-     
-            <ul class="navbar-nav ms-auto">
-              <% if(!autUser) {%> 
-                <li><a href="/user/login" class ="nav-link nav-color">Login</a></li>
-                <li><a href="/user/register" class ="nav-link nav-color">Register</a></li>
-                  <% } else{%> 
-                  <li><a href="/user/<%=session.passport.user._id%>/show" class ="nav-link color">
-                    <% if(session.passport.user.onlinePic) {%>
-                    <img class ='fbImg img-fluid'src="<%=session.passport.user.onlinePic%>" alt=""> Cont
-                  <%} else {%> 
-                    <i class="bi bi-person">Cont</i></a></li>
-                    <% } %> 
-                <li><a href="/user/logout" class ="nav-link nav-color">Logout</a></li>
-                  <% } %> 
-            </ul>
-          </li>
-        
-        
+          <% } %>
+      </div>
+
+      <ul class="navbar-nav ms-auto">
+        <% if(!autUser) {%>
+          <li><a href="/user/login" class="nav-link nav-color">Login</a></li>
+          <li><a href="/user/register" class="nav-link nav-color">Register</a></li>
+          <% } else{%>
+            <li><a href="/user/<%=session.passport.user._id%>/show" class="nav-link color">
+                <% if(session.passport.user.onlinePic) {%>
+                  <img class='fbImg img-fluid' src="<%=session.passport.user.onlinePic%>" alt=""> Cont
+                  <%} else {%>
+                    <i class="bi bi-person">Cont</i>
+              </a></li>
+            <% } %>
+              <li><a href="/user/logout" class="nav-link nav-color">Logout</a></li>
+              <% } %>
+      </ul>
+      </li>
+
+
     </div>
   </div>
-  </nav>
-  <div class="col-11 offset-1">
+</nav>
+<div class="col-11 offset-1">
   <hr>
 </div>
-  <div class="col-12" style="height:10px;"></div>
+<div class="col-12" style="height:10px;"></div>
 
-  <!-- <script>
+<!-- <script>
     $(function(){
       $(document).scroll(function(){
         var $nav = $("#mainNav")
@@ -84,5 +88,3 @@
     })
     })
   </script> -->
-
-
