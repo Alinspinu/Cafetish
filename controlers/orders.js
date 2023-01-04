@@ -10,6 +10,16 @@ const Produs = require('../models/produs');
 const user = require('../models/user');
 const GiftCard = require('../models/GiftCard')
 const stripe = require('stripe')(process.env.STRIPE_SECRET)
+const nodemailer = require('nodemailer');
+
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'cafetish.office@gmail.com',
+      pass: process.env.PAROLA_G_AP
+    }
+  });
 
 
 
@@ -189,6 +199,20 @@ module.exports.createPaymentIntent = async (req, res, next) => {
     user.save();
   }
     order.payd = 'YES'
+    const url = 'https://cafetish.com/order'
+    const mailOptions = {
+        from: 'cafetish.office@gmail.com',
+        to: 'alinz.spinu@gmail.com',
+        subject: 'Comanda noua',
+        text: `Ai primit o comandă de la ${order.nume}, la ora ${order.time}, în data de ${order.date}, în valoare de ${order.cart.totalPrice} LEi ce a fost plătită. Intră să vizualizezi comanda pe ${url}`
+      };
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
     await order.save()
     req.session.giftId = null
     req.session.cart = null
@@ -198,7 +222,21 @@ module.exports.createPaymentIntent = async (req, res, next) => {
 module.exports.renderSuccesss = async(req, res, next) => {
     const order = await Order.findById(req.session.orderId)
     order.payd = 'NO'
-    await order.save()
+    const url = 'https://cafetish.com/order'
+    const mailOptions = {
+        from: 'cafetish.office@gmail.com',
+        to: 'alinz.spinu@gmail.com',
+        subject: 'Comanda noua',
+        text: `Ai primit o comandă de la ${order.nume}, la ora ${order.time}, în data de ${order.date}, în valoare de ${order.cart.totalPrice} LEi ce urmează a fi plătită. Intră să vizualizezi comanda pe ${url}`
+      };
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
+      await order.save()
     req.session.cart = null
     res.render('partials/success', {order})
 }

@@ -50,6 +50,8 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')))
+const { MailtrapClient } = require("mailtrap");
+const nodemailer = require('nodemailer');
 
 
 
@@ -233,6 +235,66 @@ app.use('/user', userRoutes);
 app.use('/legal', legalRoutes)
 
 app.get('')
+
+
+// const TOKEN = "ff997ac8b798cceaa766fee1a78e30e7";
+// const ENDPOINT = "https://send.api.mailtrap.io/";
+
+// const client = new MailtrapClient({ endpoint: ENDPOINT, token: TOKEN });
+
+// const sender = {
+//   email: "office@cafetish.com",
+//   name: "Notificare",
+// };
+// const recipients = [
+//   {
+//     email: "alinz.spinu@gmail.com",
+//   }
+// ];
+
+// app.get('/sendMail', (req,res) => {
+//     client
+//   .send({
+//     from: sender,
+//     to: recipients,
+//     subject: "You are awesome!",
+//     text: "Congrats for sending test email with Mailtrap!",
+//     category: "Integration Test",
+//   })
+//   .then(console.log, console.error);
+//   res.redirect('/meniu')
+
+// })
+
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'cafetish.office@gmail.com',
+      pass: 'mrdbdonkdypigprm'// naturally, replace both with your real credentials or an application-specific password
+    }
+  });
+  
+  const mailOptions = {
+    from: 'cafetish.office@gmail.com',
+    to: 'alinz.spinu@gmail.com',
+    subject: 'Invoices due',
+    text: 'Dudes, we really need your money.'
+  };
+  
+  app.get('/sendMail', (req,res)=>{
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
+      res.redirect('/meniu')
+
+  })
+  
+
 
 
 
