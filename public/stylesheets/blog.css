@@ -1,0 +1,120 @@
+.borcan{
+    max-width:100%;
+    max-height: 250px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.content{
+    max-width:100%;
+    max-height: 2000px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* background-color:rgba(230, 204, 178, 0.3) ;  */
+}
+.text{
+    width:60%;
+    display: flex;
+    /* flex-direction: row; */
+    align-items: center;
+    justify-content: center;
+    /* background-color:rgba(230, 204, 178, 0.9);  */
+}
+
+.hide{
+    display: none;
+}
+
+#i14{
+    box-shadow: 0 0 0 rgba(230, 204, 178, 0.9);
+    animation: pulse 1.5s infinite;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+      -webkit-box-shadow: 0 0 0 0px rgba(230, 204, 178, 0.4);
+    }
+    70% {
+        -webkit-box-shadow: 0 0 0 30px rgba(230, 204, 178, 0);
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+    }
+  }
+  @keyframes pulse {
+    0% {
+      -moz-box-shadow: 0 0 0 0 rgba(230, 204, 178, 0.9);
+      box-shadow: 0 0 0 0 rgba(67, 40, 24, 1);
+    }
+    70% {
+        -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+        box-shadow: 0 0 0 50px rgba(204,169,44, 0);
+    }
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+        box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+    }
+  }
+
+
+.img{
+    transform: 0.2s;
+    border-radius: 50%;
+    visibility: hidden;
+    opacity: 0;
+}
+.img:active{
+    transform: scale(1.1);
+    background-image: linear-gradient(#e6ccb2, 30%, #ede0d4, #e6ccb2);
+}
+
+.img:hover{
+    cursor: pointer;
+}
+
+.show {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 1s linear;
+    -webkit-transition: opacity 1s linear;
+    -moz-transition: opacity 1s linear;
+    -o-transition: opacity 1s linear;
+  }
+
+.notShow {
+    visibility: visible;
+    opacity: 0;
+    transition: opacity 1s linear;
+    -webkit-transition: opacity 1s linear;
+    -moz-transition: opacity 1s linear;
+    -o-transition: opacity 1s linear;
+  }
+
+/* .delivery {
+    width: 150px;
+    height: 150px;
+    
+} */
+
+
+
+/* 
+.red{
+    background-color: red;
+} */
+
+/* .show{
+    animation: 1s;
+    visibility: visible;
+    
+} */
+
+/* #i24{
+    width: 220px;
+    height: 220px;
+} */

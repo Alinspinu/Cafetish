@@ -31,6 +31,7 @@ const meniuRoutes = require('./routes/meniu')
 const comandaRoutes = require('./routes/order')
 const userRoutes = require('./routes/user')
 const legalRoutes = require('./routes/legal')
+const blogRoutes = require('./routes/blog')
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET)
 
@@ -50,8 +51,8 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')))
-const { MailtrapClient } = require("mailtrap");
-const nodemailer = require('nodemailer');
+// const { MailtrapClient } = require("mailtrap");
+
 
 
 
@@ -172,7 +173,7 @@ const baseUrl = 'https://cafetish.com/user/'
 passport.use(new FbStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: `${baseUrl}FbLogin`,
+    callbackURL: `${baseUrlLocal}FbLogin`,
     profileFields: ['name', 'email', 'picture', 'displayName']
 },
     function (accessToken, refreshToken, profile, cb) {
@@ -195,7 +196,7 @@ passport.use(new FbStrategy({
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: `${baseUrl}gogLogin`
+    callbackURL: `${baseUrlLocal}gogLogin`
 },
     function (accessToken, refreshToken, profile, cb) {
         User.findOrCreate({ 
@@ -233,8 +234,20 @@ app.use('/meniu', meniuRoutes);
 app.use('/order', comandaRoutes);
 app.use('/user', userRoutes);
 app.use('/legal', legalRoutes)
+app.use('/blog', blogRoutes)
 
-app.get('')
+app.post('/blog/articolNou', (req, res) => {
+    // const articol = new Articol(req.body)
+    console.log(req.body)
+    // await articol.save()
+    
+    res.redirect('back')
+})
+
+
+
+
+
 
 
 // const TOKEN = "ff997ac8b798cceaa766fee1a78e30e7";
@@ -267,32 +280,6 @@ app.get('')
 // })
 
 
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'cafetish.office@gmail.com',
-      pass: 'mrdbdonkdypigprm'// naturally, replace both with your real credentials or an application-specific password
-    }
-  });
-  
-  const mailOptions = {
-    from: 'cafetish.office@gmail.com',
-    to: 'alinz.spinu@gmail.com',
-    subject: 'Invoices due',
-    text: 'Dudes, we really need your money.'
-  };
-  
-  app.get('/sendMail', (req,res)=>{
-    transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Email sent: ' + info.response);
-        }
-      });
-      res.redirect('/meniu')
-
-  })
   
 
 

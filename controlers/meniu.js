@@ -12,7 +12,9 @@ const Cart = require('../models/cart')
 
 
 module.exports.renderMeniu = async (req, res, next) => {
-    const cats = await Categorie.find({})
+    const cats = await Categorie.find({}).populate({
+        path: 'produs'
+    })
     res.render('meniu/categorie/meniu', { cats })
 }
 
@@ -72,7 +74,6 @@ module.exports.renderProduse = async (req, res, next) => {
     const cat = await Categorie.findById(req.params.id).populate({
         path: 'produs'
     })
-    console.log(cat.nume)
     req.session.catId = cat.id
     if (cat) {
         return res.render('meniu/produs/produse', { cat })

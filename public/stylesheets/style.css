@@ -1,7 +1,6 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css");
 body {
     height: 100vh;
-    /* background-image: linear-gradient(rgba(0,0,0, 0.3), rgba(0,0,0, 0.3)), linear-gradient(#9c6644, 30%, #eda268, #9c6644); */
     background-size: cover;
     background-position: center;
 }
@@ -18,6 +17,16 @@ body {
   border-radius: 50%;
   width: 30px;
   height: 30px;
+}
+
+.fbImgM{
+  border-radius: 15%;
+  width: 50px;
+  height: 40px;
+}
+
+.navbar-toggler{
+  border: none;
 }
 
 .cod{
@@ -73,7 +82,7 @@ a:link{
 
 .navbar, .btn{
   font-family: Inconsolata, monospace;
-  font-weight: 300;
+  font-weight: 500;
   font-size: 20px;
   border-color: black;
 }
@@ -82,8 +91,8 @@ a:link{
 background-color: rgba(212, 162, 118, 0);
 }
 
-.navbar{
-background-color: rgba(212, 162, 118, 0);
+.nav-link{
+/* background-color: rgba(212, 162, 118, 0); */
 font-weight: 500;
 }
 
@@ -112,7 +121,7 @@ input[type="file"] {
 }
 
 
-h3, h2, h4, p, h5, h1, span, label, input, strong, a, select, textarea, i{
+h3, h2, h4, p, h5, h1, span, label, input, strong, a, select, textarea, i, div{
     font-family: Inconsolata, monospace;
     font-weight: 300;
 }
