@@ -5,6 +5,7 @@ const urlLocal = 'http://localhost:3000/blog/apiArt'
 const url = 'https://cafetish.com/blog/apiArt'
 
 
+
 window.addEventListener('DOMContentLoaded', (event) => {
     fetch(url).then(res => res.json()).then((data) => {
         
