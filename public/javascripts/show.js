@@ -1,3 +1,4 @@
+
 const output = document.querySelector('.output');
 const output1 = document.querySelector('.output1');
 const urlIdLcl = window.location.href.slice(27, 51);

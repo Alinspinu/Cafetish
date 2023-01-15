@@ -166,14 +166,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 
-const baseUrlLocal = 'http://localhost:3000/user/'
-const baseUrl = 'https://cafetish.com/user/'
+
 
 
 passport.use(new FbStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: `${baseUrlLocal}FbLogin`,
+    callbackURL: `${process.env.AUTH_CALLBK_URL_BASE}FbLogin`,
     profileFields: ['name', 'email', 'picture', 'displayName']
 },
     function (accessToken, refreshToken, profile, cb) {
@@ -196,7 +195,7 @@ passport.use(new FbStrategy({
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: `${baseUrlLocal}gogLogin`
+    callbackURL: `${process.env.AUTH_CALLBK_URL_BASE}gogLogin`
 },
     function (accessToken, refreshToken, profile, cb) {
         User.findOrCreate({ 
@@ -228,6 +227,7 @@ app.use((req, res, next) => {
 })
 
 app.get('/', (req, res) => {
+
     res.render('index')
 })
 app.use('/meniu', meniuRoutes);
@@ -236,13 +236,7 @@ app.use('/user', userRoutes);
 app.use('/legal', legalRoutes)
 app.use('/blog', blogRoutes)
 
-app.post('/blog/articolNou', (req, res) => {
-    // const articol = new Articol(req.body)
-    console.log(req.body)
-    // await articol.save()
-    
-    res.redirect('back')
-})
+
 
 
 
