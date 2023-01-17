@@ -1,0 +1,20 @@
+
+@media (min-width: 168px) {
+    body{
+        background-image: url('https://res.cloudinary.com/dhetxk68c/image/upload/v1673976850/ProduseI/Untitled_design_9_ydpibk.png');
+        background-size: cover;
+    }
+    #mainNav{
+        background-color: rgba(255,255,255, 0.8);
+        /* border-bottom: 0.2px solid #432818; */
+    }
+    .footer{
+        background-color: rgba(255,255,255, 0.8);
+    }
+    #cont{
+        background-color: rgba(255,255,255, 0.95);
+        /* border: 0.1px solid #432818; */
+        border-radius: 15px;
+    }
+  
+}

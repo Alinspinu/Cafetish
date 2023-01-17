@@ -4,6 +4,7 @@ body {
     background-size: cover;
     background-position: center;
 }
+
 #voucher, #telefon{
   border-radius: 5px;
   border: 1px solid #432818;

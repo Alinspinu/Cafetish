@@ -4,11 +4,11 @@
     <h1 class="text-center">Adaugă articol</h1>
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <form action="/blog/articolNou" method="POST" enctype="multipart/form-data" novalidate class="validated-form">
+            <form action="/blog/articol/<%=id%>" method="POST" enctype="multipart/form-data" novalidate class="validated-form">
                 <!-- <form action="/blog/articolNou" method="POST" novalidate class="validated-form"> -->
                 <label class="fs-5" for="titlu">Titlu</label>
                 <div class="input-group mb-3">
-                    <input type="text" name="articol[titlu]" id="titlu" class="form-control color bg-transparent" placeholder="Titlu"
+                    <input type="text" name="articol[titlu]" id="titlu" value="<%=articol.titlu%>" class="form-control color bg-transparent" placeholder="Titlu"
                         aria-describedby="basic-addon1" required>
                 </div>
                 <div class="input-group">
@@ -18,9 +18,9 @@
                 </div>
                 <label class="fs-5"for="text">Text</label>
                 <div class="input-group mb-3">
-                    <textarea class="form-control color bg-transparent" id="text" name="articol[text]" placeholder="Text" required></textarea>
+                    <textarea class="form-control color bg-transparent" id="text" name="articol[text]" placeholder="Text" required><%=articol.text%></textarea>
                 </div>
-                <button class="btn btn-primary">Adaugă</button>
+                <button class="btn btn-primary">Modifică</button>
             </form>
             <div style="height: 60px;"></div>
         </div>

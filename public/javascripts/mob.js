@@ -10,8 +10,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
     fetch(url).then(res => res.json()).then((data) => {
         
     data.forEach(function(art){ 
-        console.log(art)
-        console.log(box)
         const subT = document.createElement('h3')
         const text = document.createElement('p')
         subT.innerHTML = art.titlu

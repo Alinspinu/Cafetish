@@ -1,4 +1,4 @@
-<nav id="mainNav" class="navbar navbar-white navbar-expand-lg">
+<nav id="mainNav" class="navbar navbar-white navbar-expand-lg shadow mb-4">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
       <img
@@ -29,6 +29,9 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
+          <a href="/blog" class="nav-link nav-hide nav-color">Blog</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-hide nav-link nav-color" aria-current="page" href="/meniu">Meniu</a>
         </li>
       </ul>
@@ -42,7 +45,7 @@
           <% } %> 
       </a>
 
-      <a href="/blog" class="nav-link nav-hide nav-color ms-auto">Blog</a>
+      
       <div class="navbar-nav ms-auto">
         <% if(autUser && autUser.admin===flowerpower) {%>
           <li class="nav-item">
@@ -84,9 +87,9 @@
     </div>
   </div>
 </nav>
-<div class="col-11 offset-1">
+<!-- <div class="col-11 offset-1">
   <hr>
-</div>
+</div> -->
 <div class="col-12" style="height:10px;"></div>
 
 <!-- <script>
