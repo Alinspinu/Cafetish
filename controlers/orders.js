@@ -133,10 +133,14 @@ module.exports.addToCart = async(req, res, next) => {
         produs.nume = produs.nume+' '+cafeaN,
         cart.add(produs, produs.id)
         req.session.cart = cart;
+        // console.log(cart)
+        const c = await Produs.findById('63c9373a59fdeed2cc3200eb')
+        console.log(c)
         res.redirect('back')
     } else {
     cart.add(produs, produs.id)
     req.session.cart = cart;
+    // console.log(cart)
     res.redirect('back')
     }
 }

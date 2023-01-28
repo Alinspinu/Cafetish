@@ -226,8 +226,8 @@ app.use((req, res, next) => {
     next();
 })
 
-app.get('/', (req, res) => {
 
+app.get('/', (req, res) => {
     res.render('index')
 })
 app.use('/meniu', meniuRoutes);
@@ -274,14 +274,10 @@ app.use('/blog', blogRoutes)
 // })
 
 
-  
-
-
-
-
 // app.all('*', (err, req, res, next) => {
 //     next(new ExpressError('page not found', 404))
 // })
+
 
 app.use((err, req, res, next) => {
     const { statusCode = 500 } = err;
@@ -289,7 +285,7 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', { err })
 })
 
-const port = process.env.PORT || 3000
+const port = 3000
 app.listen(port, () => {
     console.log(`App running on port ${port}`)
 })

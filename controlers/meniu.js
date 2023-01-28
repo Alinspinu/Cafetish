@@ -83,7 +83,6 @@ module.exports.renderProduse = async (req, res, next) => {
 
 module.exports.renderProdusNou = async (req, res, next) => {
     const cats = await Categorie.find({})
-    console.
     res.render('meniu/produs/produsNou', { cats })
 }
 
@@ -102,6 +101,7 @@ module.exports.renderProdusEdit = async (req, res, next) => {
 
 
 module.exports.produsNou = async (req, res, next) => {
+    console.log(req.body)
     const cat = await Categorie.findById(req.body.produs.categorie)
     if (!req.file) {
         return next(new ExpressError('Produsul trebuie să conțină o imagine', 404))
