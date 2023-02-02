@@ -7,14 +7,17 @@ const cafea = require('../models/cafea');
 const GiftCard = require('../models/GiftCard');
 const user = require('../models/user');
 const User = require('../models/user')
-const Cart = require('../models/cart')
+const Cart = require('../models/cart');
+const { castObject } = require('../models/user');
 
 
 
 module.exports.renderMeniu = async (req, res, next) => {
+    // const cats = await Produs.find({})
     const cats = await Categorie.find({}).populate({
         path: 'produs'
     })
+    console.log(cats)
     res.render('meniu/categorie/meniu', { cats })
 }
 

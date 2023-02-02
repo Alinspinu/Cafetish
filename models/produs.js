@@ -19,7 +19,7 @@ const produsSchema = new Schema({
     categorie:
     {
         type: Schema.Types.ObjectId,
-        ref: 'categorie'
+        ref: 'Categorie'
     }
 
 })

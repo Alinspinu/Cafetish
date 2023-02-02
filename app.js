@@ -230,6 +230,7 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     res.render('index')
 })
+
 app.use('/meniu', meniuRoutes);
 app.use('/order', comandaRoutes);
 app.use('/user', userRoutes);

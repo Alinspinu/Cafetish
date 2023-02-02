@@ -49,12 +49,12 @@ module.exports.checkout = async (req, res, next) =>{
     if(!req.session.cart) {
         return res.redirect('/meniu')
     }
-    const currentDate = new Date().toLocaleDateString(undefined, {
+    const currentDate = new Date().toLocaleDateString(("ro-Ro"), {
         day:    '2-digit',
         month:  'short',
         year:   'numeric',
     });
-    const currentTime = new Date().toLocaleTimeString(undefined,{
+    const currentTime = new Date().toLocaleTimeString(("ro-Ro"),{
         hour:   '2-digit',
         minute: '2-digit',
         second: '2-digit',
