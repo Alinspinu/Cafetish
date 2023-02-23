@@ -1,10 +1,13 @@
 // This is your test publishable API key.
-const stripe = Stripe("pk_live_51M9k8jFFsy1gu6PUgVOlcBaao0oajDPLeH4uid7E8yfK2rV5061097GXDBrILq1sa0gu4oxJXq8wY7vrKxS6IWSZ00TLc9ttYS");
+const stripe = Stripe(
+  "pk_live_51M9k8jFFsy1gu6PUgVOlcBaao0oajDPLeH4uid7E8yfK2rV5061097GXDBrILq1sa0gu4oxJXq8wY7vrKxS6IWSZ00TLc9ttYS"
+);
 
 // The items the customer wants to buy
 const items = [{ id: "xl-tshirt" }];
-const urlLocal = 'http://localhost:3000/order/success'
-const URL = 'https://cafetish.com/order/success'
+const urlLocal = "http://localhost:3000/order/success";
+const URL = "https://cafetish.com/order/success";
+const urlHeroku = "http://www.cafetish.com/order/success";
 let elements;
 
 initialize();
@@ -24,17 +27,17 @@ async function initialize() {
   const { clientSecret } = await response.json();
 
   const appearance = {
-    theme: 'stripe',
+    theme: "stripe",
     variables: {
-      colorPrimary: '#ede0d4',
-      colorBackground: '#ffd7ba',
-      colorText: '#432818',
-      colorDanger: '#df1b41',
-      fontFamily: 'Marcellus, system-ui, sans-serif',
-      spacingUnit: '2px',
-      borderRadius: '4px',
+      colorPrimary: "#ede0d4",
+      colorBackground: "#ffd7ba",
+      colorText: "#432818",
+      colorDanger: "#df1b41",
+      fontFamily: "Marcellus, system-ui, sans-serif",
+      spacingUnit: "2px",
+      borderRadius: "4px",
       // See all possible variables below
-    }
+    },
   };
   elements = stripe.elements({ appearance, clientSecret });
 
@@ -54,10 +57,10 @@ async function handleSubmit(e) {
     elements,
     confirmParams: {
       // Make sure to change this to your payment completion page
-      return_url: URL,
+      return_url: urlHeroku,
     },
   });
-  
+
   // This point will only be reached if there is an immediate error when
   // confirming the payment. Otherwise, your customer will be redirected to
   // your `return_url`. For some payment methods like iDEAL, your customer will
@@ -65,7 +68,7 @@ async function handleSubmit(e) {
   // redirected to the `return_url`.
   if (error.type === "card_error" || error.type === "validation_error") {
     showMessage(error.message);
-    console.log(cart)
+    console.log(cart);
   } else {
     showMessage("An unexpected error occurred.");
   }
@@ -82,8 +85,6 @@ async function checkStatus() {
   if (!clientSecret) {
     return;
   }
- 
-  
 
   const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
 
