@@ -7,7 +7,7 @@ const stripe = Stripe(
 const items = [{ id: "xl-tshirt" }];
 const urlLocal = "http://localhost:3000/order/success";
 const URL = "https://cafetish.com/order/success";
-const urlHeroku = "http://www.cafetish.com/order/success";
+const urlHeroku = "https://www.cafetish.com/order/success";
 let elements;
 
 initialize();

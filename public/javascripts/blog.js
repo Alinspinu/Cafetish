@@ -11,7 +11,7 @@ const artImg = document.querySelector("#artImg");
 const h1 = document.querySelector("h1");
 const urlLocal = "http://localhost:3000/blog/apiArt";
 const url = "https://cafetish.com/blog/apiArt";
-const urlHeroku = "http://www.cafetish.com/blog/apiArt";
+const urlHeroku = "https://www.cafetish.com/blog/apiArt";
 const container = document.querySelector(".container");
 
 // container.classList.add('mx-0')

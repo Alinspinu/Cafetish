@@ -5,7 +5,7 @@ const urlId = window.location.href.slice(26, 50);
 const urlIdHer = window.location.href.slice(24, 48);
 const url = `https://cafetish.com/user/${urlId}/api`;
 const urlLocal = `http://localhost:3000/user/${urlIdLcl}/api`;
-const urlHeroku = `http://www.cafetish.com/user${urlIdHer}/api`;
+const urlHeroku = `https://www.cafetish.com/user${urlIdHer}/api`;
 
 // http://localhost:3000/user/63b473f0a7bf424089e056de/show
 

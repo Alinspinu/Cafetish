@@ -3,7 +3,7 @@ const cont = document.querySelector(".cont");
 const box = document.querySelector(".box");
 const urlLocal = "http://localhost:3000/blog/apiArt";
 const url = "https://cafetish.com/blog/apiArt";
-const urlHeroku = "http://www.cafetish.com/blog/apiArt";
+const urlHeroku = "https://www.cafetish.com/blog/apiArt";
 
 window.addEventListener("DOMContentLoaded", (event) => {
   fetch(urlHeroku)
