@@ -1,23 +1,24 @@
 <% layout('layouts/boilerplate') %>
-<h1 class="text-center mb-2 fw400 color">Produs nou</h1>
+    <h1 class="text-center mb-2 fw400 color">Produs nou</h1>
     <div class="container-fluid mt-5">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                
-                <form action="/meniu/cats/produs/nou" method="POST" enctype="multipart/form-data" novalidate class="validated-form">
+
+                <form action="/meniu/cats/produs/nou" method="POST" enctype="multipart/form-data" novalidate
+                    class="validated-form">
                     <div class="input-group mb-3">
-                        <input type="text" name="produs[nume]" id="nume" class="form-control color bg-transparent" placeholder="Denumire Produs"
-                            aria-describedby="basic-addon1" required>
+                        <input type="text" name="produs[nume]" id="nume" class="form-control color bg-transparent"
+                            placeholder="Denumire Produs" aria-describedby="basic-addon1" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" name="produs[gramaj]" id="gramaj" class="form-control color bg-transparent" placeholder="Gramaj"
-                            aria-describedby="basic-addon1" required>
+                        <input type="text" name="produs[gramaj]" id="gramaj" class="form-control color bg-transparent"
+                            placeholder="Gramaj" aria-describedby="basic-addon1" required>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" name="produs[pret]" id="pret" class="form-control color bg-transparent" placeholder="Preț"
-                            aria-describedby="basic-addon1" required>
+                        <input type="text" name="produs[pret]" id="pret" class="form-control color bg-transparent"
+                            placeholder="Preț" aria-describedby="basic-addon1" required>
                     </div>
-                  
+
                     <!-- <div class="input-group mb-3">
                         <span class="input-group-text color bg-transparent" for="video">Youtube URL</span>
                         <input type="text" name="produs[video]" id="video" class="form-control color bg-transparent" 
@@ -26,22 +27,26 @@
                     <div class="input-group">
                         <!-- <span class="input-group-text text-white bg-dark" for="imagine">Imagine</span> -->
                         <label for="imagine" class="custom-file-upload color bg-transparent mb-2">Imagine</label>
-                        <input type="file" name="imagine" id="imagine" class="form-control form-control-color" placeholder="Poză"
-                            aria-describedby="basic-addon1">
+                        <input type="file" name="imagine" id="imagine" class="form-control form-control-color"
+                            placeholder="Poză" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-grup mb-3">
                         <label class="color bg-transparent mb-2" for="cat"> Selectează o categorie</label>
-                        <select class="form-select color bg-transparent" name="produs[categorie]" aria-label="Default select example" id="cat">
-                          <% for(let i=0; i<cats.length; i++) {%> 
-                            <option value="<%=cats[i]._id%>"><%=cats[i].nume%></option>
-                          <% } %> 
-                          </select>
+                        <select class="form-select color bg-transparent" name="produs[categorie]"
+                            aria-label="Default select example" id="cat">
+                            <% for(let i=0; i<cats.length; i++) {%>
+                                <option value="<%=cats[i]._id%>">
+                                    <%=cats[i].nume%>
+                                </option>
+                                <% } %>
+                        </select>
                     </div>
-                
+
                     <div class="input-group mb-3">
-                        <textarea class="form-control color bg-transparent" name="produs[descriere]" placeholder="Descriere"></textarea>
+                        <textarea class="form-control color bg-transparent" name="produs[descriere]"
+                            placeholder="Descriere"></textarea>
                     </div>
-        
+
                     <button class="btn btn-dark btn-lg mt-3">Adaugă</button>
                 </form>
             </div>

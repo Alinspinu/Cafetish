@@ -68,14 +68,7 @@ const sessionConfig = {
   },
 };
 
-// const sessionConfig = {
-//     store,
-//     name: 'session',
-//     secret,
-//     resave: false,
-//     saveUninitialized: true,
 
-// }
 
 const scriptSrcUrls = [
   "https://stackpath.bootstrapcdn.com/",
@@ -277,7 +270,7 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error", { err });
 });
 
-const port = process.env.PORT || 3000;
+const port = 8080;
 app.listen(port, () => {
   console.log(`App running on port ${port}`);
 });
