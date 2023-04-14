@@ -1,69 +1,76 @@
 <% layout('layouts/boilerplate') %>
-<!-- <script src="/javascripts/cart.js" defer></script>  -->
-<% if(session.cart){%>
-<div class="row mt-5 mb-2">
-    <div class="col-lg-6 offset-lg-3 text-white" style="text-align: center;">
-        <p class="lead color fs-3">Bunătățile se ridică din locație!</p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-6 offset-lg-3 mt-2">
-        <ul class="list-group mb-2">
-            <%produse.forEach(function(produs) { %> 
-            <li class="list-group-item bg-transparent color" id="cart" style="--bs-border-opacity: .3;">
-                <span class="badge mx-1"><%=produs.qty%>x</span>
-                <strong><%=produs.item.nume%></strong>
-                <spam class="label label-success "> <%=produs.pret%> Lei</spam>
-               
-                <div class="counter">
-                    <form action="/order/reduce-by-one/<%=produs.item._id%>" method="POST">
-                        <button class="btn btn-sm mx-2">-1</button>
-                    </form> 
-                    <form action="/order/add-by-one/<%=produs.item._id%>" method="POST">
-                        <button class="btn btn-sm mx-2">+1</button>
-                    </form> 
-                </div>
-            </li>
-            <% }) %> 
-            <li class="list-group-item bg-transparent" id="totalCart" style="--bs-border-opacity: .3;">
-                <strong class="total fs-4" style="color: #432818;;">TOTAL <%=totalPrice%> Lei </strong>
-            </li>
-        </ul>
-
-        <form action="/order/checkout" method="POST" novalidate class="validated-form">
-
-            <label for="timp" class="my-2 color">În cât timp să fie gata?</label>
-            <div class="input-group">
-                <select class="form-select bg-transparent color mb-2" type="number" name="timp" id="timp"
-                        aria-label="Example select with button addon" required>
-                    <option value="5">5 Min</option>
-                    <option selected value="10">10 Min</option>
-                    <option value="15">15 Min</option>
-                    <option value="30">30 Min</option>
-                 </select>
-                <div class="valid-feedback">Looks Good!!</div>
+    <!-- <script src="/javascripts/cart.js" defer></script>  -->
+    <% if(session.cart){%>
+        <div class="row mt-5 mb-2">
+            <div class="col-lg-6 offset-lg-3 text-white" style="text-align: center;">
+                <p class="lead color fs-3">Pick up the goods from coffeeshop!</p>
             </div>
-            <label for="telefon" class="color form-label">Lasă-ne un numar de telefon!</label>
-            <div class="input-group">
-            <input type="text" id="telefon" name="telefon" class="form-control" placeholder="Telefon" required>
-            <div class="valid-feedback">Looks Good!!</div>
         </div>
-            <label for="comentarii" class="my-2 color">Scrie-ne detalii despre comanda!</label>
-            <textarea name="comentarii"  id="comentarii" class="form-control bg-transparent color1 mb-1" placeholder="Comentarii"></textarea>
-            <label for="voucher" class="color">Ai un Git Card?</label>
-            <input type="text" id="voucher" name="voucher" class="input-group" placeholder="Cod Card">
-            <button class="btn mt-4">Comandă</button>  
-        </form>
-    </div>
-</div>
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 mt-2">
+                <ul class="list-group mb-2">
+                    <%produse.forEach(function(produs) { %>
+                        <li class="list-group-item bg-transparent color" id="cart" style="--bs-border-opacity: .3;">
+                            <span class="badge mx-1">
+                                <%=produs.qty%>x
+                            </span>
+                            <strong>
+                                <%=produs.item.nume%>
+                            </strong>
+                            <spam class="label label-success ">
+                                <%=produs.pret%> Lei
+                            </spam>
 
-<div style="height:80px;"></div>
+                            <div class="counter">
+                                <form action="/order/reduce-by-one/<%=produs.item._id%>" method="POST">
+                                    <button class="btn btn-sm mx-2">-1</button>
+                                </form>
+                                <form action="/order/add-by-one/<%=produs.item._id%>" method="POST">
+                                    <button class="btn btn-sm mx-2">+1</button>
+                                </form>
+                            </div>
+                        </li>
+                        <% }) %>
+                            <li class="list-group-item bg-transparent" id="totalCart" style="--bs-border-opacity: .3;">
+                                <strong class="total fs-4" style="color: #432818;;">TOTAL <%=totalPrice%> Lei </strong>
+                            </li>
+                </ul>
 
-<% } else {%> 
-<div class="row mt-5">
-    <div class="col-lg-6 offset-lg-3">
-        <h2 class="color">Coșul de bunătăți este gol! Nu e bine mergi și pune ceva!</h2>
-    </div>
-    <% } %> 
-</div>
+                <form action="/order/checkout" method="POST" novalidate class="validated-form">
 
+                    <label for="timp" class="my-2 color">Ready in?</label>
+                    <div class="input-group">
+                        <select class="form-select bg-transparent color mb-2" type="number" name="timp" id="timp"
+                            aria-label="Example select with button addon" required>
+                            <option value="5">5 Min</option>
+                            <option selected value="10">10 Min</option>
+                            <option value="15">15 Min</option>
+                            <option value="30">30 Min</option>
+                        </select>
+                        <div class="valid-feedback">Looks Good!!</div>
+                    </div>
+                    <label for="telefon" class="color form-label">Phone Number</label>
+                    <div class="input-group">
+                        <input type="text" id="telefon" name="telefon" class="form-control" placeholder="Telephone"
+                            required>
+                        <div class="valid-feedback">Looks Good!!</div>
+                    </div>
+                    <label for="comentarii" class="my-2 color">Order Details</label>
+                    <textarea name="comentarii" id="comentarii" class="form-control bg-transparent color1 mb-1"
+                        placeholder="Details"></textarea>
+                    <label for="voucher" class="color">Git Card?</label>
+                    <input type="text" id="voucher" name="voucher" class="input-group" placeholder="Card code">
+                    <button class="btn mt-4">Comandă</button>
+                </form>
+            </div>
+        </div>
+
+        <div style="height:80px;"></div>
+
+        <% } else {%>
+            <div class="row mt-5">
+                <div class="col-lg-6 offset-lg-3">
+                    <h2 class="color">Cart is empty!</h2>
+                </div>
+                <% } %>
+            </div>

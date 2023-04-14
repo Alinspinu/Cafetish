@@ -1,129 +1,149 @@
 <% layout('layouts/boilerplate') %>
-<h1 class="text-center mb-5"><%=cat.nume%></h1>
-        <% cat.produs.forEach(function(produs, i) {%>
-          <%if(i%2===0) { %> 
-       <section class="container-fluid px-0">
-        <div class="row align-items-center mb-2">
-            <div class="col-md-4 order-1">
-              <a href="/meniu/cafea">
-              <img src="<%= produs.imagine.path.replace('/upload', '/upload/w_650')%> " class="img-fluid mb-3" alt="..."
-              id="img">
-            </a>
-            </div>
-            <div class="col-md-8 order-2 mb-2">
-              <div class="row justify-content-center">
-                <div class="col-lg-10 descriere">
-                  <span class="color fw500 fs-2"><%=produs.nume%></span> 
-                    <br>
-                  <span class="color fw400 fs-4"><%=produs.pret%> Lei / <%=produs.gramaj%> </span> <br>
-                    <span class="color" style="font-size:18px;"><%=produs.descriere%></span> <br>
-                    <%if(cat.nume === "Lumea lui Espresso " || cat.nume === "Cu Lapte" || cat.nume === "Cafeaua la filtru") {%> 
-                      <div class="row">
-                        <div class="col-lg-6">
-                          <form action="/order/add-to-cart/<%=produs._id%>" method="POST">
-                            <label for="cafea" class="color">Alege Cafeaua</label>
-                            <select name="cafea" id="cafea" class="color form-select form-select-sm mb-3 bg-transparent" aria-label=".form-select-sm example">
-                              <option value="Brazilia0">Brazilia Pedra Grande</option>
-                              <option value="Beshasha2">Etiopia Beshasha + 2 Lei</option>
-                              <option value="Danisa  3">Etiopia Danisa + 3 Lei</option>
-                              <option value="Tarrazu 4">Costa Rica Tarrazu + 4 Lei</option>
-                            </select>
-                              <button class="btn btn-sm fw400 mb-3 me-3" name ="addButton" >Adaugă</button>   
-                              <a href="/meniu/cafea" id="detaliiCafea">Despre cafea!</a>                   
-                          </form>
-                        </div>
-                      </div>
-                   
-
-                    <% } else {%>
-                       <form action="/order/add-to-cart/<%=produs._id%>" method="POST">
-                          <!-- <div class="d-grid gap-2"> -->
-                             <button class="btn btn-sm my-3" name ="addButton" >Adaugă</button>
-                          <!-- </div> -->
-                        </form>
-                    <% } %> 
-                    <% if(autUser && autUser.admin===flowerpower) {%> 
-                      <a class='color'href="/meniu/cats/produs/<%=produs.id%>/edit">Modifică</a>
-                      <% } %> 
-                </div>
-              </div>
-            </div>
-        </div>
-      </section>
-      <% } else{ %> 
+  <h1 class="text-center mb-5">
+    <%=cat.nume%>
+  </h1>
+  <a href="/meniu/cats/<%=cats._id%>/edit" class="btn btn-sm mt-3">Edit Cat</a>
+  <% cat.produs.forEach(function(produs, i) {%>
+    <%if(i%2===0) { %>
       <section class="container-fluid px-0">
         <div class="row align-items-center mb-2">
+          <div class="col-md-4 order-1">
+            <a href="/meniu/cafea">
+              <img src="<%= produs.imagine.path.replace('/upload', '/upload/w_650')%> " class="img-fluid mb-3" alt="..."
+                id="img">
+            </a>
+          </div>
+          <div class="col-md-8 order-2 mb-2">
+            <div class="row justify-content-center">
+              <div class="col-lg-10 descriere">
+                <span class="color fw500 fs-2">
+                  <%=produs.nume%>
+                </span>
+                <br>
+                <span class="color fw400 fs-4">
+                  <%=produs.pret%> Lei / <%=produs.gramaj%>
+                </span> <br>
+                <span class="color" style="font-size:18px;">
+                  <%=produs.descriere%>
+                </span> <br>
+                <%if(cat.nume==="Lumea lui Espresso " || cat.nume==="Cu Lapte" || cat.nume==="Cafeaua la filtru" ) {%>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <form action="/order/add-to-cart/<%=produs._id%>" method="POST">
+                        <label for="cafea" class="color">Pick Coffee</label>
+                        <select name="cafea" id="cafea" class="color form-select form-select-sm mb-3 bg-transparent"
+                          aria-label=".form-select-sm example">
+                          <option value="Brazilia0">Brazilia Pedra Grande</option>
+                          <option value="Beshasha2">Etiopia Beshasha + 2 Lei</option>
+                          <option value="Danisa  3">Etiopia Danisa + 3 Lei</option>
+                          <option value="Tarrazu 4">Costa Rica Tarrazu + 4 Lei</option>
+                        </select>
+                        <button class="btn btn-sm fw400 mb-3 me-3" name="addButton">Add</button>
+                        <a href="/meniu/cafea" id="detaliiCafea">About Coffee!</a>
+                        <a href="/cats/produs/<%=produs._id%>/edit" class="btn btn-sm mt-3">Edit Produs</a>
+                      </form>
+                      
+                    </div>
+                  </div>
+
+
+                  <% } else {%>
+                    <form action="/order/add-to-cart/<%=produs._id%>" method="POST">
+                      <!-- <div class="d-grid gap-2"> -->
+                      <button class="btn btn-sm my-3" name="addButton">Add</button>
+                      <!-- </div> -->
+                    </form>
+                    <% } %>
+                      
+                        <a class='color' href="/meniu/cats/produs/<%=produs.id%>/edit">Edit</a>
+                      
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <% } else{ %>
+        <section class="container-fluid px-0">
+          <div class="row align-items-center mb-2">
             <div class="col-md-4 order-1 order-md-2">
               <a href="/meniu/cafea">
-              <img src="<%= produs.imagine.path.replace('/upload', '/upload/w_650')%> " class="img-fluid mb-3" alt="..."
-              id="img1">
+                <img src="<%= produs.imagine.path.replace('/upload', '/upload/w_650')%> " class="img-fluid mb-3"
+                  alt="..." id="img1">
               </a>
             </div>
             <div class="col-md-8 order-2 order-md-1 mb-2">
               <div class="row justify-content-center">
                 <div class="col-lg-10 descriere">
-                  <span class="color fw500 fs-2"><%=produs.nume%></span> 
-                    <br>
-                  <span class="color fw400 fs-4"><%=produs.pret%> Lei / <%=produs.gramaj%> </span> <br>
-                    <span class="color" style="font-size:18px;"><%=produs.descriere%></span> <br>
-                    <%if(cat.nume === "Cu Lapte" || cat.nume === "Cafeaua la filtru" || cat.nume === "Lumea lui Espresso ") {%> 
-                      <div class="row">
-                        <div class="col-lg-6">
-                          <form action="/order/add-to-cart/<%=produs._id%>" method="POST">
-                            <label for="cafea" class="color">Alege Cafeaua</label>
-                            <select name="cafea" id="cafea" class="color form-select form-select-sm mb-3 bg-transparent" aria-label=".form-select-sm example">
-                              <option value="Brazilia0">Brazilia Pedra Grande</option>
-                              <option value="Beshasha2">Etiopia Beshasha + 2 Lei</option>
-                              <option value="Danisa  3">Etiopia Danisa + 3 Lei</option>
-                              <option value="Tarrazu 4">Costa Rica Tarrazu + 4 Lei</option>
-                            </select>
-                              <button class="btn btn-sm mb-3 me-3" name ="addButton" >Adaugă</button>
-                              <a href="/meniu/cafea" id="detaliiCafea">Despre cafea!</a>
-                          </form>
-    
-                        </div>
-                      </div>
-                      
-                    <% } else {%>
-                       <form action="/order/add-to-cart/<%=produs._id%>" method="POST">
-                          <!-- <div class="d-grid gap-2"> -->
-                             <button class="btn btn-sm my-3" name ="addButton" >Adaugă</button>
-                          <!-- </div> -->
+                  <span class="color fw500 fs-2">
+                    <%=produs.nume%>
+                  </span>
+                  <br>
+                  <span class="color fw400 fs-4">
+                    <%=produs.pret%> Lei / <%=produs.gramaj%>
+                  </span> <br>
+                  <span class="color" style="font-size:18px;">
+                    <%=produs.descriere%>
+                  </span> <br>
+                  <%if(cat.nume==="Cu Lapte" || cat.nume==="Cafeaua la filtru" || cat.nume==="Lumea lui Espresso " ) {%>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <form action="/order/add-to-cart/<%=produs._id%>" method="POST">
+                          <label for="cafea" class="color">Alege Cafeaua</label>
+                          <select name="cafea" id="cafea" class="color form-select form-select-sm mb-3 bg-transparent"
+                            aria-label=".form-select-sm example">
+                            <option value="Brazilia0">Brazilia Pedra Grande</option>
+                            <option value="Beshasha2">Etiopia Beshasha + 2 Lei</option>
+                            <option value="Danisa  3">Etiopia Danisa + 3 Lei</option>
+                            <option value="Tarrazu 4">Costa Rica Tarrazu + 4 Lei</option>
+                          </select>
+                          <button class="btn btn-sm mb-3 me-3" name="addButton">Add</button>
+                          <a href="/meniu/cafea" id="detaliiCafea">About Coffee!</a>
+                          <!-- <a href="/cats/produs/<%=produs._id%>/edit" class="btn btn-sm mt-3">Edit Produs</a> -->
                         </form>
-                    <% } %> 
-                    <% if(autUser && autUser.admin===flowerpower) {%> 
-                    <a class='color'href="/meniu/cats/produs/<%=produs.id%>/edit">Modifică</a>
-                    <% } %> 
-                </div>
-               
-              </div>
-            </div>
-        </div>
-      </section>
-      <% } %> 
-        <% }) %> 
-     
+                        
 
-      <div class="row">
-          <form action="/meniu/giftCard" method="POST">
-            <div class="col-lg-6 offset-lg-3">
-              <div class="row mt-5">
-                <div class="col-lg-6 order-2 order-lg-1">
-                  <h3 class="fw500 color">Cadrd Cadou</h3>
-                  <span class="color fs-4 fw400 text-center">100 de Lei</span><br>
-                  <p class ='color'style="font-size:18px;">Fă un om fericit.</p>
-                  <button class="btn">Adaugă</button>
-                
-              </div>
-              <div class="col-lg-6 order-1 order-lg-2">
-                <img src="https://res.cloudinary.com/dhetxk68c/image/upload/v1672780921/ProduseI/Card_Cadou_3_eksmtx.png" 
-                class="img-fluid shadow-lg pointer mb-2" id="imgCard" alt="">
+                      </div>
+                    </div>
+
+                    <% } else {%>
+                      <form action="/order/add-to-cart/<%=produs._id%>" method="POST">
+                        <!-- <div class="d-grid gap-2"> -->
+                        <button class="btn btn-sm my-3" name="addButton">Add</button>
+                        <!-- </div> -->
+                      </form>
+                      <% } %>
+                        <% if(autUser && autUser.admin===flowerpower) {%>
+                          <a class='color' href="/meniu/cats/produs/<%=produs.id%>/edit">Edit</a>
+                          <% } %>
+                </div>
+
               </div>
             </div>
-          
-          
-          
-        </div>
-        </form>
-      </div>
-      
+          </div>
+        </section>
+        <% } %>
+          <% }) %>
+
+
+            <div class="row">
+              <form action="/meniu/giftCard" method="POST">
+                <div class="col-lg-6 offset-lg-3">
+                  <div class="row mt-5">
+                    <div class="col-lg-6 order-2 order-lg-1">
+                      <h3 class="fw500 color">Cadrd Cadou</h3>
+                      <span class="color fs-4 fw400 text-center">100 Lei</span><br>
+                      <button class="btn">Add</button>
+
+                    </div>
+                    <div class="col-lg-6 order-1 order-lg-2">
+                      <img
+                        src="https://res.cloudinary.com/dhetxk68c/image/upload/v1672780921/ProduseI/Card_Cadou_3_eksmtx.png"
+                        class="img-fluid shadow-lg pointer mb-2" id="imgCard" alt="">
+                    </div>
+                  </div>
+
+
+
+                </div>
+              </form>
+            </div>

@@ -2,7 +2,7 @@ const titlu = document.querySelector("h1");
 const cont = document.querySelector(".cont");
 const box = document.querySelector(".box");
 const urlLocal = "http://localhost:3000/blog/apiArt";
-const url = "https://cafetish.com/blog/apiArt";
+const url = "https://www.cafetish.com/blog/apiArt";
 const urlHeroku = "https://www.cafetish.com/blog/apiArt";
 
 window.addEventListener("DOMContentLoaded", (event) => {

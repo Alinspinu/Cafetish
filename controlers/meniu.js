@@ -17,6 +17,10 @@ module.exports.renderMeniu = async (req, res, next) => {
     const cats = await Categorie.find({}).populate({
         path: 'produs'
     })
+    cats.forEach(function (cat) {
+        console.log(cat.nume)
+    })
+
     res.render('meniu/categorie/meniu', { cats })
 }
 
@@ -139,7 +143,7 @@ module.exports.produsEdit = async (req, res, next) => {
         produs.imagine.filename = req.file.filename
     }
     await produs.save()
-    res.redirect(`/meniu/cats/produs/${produs.id}`)
+    res.redirect(`/meniu`)
 }
 
 module.exports.produsDelete = async (req, res, next) => {

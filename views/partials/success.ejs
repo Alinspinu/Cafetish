@@ -1,53 +1,57 @@
 <% layout('layouts/center') %>
-<style>
- video {
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-}
-.video-wrapper {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.container{
-  position: relative;
-}
-
-
-
-@media screen and (max-width: 500px) {
-    .lead {
-      font-size: 18px;
+  <style>
+    video {
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
     }
-}
 
-a {
- font-size: 17px;
-}
-</style>
+    .video-wrapper {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-<div class="video-wrapper">
-  <video playsinline autoplay muted loop>
-    <source src="https://res.cloudinary.com/dhetxk68c/video/upload/v1670672497/video/CafetishV_i34lo3.mp4" type="video/mp4">
-  </video>
+    .container {
+      position: relative;
+    }
 
-<div class="container text-center text-white">
-  <div class="row">
-      <div class="col-lg-6 offset-md-3">
-          <h1 class="color1 fw500">Mulțumin!</h1>
-          <p class="lead color1 fw400">Comanda ta va fi gata în <%= order.timp %>  minute <br>Te așteptăm! <br> Între timp, intră pe pagina ta de profil unde poți vedea istoricul comenzilor și cardurile tale.</p>
-          <a href="/user/<%=session.userId%>/show" class="btn btn-lg fw500" id="btn">Cont</a>
 
+
+    @media screen and (max-width: 500px) {
+      .lead {
+        font-size: 18px;
+      }
+    }
+
+    a {
+      font-size: 17px;
+    }
+  </style>
+
+  <div class="video-wrapper">
+    <video playsinline autoplay muted loop>
+      <source src="https://res.cloudinary.com/dhetxk68c/video/upload/v1670672497/video/CafetishV_i34lo3.mp4"
+        type="video/mp4">
+    </video>
+
+    <div class="container text-center text-white">
+      <div class="row">
+        <div class="col-lg-6 offset-md-3">
+          <h1 class="color1 fw500">Thank you!</h1>
+          <p class="lead color1 fw400">the order will be reeady in <%= order.timp %> minutes <br> In the mean time go on
+              your profile page to see yor order history and gift cards!</p>
+          <a href="/user/<%=session.userId%>/show" class="btn btn-lg fw500" id="btn">Account</a>
+
+        </div>
       </div>
+    </div>
   </div>
-</div>
-</div>

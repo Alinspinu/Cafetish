@@ -13,6 +13,7 @@ router.route('/login/facebook')
 router.route('/FbLogin')
     .get(passport.authenticate('facebook', { failureRedirect: '/user/login', failureMessage: true }),
         function (req, res) {
+            console.log(req.session, req.user)
             req.flash('success', `Salut ${req.user.onlineName}! Bine ai venit!`)
             res.redirect('/meniu');
 
@@ -25,6 +26,7 @@ router.route('/login/google')
 router.route('/gogLogin')
     .get(passport.authenticate('google', { failureRedirect: '/user/login', failureMessage: true }),
         function (req, res) {
+            console.log(req.body, req.user)
             req.flash('success', `Salut ${req.user.onlineName}! Bine ai venit!`)
             res.redirect('/meniu');
         });
@@ -39,7 +41,7 @@ router.route('/:id/api')
 router.route('/register')
     .get(user.renderRegister)
     .post(user.makeMasterAdmin)
-    // .post(catchAsync(user.registerUser))
+// .post(catchAsync(user.registerUser))
 
 router.route('/login')
     .get(user.renderLogin)

@@ -1,24 +1,27 @@
 <% layout('layouts/boilerplate') %>
 
     <div class="container-fluid">
-        <h1 class="text-center">Modifică Cafea</h1>
+        <h1 class="text-center">Edit Coffee</h1>
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <form action="/meniu/cafea/<%=cafea.id%>?_method=PUT" method="POST" enctype="multipart/form-data" novalidate class="validated-form">
-                    <label class="fs-5" for="nume">Denumire</label>
+                <form action="/meniu/cafea/<%=cafea.id%>?_method=PUT" method="POST" enctype="multipart/form-data"
+                    novalidate class="validated-form">
+                    <label class="fs-5" for="nume">Name</label>
                     <div class="input-group mb-3">
-                        <input type="text" name="cafea[nume]" id="nume" class="form-control text-white bg-dark" placeholder="Denumire Categorie"
-                            aria-describedby="basic-addon1" value = "<%=cafea.nume%>" required>
+                        <input type="text" name="cafea[nume]" id="nume" class="form-control text-white bg-dark"
+                            placeholder="Denumire Categorie" aria-describedby="basic-addon1" value="<%=cafea.nume%>"
+                            required>
                     </div>
-                    <label for="cafImg" class="fs-5">Adauga</label>
+                    <label for="cafImg" class="fs-5">Add</label>
                     <div class="input-group">
                         <label for="cafImg" class="custom-file-upload text-white bg-dark mb-2">Imagine</label>
-                        <input type="file" name="cafImg" id="cafImg" class="form-control form-control-color" placeholder="Poză"
-                            aria-describedby="basic-addon1" multiple>
+                        <input type="file" name="cafImg" id="cafImg" class="form-control form-control-color"
+                            placeholder="Poză" aria-describedby="basic-addon1" multiple>
                     </div>
-                    <label class="fs-5"for="descriere">Descriere Cafea</label>
+                    <label class="fs-5" for="descriere">Coffee Description</label>
                     <div class="input-group mb-3">
-                        <textarea class="form-control text-white bg-dark" id="descriere" name="cafea[descriere]" placeholder="Descriere" required><%=cafea.descriere%> </textarea>
+                        <textarea class="form-control text-white bg-dark" id="descriere" name="cafea[descriere]"
+                            placeholder="Descriere" required><%=cafea.descriere%> </textarea>
                     </div>
                     <!-- <label class="fs-5"for="profilEsp">Profil Gust Espresso</label>
                     <div class="input-group mb-3">
@@ -28,10 +31,10 @@
                     <div class="input-group mb-3">
                         <textarea class="form-control text-white bg-dark" id="profilFil" name="cafea[profilFil]" placeholder="Descriere"></textarea>
                     </div> -->
-                    <button class="btn btn-primary ">Modifică</button>
+                    <button class="btn btn-primary">Edit</button>
                 </form>
                 <div style="height: 60px;"></div>
             </div>
-    
+
         </div>
-        </div>
+    </div>
