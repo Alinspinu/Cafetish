@@ -14,7 +14,7 @@ const storage = new CloudinaryStorage({
     params: {
         folder: 'ProduseI',
         transformation: [
-            {width: 760, height: 350, crop: "fill"}
+            { width: 666, height: 666, crop: "fill" }
         ],
         allowedForms: ['jpeg', 'png', 'jpg', 'mp4'],
         resource_type: 'auto'

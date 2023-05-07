@@ -30,6 +30,7 @@ const comandaRoutes = require("./routes/order");
 const userRoutes = require("./routes/user");
 const legalRoutes = require("./routes/legal");
 const blogRoutes = require("./routes/blog");
+const recipeRoutes = require("./routes/recipe")
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
@@ -230,6 +231,7 @@ app.use("/order", comandaRoutes);
 app.use("/user", userRoutes);
 app.use("/legal", legalRoutes);
 app.use("/blog", blogRoutes);
+app.use("/recipes", recipeRoutes)
 
 // const TOKEN = "ff997ac8b798cceaa766fee1a78e30e7";
 // const ENDPOINT = "https://send.api.mailtrap.io/";

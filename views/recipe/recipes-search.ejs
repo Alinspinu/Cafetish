@@ -1,0 +1,66 @@
+<% layout('layouts/boilerplate-recipe') %>
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3" id="container">
+               
+                <!-- <i class="bi bi-person-lock" id="login" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"></i> -->
+                  
+               <i class="bi bi-plus-lg" id="add"></i>
+                   
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header text-center">
+                          <h1 class="modal-title fs-5" id="loginModal">Login</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/user/login" method="POST" class="validated-form" novalidate>
+                                <label  for="username">Username</label>
+                                <div class="mb-3 input-group">
+                                    <input class="form-control bg-transparent" type="text" name="username" id="username"
+                                        autofocus required>
+                                    <div class="valid-feedback">Looks Good!!</div>
+                                </div>
+                                <label for="password">Password</label>
+                                <div class="mb-3 input-group">
+                                    <input class="form-control bg-transparent" type="password" name="password" id="password"
+                                        required>
+                                    <div class="valid-feedback">Looks Good!!</div>
+                                </div>
+                               
+                            </div>
+                            <div class="modal-footer text-center">
+                                <button type="submit" data-bs-dismiss="modal"  class="btn btn-primary">Login</button>
+                            </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  
+                <div class="wrap">
+                    <div class="search-input">
+                        <input type="text" id="cauta" placeholder="Search Recipe...">
+                        <div class="nomenclator">
+                            <%recipes.forEach(recipe => {%>
+                                <li class="recipes m-0"><a href="/recipes/<%=recipe._id%>"> 
+                                    <% if(recipe.image.path){ %>
+                                        <img src="<%=recipe.image.path%>" 
+                                        style="width:50px; height:50px;"
+                                        class="float-start img-fluid" alt="">
+                                        <% } else { %>
+                                            <img src="https://res.cloudinary.com/dhetxk68c/image/upload/v1683306917/Recipes/5057709_ojy0wt.png" 
+                                            style="width:50px; height:50px;"
+                                            class="float-start img-fluid" alt="">
+                                            <% } %>
+                                    <%=recipe.name%> 
+                                </a></li>
+                                <% }) %>
+                        </div>
+                        <div class="icon"><i class="bi bi-search"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/javascripts/recipe-search.js"></script>
