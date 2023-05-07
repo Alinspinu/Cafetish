@@ -64,7 +64,7 @@ span{
 #add{
 position: relative;
 top: 10px;
-left: 89%;
+left: 85%;
 font-size: 23px;
 }
 
@@ -226,6 +226,13 @@ font-size: 23px;
     font-size: 22px;
     top: 10px;
     left: 20px
+}
+
+#back-menu{
+    position: relative;
+    font-size: 22px;
+    top: 10px;
+    left: 10px
 }
 
 #edit-icon{

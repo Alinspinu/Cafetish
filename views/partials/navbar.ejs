@@ -14,7 +14,9 @@
           <% } %>
             <% } %>
     </a>
-    <a href="/blog/mob" class="nav-link d-lg-none nav-color">Blog</a>
+    <% if(autUser && autUser.admin===flowerpower) {%>
+    <a href="/recipes" class="nav-link nav-color">Recipes</a>
+      <% } %>
     <button class="navbar-toggler  bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <% if(session.passport){%>

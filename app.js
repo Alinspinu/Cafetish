@@ -34,8 +34,8 @@ const recipeRoutes = require("./routes/recipe")
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
-const dbUrl =
-  "mongodb+srv://Alin:espsOCn7sllc@cluster0.459nok3.mongodb.net/?retryWrites=true&w=majority";
+const dbUrl = process.env.DB_URL
+
 mongoose.connect(dbUrl);
 
 const db = mongoose.connection;

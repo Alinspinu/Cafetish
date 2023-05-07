@@ -4,6 +4,7 @@ const searchBar = document.getElementById('cauta');
 const icon = document.getElementById('add');
 const recipes = document.querySelectorAll('.recipes')
 const profile = document.getElementById('profile')
+const backIcon = document.getElementById('back-menu')
 
 if (icon) {
     icon.addEventListener('click', function () {
@@ -11,7 +12,9 @@ if (icon) {
     });
 }
 
-
+backIcon.onclick = () => {
+    window.location.href = '/meniu'
+}
 
 produsLink.forEach(function (item) {
     item.addEventListener('click', function () {
