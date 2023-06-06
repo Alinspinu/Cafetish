@@ -26,16 +26,19 @@
              
               </div>
             </div>
-          </div>
-          </div>
+        </div>
+        </div>
     
-        <div class="card text-center mt-2" style="width:100%;">
+        <div class="col-lg-6 offset-lg-3 card text-center mt-2">
             <% if(recipe.image.path){%>
-                <img src="<%=recipe.image.path%>" class="card-img-top" id="image" alt="...">
-                <% } %>
+                <img src="<%=recipe.image.path%>" class="card-img-top" id="image" alt="recipe-image">
+                <% } else {%>
+                    <img src="https://res.cloudinary.com/dhetxk68c/image/upload/v1683306917/Recipes/5057709_ojy0wt.png" class="card-img-top" id="image" alt="default-image">
+                    <% } %>
             <h3 class="text-center"><%= recipe.name%></h3>
             <span class="recipe-header text-center"><%=recipe.totalVolume%></span>
             <div class="card-body text-center px-3">
+                <% if(recipe.recipent || recipe.method.name || recipe.garnish) {%>
                         <div class="row p-0 bg-gray round-up" id="first-header">
                             <div class="col p-2">
                                     <span class="recipe-header">Recipent</span>
@@ -50,6 +53,7 @@
                                 <p class="recipe-content"><%=recipe.garnish%></p>
                              </div>
                         </div>
+                        <% } %>
                         <% if(recipe.waterTemp || 
                             recipe.grinderStep ||
                             recipe.brewTime

@@ -14,7 +14,7 @@ router.route('/add')
 router.route('/:id')
     .get(recipeControlers.renderRecipeShow)
     .delete(isAdmin, recipeControlers.deleteRecepie)
-    .putisAdmin, (recipeControlers.editRecipe)
+    .put(isAdmin, recipeControlers.editRecipe)
 router.route('/:id/edit')
     .get(isAdmin, recipeControlers.renderEditRecipe)
 

@@ -11,13 +11,20 @@ recipeSelector.addEventListener('change', () => {
     const selectedValue = recipeSelector.value
     const formContainer = document.querySelector('.form-container')
     const coffeeSetup = document.querySelector('.coffee-setup')
+    const cocktailSetup = document.querySelector('.cocktail-setup')
     if (selectedValue === '1') {
         formContainer.classList.remove('hide')
         coffeeSetup.classList.remove('hide')
+        cocktailSetup.classList.remove('hide')
     } else if (selectedValue === '2') {
         // const coffeeSetup = document.querySelector('.coffee-setup')
         formContainer.classList.remove('hide')
         coffeeSetup.classList.add('hide')
+        cocktailSetup.classList.remove('hide')
+    } else if (selectedValue === '3') {
+        formContainer.classList.remove('hide')
+        coffeeSetup.classList.add('hide')
+        cocktailSetup.classList.add('hide')
     } else {
         formContainer.classList.add('hide')
         coffeeSetup.classList.add('hide')

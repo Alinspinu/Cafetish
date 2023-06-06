@@ -7,12 +7,13 @@ const backIcon = document.getElementById('back-icon')
 const editIcon = document.getElementById('edit-icon')
 const id = window.location.href.split('/').pop()
 
-if (!secondHeader) {
-    firtsHeader.classList.add('round-down')
-} else {
-    firtsHeader.classList.remove('round-down')
+if (firtsHeader) {
+    if (!secondHeader) {
+        firtsHeader.classList.add('round-down')
+    } else {
+        firtsHeader.classList.remove('round-down')
+    }
 }
-
 for (let i = 0; i < ingredients.length; i++) {
     if (i % 2 === 0) {
         ingredients[i].classList.add('bg-gray')

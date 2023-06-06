@@ -12,8 +12,10 @@ if (icon) {
     });
 }
 
-backIcon.onclick = () => {
-    window.location.href = '/meniu'
+if (backIcon) {
+    backIcon.onclick = () => {
+        window.location.href = '/meniu'
+    }
 }
 
 produsLink.forEach(function (item) {

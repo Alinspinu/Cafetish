@@ -9,6 +9,7 @@
                     <option value="">Select the type of Recipe</option>
                     <option value="1">Coffee Recipe</option>
                     <option value="2">Cocktail Recipe</option>
+                    <option value="3">Food Recipe</option>
                   </select>
             </div>
             <div class="form-container hide">
@@ -17,12 +18,14 @@
                   <input type="text" class="form-control" id="name" name="recipe[name]" aria-describedby="name" placeholder="Recipe name" required>
                   <input type="text" class="form-control" id="name" name="recipe[totalVolume]" aria-describedby="name" placeholder="Recipe volume" required>
                 </div>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="method-name" aria-describedby="method-name" name="recipe[method][name]" placeholder="Method" required>
-                </div>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="recipent" name="recipe[recipent]" aria-describedby="recipent" placeholder="Recipent type" required>
-                    <input type="text" class="form-control" id="garnish" name="recipe[garnish]" aria-describedby="recipent" placeholder="Garnish" required>
+                <div class="cocktail-setup hide">
+                  <div class="input-group mb-3">
+                      <input type="text" class="form-control" id="method-name" aria-describedby="method-name" name="recipe[method][name]" placeholder="Method">
+                  </div>
+                  <div class="input-group mb-3">
+                      <input type="text" class="form-control" id="recipent" name="recipe[recipent]" aria-describedby="recipent" placeholder="Recipent type">
+                      <input type="text" class="form-control" id="garnish" name="recipe[garnish]" aria-describedby="recipent" placeholder="Garnish">
+                  </div>
                 </div>
                 <div class="coffee-setup hide">
                     <div class="input-group mb-3">
