@@ -17,10 +17,6 @@ module.exports.renderMeniu = async (req, res, next) => {
     const cats = await Categorie.find({}).populate({
         path: 'produs'
     })
-    cats.forEach(function (cat) {
-        console.log(cat.nume)
-    })
-
     res.render('meniu/categorie/meniu', { cats })
 }
 

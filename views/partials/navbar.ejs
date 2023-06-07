@@ -22,10 +22,11 @@
       <% if(session.passport){%>
         <%if(session.passport.user.onlinePic){%>
           <img class="fbImgM img-fluid" src="<%=session.passport.user.onlinePic%>" alt="">
-          <% } %>
+          <% } else{ %>
+            <i class="bi bi-person"></i>
+            <% } %>
             <%} else {%>
               <i class="bi bi-person"></i>
-
               <% } %>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -101,16 +102,6 @@
     </div>
   </div>
 </nav>
-<!-- <div class="col-11 offset-1">
-  <hr>
-</div> -->
+
 <div class="col-12" style="height:10px;"></div>
 
-<!-- <script>
-    $(function(){
-      $(document).scroll(function(){
-        var $nav = $("#mainNav")
-        $nav.toggleClass("scrolled", $(this).scrollTop()>$nav.height())
-    })
-    })
-  </script> -->
