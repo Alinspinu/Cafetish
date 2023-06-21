@@ -4,7 +4,6 @@ const Recipe = require('../models/recipe')
 
 module.exports.renderSearchRecipes = async (req, res) => {
     const recipes = await Recipe.find({})
-    console.log(req.session.userId)
     res.render('recipe/recipes-search', { recipes, session: req.session })
 }
 
@@ -28,6 +27,7 @@ module.exports.createRecipe = async (req, res) => {
             brewTime,
             recipent,
             garnish,
+            shop
         } = req.body.recipe
         const author = req.session.userId
         const newRecipe = new Recipe({
@@ -39,7 +39,8 @@ module.exports.createRecipe = async (req, res) => {
             brewTime: brewTime,
             recipent: recipent,
             garnish: garnish,
-            author: author
+            author: author,
+            shop: shop
         })
         const ingredients = req.body.recipe.ingredients
         const nameArray = ingredients.name
@@ -60,8 +61,8 @@ module.exports.createRecipe = async (req, res) => {
             newRecipe.image.filename = filename
             newRecipe.image.path = path
         }
-        await newRecipe.save()
         console.log(newRecipe)
+        await newRecipe.save()
         res.redirect('back')
     } catch (err) {
         console.log(err)
@@ -104,8 +105,8 @@ module.exports.editRecipe = async (req, res) => {
 
     const ingredients = req.body.recipe.ingredients
     const nameArray = ingredients.name
+    let ingArr = []
     if (Array.isArray(nameArray)) {
-        let ingArr = []
         for (let i = 0; i < nameArray.length; i++) {
             const newIng = {
                 name: ingredients.name[i],
@@ -117,10 +118,15 @@ module.exports.editRecipe = async (req, res) => {
         recipe.ingredients = ingArr
     } else {
         recipe.ingredients.length = 0
-        recipe.ingredients.push(ingredients)
+        ingArr.push(ingredients)
+        recipe.ingredients = ingArr
+    }
+    if (req.file) {
+        const { filename, path } = req.file
+        recipe.image.filename = filename
+        recipe.image.path = path
     }
     await recipe.save()
-    console.log(recipe)
     res.redirect(`/recipes/${id}`)
 }
 

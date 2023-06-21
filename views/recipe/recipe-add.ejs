@@ -14,6 +14,13 @@
             </div>
             <div class="form-container hide">
             <form action="/recipes/add" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+              <div class="mb-3">
+                <select class="form-select" aria-label="Select recipe type" name="recipe[shop]"id="selectShop">
+                    <option value="">Select Shop</option>
+                    <option value="cafetish">Cafetish</option>
+                    <option value="true">True</option>
+                  </select>
+            </div>
                 <div class="input-group mb-3">
                   <input type="text" class="form-control" id="name" name="recipe[name]" aria-describedby="name" placeholder="Recipe name" required>
                   <input type="text" class="form-control" id="name" name="recipe[totalVolume]" aria-describedby="name" placeholder="Recipe volume" required>

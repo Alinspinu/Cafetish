@@ -15,6 +15,7 @@ const recipeSchema = new Schema({
         },
         description: String
     },
+    shop: String,
     grinderStep: String,
     waterTemp: String,
     brewTime: String,

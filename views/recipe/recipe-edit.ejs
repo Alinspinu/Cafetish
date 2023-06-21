@@ -6,7 +6,7 @@
             <h5 class="text-center mt-3 mb-5"><%=recipe.name %></h5>
          
             <div class="form-container">
-            <form action="/recipes/<%=recipe._id%>?_method=PUT" method="POST" novalidate class="validated-form">
+            <form action="/recipes/<%=recipe._id%>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
               <div class="label-name">
                 <span>Recipe name</span>
                 <span id="lastLabel">Recipe volume</span>
@@ -63,6 +63,11 @@
                   <div class="mb-3">
                     <textarea type="text" class="form-control" id="method-description" aria-describedby="method-description" name="recipe[method][description]" required> <%=recipe.method.description%></textarea>
                     <div id="method-description" class="form-text">Describe the workflow in detail</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="method-description" class="form-label">Image</label>
+                    <input type="file" class="form-control" id="method-description" aria-describedby="method-description" name="recipe-image">
+                    
                   </div>
                 <button type="submit" class="btn bg-gray mb-3" style="width:100%;">Modify Recipe</button>
               </form>
