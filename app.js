@@ -32,12 +32,18 @@ const legalRoutes = require("./routes/legal");
 const blogRoutes = require("./routes/blog");
 const recipeRoutes = require("./routes/recipe")
 const posRoutes = require("./routes/pos")
+const apiRoutes = require("./routes/api")
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 const dbUrl = process.env.DB_URL
 
 mongoose.connect(dbUrl);
+
+const cors = require('cors')
+
+app.use(cors())
+
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -234,6 +240,7 @@ app.use("/legal", legalRoutes);
 app.use("/blog", blogRoutes);
 app.use("/recipes", recipeRoutes)
 app.use("/pos", posRoutes)
+app.use("/api", apiRoutes)
 
 // const TOKEN = "ff997ac8b798cceaa766fee1a78e30e7";
 // const ENDPOINT = "https://send.api.mailtrap.io/";
