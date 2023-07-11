@@ -33,6 +33,7 @@ const blogRoutes = require("./routes/blog");
 const recipeRoutes = require("./routes/recipe")
 const posRoutes = require("./routes/pos")
 const apiRoutes = require("./routes/api")
+const bodyParser = require('body-parser')
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
@@ -153,6 +154,8 @@ app.use(
 );
 
 app.use(flash());
+
+app.use(bodyParser.json());
 
 app.disable("etag");
 app.use(session(sessionConfig));

@@ -6,7 +6,6 @@ const Schema = mongoose.Schema;
 
 const productTrueSchema = new Schema({
     name: String,
-    qty: String,
     image:
     {
         path: String,
@@ -18,7 +17,14 @@ const productTrueSchema = new Schema({
     {
         type: Schema.Types.ObjectId,
         ref: 'CategoryTrue'
-    }
+    },
+    subProducts:
+        [
+            {
+                name: String,
+                price: String
+            }
+        ]
 
 })
 

@@ -12,5 +12,9 @@ router.route('/cat-add')
     .post(upload.single('image'), apiRoutes.addCat)
 router.route('/prod-add')
     .post(upload.single('image'), apiRoutes.addProd)
+// router.route('/new-user').get(apiRoutes.register)
+router.route('/login').post(apiRoutes.login)
+router.route('/sub-prod-add').post(apiRoutes.saveSubProd)
+
 
 module.exports = router
