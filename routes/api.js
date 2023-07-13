@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const apiRoutes = require('../controlers/api')
 const multer = require('multer')
-const { storage } = require('../cloudinary');
+const { storage } = require('../cloudinary/photo-true.js');
 const upload = multer({ storage })
 
 router.route('/get-cats').get(apiRoutes.sendCats)

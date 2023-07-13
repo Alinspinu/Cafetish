@@ -2,28 +2,28 @@ const express = require('express');
 const router = express.Router();
 const Articol = require('../models/articol')
 const multer = require('multer')
-const {storage} = require('../cloudinary');
-const upload = multer({storage})
+const { storage } = require('../cloudinary/index.js');
+const upload = multer({ storage })
 
 
 router.get('/', (req, res) => {
     res.render('blog/blog')
 })
 
-router.get('/articol', (req, res) =>{
+router.get('/articol', (req, res) => {
     res.render('blog/articolNou')
 })
 
-router.post('/articolNou', upload.array('artImg'), async(req, res, next) => {
+router.post('/articolNou', upload.array('artImg'), async (req, res, next) => {
     const articol = new Articol(req.body.articol)
-    if(req.files){
+    if (req.files) {
         articol.imagini = req.files.map(f => ({ path: f.path, filename: f.filename }))
-        }
+    }
     await articol.save()
     res.redirect('back')
 })
 
-router.get('/apiArt', async(req, res, next) => {
+router.get('/apiArt', async (req, res, next) => {
     const articole = await Articol.find({});
     res.json(articole)
 })
@@ -32,13 +32,13 @@ router.get('/mob', (req, res) => {
     res.render('blog/mob')
 })
 
-router.get('/articol/:id/edit', async(req, res, next)=>{
-    const { id } = req.params 
+router.get('/articol/:id/edit', async (req, res, next) => {
+    const { id } = req.params
     const articol = await Articol.findById(id)
-    res.render('blog/articolEdit',{id, articol})
+    res.render('blog/articolEdit', { id, articol })
 })
 
-router.post('/articol/:id', upload.array('artImg'), async(req, res, next) => {
+router.post('/articol/:id', upload.array('artImg'), async (req, res, next) => {
     const { id } = req.params;
     const articol = await Articol.findByIdAndUpdate(id, { ...req.body.articol })
     if (req.files) {

@@ -21,8 +21,8 @@ const productTrueSchema = new Schema({
     subProducts:
         [
             {
-                name: String,
-                price: String
+                type: Schema.Types.ObjectId,
+                ref: 'SubProduct'
             }
         ]
 
@@ -30,5 +30,14 @@ const productTrueSchema = new Schema({
 
 
 
+const subProductSchema = new Schema({
+    name: String,
+    price: String,
+    product: {
+        type: Schema.Types.ObjectId,
+        ref: 'ProductTrue'
+    }
+})
 
+module.exports = mongoose.model('SubProduct', subProductSchema)
 module.exports = mongoose.model('ProductTrue', productTrueSchema)

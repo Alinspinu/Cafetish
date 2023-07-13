@@ -1,4 +1,5 @@
 const Product = require('../models/product-true')
+const SubProduct = require('../models/product-true')
 const Cat = require('../models/cat-true')
 const User = require('../models/user-true')
 const { cloudinary } = require('../cloudinary');
@@ -44,6 +45,7 @@ module.exports.addCat = async (req, res, next) => {
 module.exports.addProd = async (req, res, next) => {
     const { category } = req.body
     const cat = await Cat.findById(category)
+    console.log(cat)
     const product = new Product(req.body)
     if (req.file) {
         const { path, filename } = req.file
