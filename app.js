@@ -110,7 +110,7 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: [],
-      mediaSrc: ["https://res.cloudinary.com/", "http://localhost:8080/"],
+      mediaSrc: ["https://res.cloudinary.com/", "http://localhost:8080/", "https://www.cafetish.com"],
       connectSrc: [
         "http://localhost:8080/order/order-done",
         "https://www.cafetish.com/order/order-done",
