@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 const comenzi = require('../controlers/orders')
 
-const {isLoggedIn, isAdmin, validateComanda} = require('../middleware')
-const  catchAsync  = require('../utilities/catchasync')
+const { isLoggedIn, isAdmin, validateComanda } = require('../middleware')
+const catchAsync = require('../utilities/catchasync')
 
 router.route('/')
-    .get(isAdmin,catchAsync(comenzi.renderComenzi))
-    
+    .get(isAdmin, catchAsync(comenzi.renderComenzi))
+
 router.route('/checkout')
     .get(isLoggedIn, comenzi.renderCheckoutForm)
     .post(isLoggedIn, catchAsync(comenzi.checkout))
@@ -28,15 +28,21 @@ router.route('/create-payment-intent')
     .post(catchAsync(comenzi.createPaymentIntent))
 
 router.route('/success')
-    .get(isLoggedIn,catchAsync(comenzi.renderSuccess))
+    .get(isLoggedIn, catchAsync(comenzi.renderSuccess))
 
 router.route('/successs')
-    .get(isLoggedIn,catchAsync(comenzi.renderSuccesss))
+    .get(isLoggedIn, catchAsync(comenzi.renderSuccesss))
 
 
 router.route('/:id')
     .post(isAdmin, catchAsync(comenzi.conadaLivrat))
-    .delete(isAdmin,catchAsync(comenzi.comandaDelete))
+    .delete(isAdmin, catchAsync(comenzi.comandaDelete))
+
+
+router.route('/recive-order').get(comenzi.sendLiveOrders)
+router.route('/get-order').get(comenzi.getOrder)
+router.route('/order-done').get(comenzi.orderDone)
+router.route('/order-page').get(comenzi.renderTrueOrders)
 
 
 module.exports = router  

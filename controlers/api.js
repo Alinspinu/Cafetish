@@ -1,22 +1,40 @@
 const Product = require('../models/product-true')
-const SubProduct = require('../models/product-true')
+const SubProduct = require('../models/sub-product')
 const Cat = require('../models/cat-true')
 const User = require('../models/user-true')
+const Order = require('../models/order-true')
 const { cloudinary } = require('../cloudinary');
 const crypto = require('crypto')
 const jwt = require('jsonwebtoken')
+const axios = require('axios')
+const querystring = require('querystring');
+const { json } = require('body-parser');
 
 
 module.exports.sendCats = async (req, res, next) => {
     const { mainCat } = req.query
-    const cats = await Cat.find({ mainCat: mainCat })
+    const cats = await Cat.find().populate({
+        path: 'product',
+        populate: [
+            { path: 'category' },
+            {
+                path: 'subProducts',
+                populate: {
+                    path: 'product',
+
+                }
+            }]
+    })
     res.status(200).json(cats)
 }
 
 module.exports.sendCat = async (req, res, next) => {
     const { id } = req.query
     const cat = await Cat.findById(id).populate({
-        path: 'product'
+        path: 'product',
+        populate: {
+            path: 'subProducts'
+        }
     })
     res.status(200).json(cat)
 }
@@ -24,9 +42,13 @@ module.exports.sendCat = async (req, res, next) => {
 module.exports.saveSubProd = async (req, res, next) => {
     const { id, name, price } = req.query
     const product = await Product.findById(id)
-    console.log(product)
-    product.subProducts.push({ name: name, price: price })
-    console.log(product)
+    const newSubProduct = new SubProduct({
+        name: name,
+        price: price,
+        product: id
+    })
+    product.subProducts.push(newSubProduct)
+    await newSubProduct.save()
     await product.save()
     res.status(200).json({ message: `${name}, was saved in ${product.name}` })
 }
@@ -69,6 +91,67 @@ module.exports.login = async (req, res, next) => {
     const sendData = { token: token, name: user.name }
     res.json(sendData);
 }
+
+module.exports.getToken = async (req, res, next) => {
+    try {
+        const clientId = 'fazem58ywi5mz8z2bmbudpnq8s4ym3kuar9bvcgn2nbe0.apps.vivapayments.com';
+        const clientSecret = 'W2DoB13aOF5a2B5LfFUnP434dOFvhF';
+        const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
+        const url = 'https://demo-accounts.vivapayments.com/connect/token';
+        const headers = {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Authorization: `Basic ${credentials}`
+        };
+        const response = await axios.post(url, 'grant_type=client_credentials', { headers });
+        const requestBody = {
+            amount: 1000,
+            customerTrns: 'Produse Delicioase',
+            customer: {
+                email: '',
+                fullName: '',
+                phone: '',
+                countryCode: 'RO',
+                requestLang: 'ro-RO'
+            },
+            paymentTimeout: 300,
+            preauth: false,
+            allowRecurring: false,
+            maxInstallments: 12,
+            paymentNotification: true,
+            tipAmount: 100,
+            disableExactAmount: false,
+            disableCash: true,
+            disableWallet: true,
+            sourceCode: '1341',
+            merchantTrns: '',
+            tags: [
+
+            ],
+            cardTokens: [
+
+            ]
+        };
+        const urlPayment = 'https://demo-api.vivapayments.com/checkout/v2/orders'
+        const response2 = await axios.post(urlPayment, requestBody, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${response.data.access_token}`,
+            }
+        });
+        res.status(200).json(response2.data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+module.exports.saveOrder = async (req, res, next) => {
+    const newOrder = new Order(req.body)
+    await newOrder.save()
+    res.status(200).json({ message: `Order ${newOrder.index} was created` })
+}
+
+
 
 
 // module.exports.register = async (req, res, next) => {

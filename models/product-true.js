@@ -1,3 +1,4 @@
+const { number } = require('joi');
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
@@ -13,6 +14,14 @@ const productTrueSchema = new Schema({
     },
     price: Number,
     description: String,
+    quantity: {
+        type: Number,
+        default: 0
+    },
+    total: {
+        type: Number,
+        default: this.quantity * this.price
+    },
     category:
     {
         type: Schema.Types.ObjectId,
@@ -29,15 +38,4 @@ const productTrueSchema = new Schema({
 })
 
 
-
-const subProductSchema = new Schema({
-    name: String,
-    price: String,
-    product: {
-        type: Schema.Types.ObjectId,
-        ref: 'ProductTrue'
-    }
-})
-
-module.exports = mongoose.model('SubProduct', subProductSchema)
 module.exports = mongoose.model('ProductTrue', productTrueSchema)

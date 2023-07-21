@@ -3,6 +3,7 @@ const router = express.Router();
 const apiRoutes = require('../controlers/api')
 const multer = require('multer')
 const { storage } = require('../cloudinary/photo-true.js');
+const productTrue = require('../models/product-true');
 const upload = multer({ storage })
 
 router.route('/get-cats').get(apiRoutes.sendCats)
@@ -15,6 +16,8 @@ router.route('/prod-add')
 // router.route('/new-user').get(apiRoutes.register)
 router.route('/login').post(apiRoutes.login)
 router.route('/sub-prod-add').post(apiRoutes.saveSubProd)
+router.route('/get-token').get(apiRoutes.getToken)
+router.route('/save-order').post(apiRoutes.saveOrder)
 
 
 module.exports = router

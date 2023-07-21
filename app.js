@@ -110,11 +110,11 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: [],
-      mediaSrc: ["https://res.cloudinary.com/"],
+      mediaSrc: ["https://res.cloudinary.com/", "http://localhost:8080/"],
       connectSrc: [
-        "http://localhost:3000/order/create-payment-intent",
-        "https://cafetish.azurewebsites.net/order/create-payment-intent",
-        "http://localhost:3000/",
+        "http://localhost:8080/order/order-done",
+        "https://www.cafetish.com/order/order-done",
+        "http://localhost:8080/",
         "https://cafetish.com",
         "https://connect.facebook.net",
         "https://www.facebook.com",
