@@ -3,24 +3,34 @@
 let baseUrlLocal = 'http://localhost:8080/'
 const baseUrlHeroku = 'https://www.cafetish.com/'
 
-const currentUrl = window.location.href
-if (currentUrl.slice(0, 22) === baseUrlLocal) {
-    baseUrlLocal = baseUrlLocal
-} else (
-    baseUrlLocal = baseUrlHeroku
-)
-const since = Date.now() - 5000; // only retrieve orders from the last 5 seconds
-const url = `${baseUrlLocal}order/recive-order?since=${since}`;
+const currentUrl = window.location.href;
+if (currentUrl.startsWith(baseUrlLocal)) {
+    baseUrlLocal = baseUrlLocal;
+} else {
+    baseUrlLocal = baseUrlHeroku;
+}
+
+
+const url = `${baseUrlLocal}order/recive-order`;
 const urlLocalSend = `${baseUrlLocal}order/order-done`;
 const eventSource = new EventSource(url);
+console.log(eventSource)
+
+eventSource.onopen = () => {
+    console.log('EventSource connection is open.');
+};
 
 eventSource.onmessage = (event) => {
     const order = JSON.parse(event.data);
-    if (!order) {
-
+    if (!order || order.message === 'No Orders') {
+        console.log('hit the no orders')
     } else {
-        addOrder(order, true); ``
+        addOrder(order, true);
     }
+};
+
+eventSource.onerror = (event) => {
+    console.error('Error occurred with the EventSource connection:', event);
 };
 
 const getOrdersUrl = `${baseUrlLocal}order/get-order`;
@@ -54,23 +64,25 @@ newOrdersDiv.addEventListener("click", (event) => {
 function addOrder(order, withding) {
     // const newOrdersDiv = document.getElementById("new-orders");
     const orderDiv = document.createElement("div");
-    orderDiv.classList.add('col-4', 'order', "appear");
+    orderDiv.classList.add('col-sm-6', 'col-md-6', 'col-lg-4', 'order', "appear");
 
     const date = new Date(order.createdAt);
     const hours = date.getHours();
     const minutes = date.getMinutes();
     const localTimeString = hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0");
 
-    const productList = order.products.map(product => `<li class="list-group-item">${product.quantity} X ${product.name}</li>`).join('');
+    const productList = order.products.map(product => `<li class="list-group-item">${product.quantity} X ${product.name}  =   ${product.total}</li>`).join('');
 
     orderDiv.innerHTML = `
-  <ul class="list-group">
+    <ul class="list-group">
+    <li class="list-group-item">Masa Nr: ${order.masa}</li>
   <li class="list-group-item">Comanda Nr: ${order.index}</li>
   <li class="list-group-item hide">${order._id}</li>
   <li class="list-group-item">Ora: ${localTimeString}</li>
-  <li class="list-group-item">Masa Nr: ${order.masa}</li>
   <li class="list-group-item"><strong style="font-size:19px;">Produse:</strong></li>
   <ul class="list-group">${productList}</ul>
+  <li class="list-group-item">Tips ${order.tips}</li>
+  <li class="list-group-item">Total ${order.total}</li>
   <button class="btn pending btn-danger">Accepta</button>
   <button class="btn acceptata hide btn-success">Terminat</button>
   </ul>
@@ -113,3 +125,9 @@ function addOrder(order, withding) {
         newOrdersDiv.appendChild(orderDiv);
     }
 }
+
+
+
+
+
+

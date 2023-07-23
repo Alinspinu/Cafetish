@@ -264,22 +264,23 @@ module.exports.conadaLivrat = async (req, res, next) => {
 
 
 module.exports.sendLiveOrders = async (req, res, next) => {
-    const since = req.query.since || Date.now();
+    const since = req.query.since
     res.setHeader("Content-Type", "text/event-stream");
     res.setHeader("Cache-Control", "no-cache");
     res.setHeader("Connection", "keep-alive");
-
     const changeStream = TrueOrder.watch({ fullDocument: "updateLookup" });
     changeStream.on("change", async (change) => {
         if (
             change.operationType === "insert" &&
-            change.fullDocument.createdAt >= since
+            change.fullDocument.status === 'open'
         ) {
             const newOrder = await TrueOrder.findOne({ _id: change.fullDocument._id }).exec();
-            console.log(newOrder)
             res.write(`data: ${JSON.stringify(newOrder)}\n\n`);
         }
-    });
+    })
+    console.log('hit the message')
+    const message = { message: 'No Orders' }
+    res.write(`data: ${JSON.stringify(message)}\n\n`);
 }
 
 

@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+
 const Product = require('../models/product-true')
 const SubProduct = require('../models/sub-product')
 const Cat = require('../models/cat-true')
@@ -94,17 +98,19 @@ module.exports.login = async (req, res, next) => {
 
 module.exports.getToken = async (req, res, next) => {
     try {
-        const clientId = 'fazem58ywi5mz8z2bmbudpnq8s4ym3kuar9bvcgn2nbe0.apps.vivapayments.com';
-        const clientSecret = 'W2DoB13aOF5a2B5LfFUnP434dOFvhF';
+        const clientId = process.env.VIVA_CLIENT_ID_DEMO;
+        const clientSecret = process.env.VIVA_CLIENT_SECRET_DEMO;
         const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
         const url = 'https://demo-accounts.vivapayments.com/connect/token';
         const headers = {
             'Content-Type': 'application/x-www-form-urlencoded',
             Authorization: `Basic ${credentials}`
         };
+        const total = parseInt(req.query.total) * 100
+        console.log(total)
         const response = await axios.post(url, 'grant_type=client_credentials', { headers });
         const requestBody = {
-            amount: 1000,
+            amount: total,
             customerTrns: 'Produse Delicioase',
             customer: {
                 email: '',
@@ -140,7 +146,7 @@ module.exports.getToken = async (req, res, next) => {
         });
         res.status(200).json(response2.data);
     } catch (error) {
-        console.error(error);
+        // console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
