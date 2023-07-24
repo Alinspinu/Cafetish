@@ -14,6 +14,10 @@ const subProductSchema = new Schema({
         type: Number,
         default: this.quantity * this.price
     },
+    available: {
+        type: Boolean,
+        default: true
+    },
     product: {
         type: Schema.Types.ObjectId,
         ref: 'ProductTrue'

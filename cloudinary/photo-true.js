@@ -20,6 +20,17 @@ const storage = new CloudinaryStorage({
         resource_type: 'auto'
     }
 });
+const storageCategory = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'True',
+        transformation: [
+            { width: 666, height: 666, crop: "fill" }
+        ],
+        allowedForms: ['jpeg', 'png', 'jpg', 'mp4'],
+        resource_type: 'auto'
+    }
+});
 
 
-module.exports = { cloudinary, storage };
+module.exports = { cloudinary, storage, storageCategory };

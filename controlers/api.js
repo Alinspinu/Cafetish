@@ -107,7 +107,6 @@ module.exports.getToken = async (req, res, next) => {
             Authorization: `Basic ${credentials}`
         };
         const total = parseInt(req.query.total) * 100
-        console.log(total)
         const response = await axios.post(url, 'grant_type=client_credentials', { headers });
         const requestBody = {
             amount: total,
@@ -146,7 +145,7 @@ module.exports.getToken = async (req, res, next) => {
         });
         res.status(200).json(response2.data);
     } catch (error) {
-        // console.error(error);
+        console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
