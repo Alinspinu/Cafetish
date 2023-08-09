@@ -82,6 +82,7 @@ function addOrder(order, withding) {
   <li class="list-group-item"><strong style="font-size:19px;">Produse:</strong></li>
   <ul class="list-group">${productList}</ul>
   <li class="list-group-item">Tips ${order.tips}</li>
+  <li class="list-group-item">Cash Back${order.cashBack}</li>
   <li class="list-group-item">Total ${order.total}</li>
   <button class="btn pending btn-danger">Accepta</button>
   <button class="btn acceptata hide btn-success">Terminat</button>
