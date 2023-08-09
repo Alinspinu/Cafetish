@@ -71,7 +71,7 @@ function addOrder(order, withding) {
     const minutes = date.getMinutes();
     const localTimeString = hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0");
 
-    const productList = order.products.map(product => `<li class="list-group-item">${product.quantity} X ${product.name}  =   ${product.total}</li>`).join('');
+    const productList = order.products.map(product => `<li class="list-group-item">${product.quantity} X ${product.name}  -  ${product.total} Lei</li>`).join('');
 
     orderDiv.innerHTML = `
     <ul class="list-group">
