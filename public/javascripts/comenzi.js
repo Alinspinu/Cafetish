@@ -81,7 +81,7 @@ function addOrder(order, withding) {
   <li class="list-group-item">Ora: ${localTimeString}</li>
   <li class="list-group-item"><strong style="font-size:19px;">Produse:</strong></li>
   <ul class="list-group">${productList}</ul>
-  <ul class="list-group">Total Produse ${order.totalProducts}</ul>
+  <ul class="list-group-item fw-bold">Total Produse ${order.totalProducts}</ul>
   <li class="list-group-item">Tips ${order.tips}</li>
   <li class="list-group-item">Cash Back ${order.cashBack}</li>
   <li class="list-group-item">Total ${order.total}</li>
