@@ -83,7 +83,7 @@ function addOrder(order, withding) {
   <ul class="list-group">${productList}</ul>
   <ul class="list-group-item fw-bold">Total Produse:  ${order.totalProducts} Lei</ul>
   <li class="list-group-item">Tips:  ${order.tips} Lei</li>
-  <li class="list-group-item">Cash Back:  ${order.cashBack} Lei</li>
+  <li class="list-group-item">Cash Back: - ${order.cashBack} Lei</li>
   <li class="list-group-item fw-bold">Total:  ${order.total} Lei</li>
   <button class="btn pending btn-danger">Accepta</button>
   <button class="btn acceptata hide btn-success">Terminat</button>
