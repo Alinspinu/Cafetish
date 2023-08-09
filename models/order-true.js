@@ -16,6 +16,10 @@ const orderTrueSchema = new Schema({
         type: Number,
         required: true
     },
+    totalProducts: {
+        type: Number,
+        required: true
+    },
     tips: {
         type: Number,
         default: 0
