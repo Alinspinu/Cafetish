@@ -20,6 +20,10 @@ const orderTrueSchema = new Schema({
         type: Number,
         default: 0
     },
+    cashBack: {
+        type: Number,
+        default: 0
+    },
     total: {
         type: String,
         required: true

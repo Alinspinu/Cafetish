@@ -14,13 +14,20 @@ const productTrueSchema = new Schema({
     },
     price: Number,
     description: String,
+    qty: {
+        type: String,
+    },
     quantity: {
         type: Number,
         default: 0
     },
+    available: {
+        type: Boolean,
+        default: true
+    },
     total: {
         type: Number,
-        default: this.quantity * this.price
+
     },
     category:
     {

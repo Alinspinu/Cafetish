@@ -15,6 +15,7 @@ const querystring = require('querystring');
 const { json } = require('body-parser');
 
 
+
 module.exports.sendCats = async (req, res, next) => {
     const { mainCat } = req.query
     const cats = await Cat.find().populate({
@@ -59,20 +60,25 @@ module.exports.saveSubProd = async (req, res, next) => {
 
 module.exports.addCat = async (req, res, next) => {
     const cat = new Cat(req.body)
+    console.log(req.file)
     if (req.file) {
         const { path, filename } = req.file
         cat.image.filename = filename
         cat.image.path = path
     }
+
     await cat.save()
+    console.log(cat)
     res.status(200).json({ message: `Category ${cat.name} was created!` })
 }
 
 module.exports.addProd = async (req, res, next) => {
     const { category } = req.body
     const cat = await Cat.findById(category)
-    console.log(cat)
+
     const product = new Product(req.body)
+    product.price = parseFloat(req.body.price)
+    console.log(product, req.body)
     if (req.file) {
         const { path, filename } = req.file
         product.image.filename = filename
@@ -145,7 +151,7 @@ module.exports.getToken = async (req, res, next) => {
         });
         res.status(200).json(response2.data);
     } catch (error) {
-        console.error(error);
+        console.error(error.message);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }

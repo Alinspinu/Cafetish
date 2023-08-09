@@ -11,7 +11,7 @@ router.route('/get-cats').get(apiRoutes.sendCats)
 router.route('/get-cat').get(apiRoutes.sendCat)
 
 router.route('/cat-add')
-    .post(uploadCategory.single('image'), apiRoutes.addCat)
+    .post(upload.single('image'), apiRoutes.addCat)
 router.route('/prod-add')
     .post(upload.single('image'), apiRoutes.addProd)
 // router.route('/new-user').get(apiRoutes.register)

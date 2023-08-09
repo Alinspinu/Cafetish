@@ -1,0 +1,26 @@
+runtime: nodejs20
+
+build_env_variables:
+  GOOGLE_NODE_RUN_SCRIPTS: ""
+
+env_variables:
+  CLOUDINARY_CLOUD_NAME: dhetxk68c
+  CLOUDINARY_KEY: 741571261437733
+  CLOUDINARY_SECRET: GZZXIJkDIeuriwYO1wS-KBJIo-g
+  SECRET: HlA71dvjIigafyX^N0CpA4PK*4$VXl8
+  DB_URL: mongodb+srv://Alin:cestlavieonrouge@cluster0.459nok3.mongodb.net/?retryWrites=true&w=majority
+  STRIPE_TEST_KEY: pk_test_51M9k8jFFsy1gu6PU0uAH1MH09KooARZ1G45N0DpC9kXOM9w7GRGSbENE3bQK9odyX2ChEOMaDser1EnTYoAC3suC00aLuGcn69
+  STRIPE_TEST_SECRET: sk_test_51M9k8jFFsy1gu6PUWj7pEdeN91IDJ8yIA3nVufeJmKNclRBDvpvaVD2ZMiAQnJrAm7eRQJsdccUL24ZrcWYHceex00yRRO58ZQ
+  STRIPE_PUBLIC: pk_live_51M9k8jFFsy1gu6PUgVOlcBaao0oajDPLeH4uid7E8yfK2rV5061097GXDBrILq1sa0gu4oxJXq8wY7vrKxS6IWSZ00TLc9ttYS
+  STRIPE_SECRET: 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
+  FACEBOOK_APP_ID: 900242811343725
+  FACEBOOK_APP_SECRET: c0256152c508b801833dac7740bd7eb2
+  GOOGLE_CLIENT_ID: 1065286205489-iohd238s9j3s1cr6ni3f62l35in6l7ue.apps.googleusercontent.com
+  GOOGLE_CLIENT_SECRET: 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
+  ADMIN_USER: admin1cafetish2
+  ADMIN_PASS: viataestefrumoasa
+  PAROLA_G_AP: mrdbdonkdypigprm
+  POS_DB_URL: mongodb+srv://Alin:espsOCn7sllc@cluster0.m2r9yun.mongodb.net/?retryWrites=true&w=majority
+  AUTH_CALLBK_URL_BASE: http://localhost:8080/user/
+  VIVA_CLIENT_ID_DEMO: fazem58ywi5mz8z2bmbudpnq8s4ym3kuar9bvcgn2nbe0.apps.vivapayments.com
+  VIVA_CLIENT_SECRET_DEMO: W2DoB13aOF5a2B5LfFUnP434dOFvhF

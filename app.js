@@ -45,6 +45,9 @@ const cors = require('cors')
 
 app.use(cors())
 
+app.set('trust proxy', true);
+
+
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -156,9 +159,9 @@ app.use(
 app.use(flash());
 
 app.use(bodyParser.json());
+app.use(session(sessionConfig));
 
 app.disable("etag");
-app.use(session(sessionConfig));
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
