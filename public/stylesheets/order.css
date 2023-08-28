@@ -1,3 +1,9 @@
+
+
+#new-orders{
+  padding: 20px 0px 60px 0px;
+}
+
 @keyframes appear {
     0% {
       opacity: 0;
@@ -18,3 +24,4 @@
   .hide{
     display: none;
 }
+

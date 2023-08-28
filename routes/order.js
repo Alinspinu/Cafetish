@@ -43,6 +43,7 @@ router.route('/recive-order').get(comenzi.sendLiveOrders)
 router.route('/get-order').get(comenzi.getOrder)
 router.route('/order-done').get(comenzi.orderDone)
 router.route('/order-page').get(comenzi.renderTrueOrders)
+router.route('/set-order-time').get(comenzi.setOrderTime)
 
 
 module.exports = router  

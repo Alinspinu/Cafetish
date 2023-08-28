@@ -115,7 +115,8 @@ app.use(
       defaultSrc: [],
       mediaSrc: ["https://res.cloudinary.com/", "http://localhost:8080/", "https://www.cafetish.com"],
       connectSrc: [
-        "http://localhost:8080/order/order-done",
+        "https://localhost:8080",
+        "http://localhost:8090",
         "https://www.cafetish.com/order/order-done",
         "http://localhost:8080/",
         "https://cafetish.com",
@@ -287,7 +288,7 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error", { err });
 });
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8090;
 app.listen(port, () => {
   console.log(`App running on port ${port}`);
 });

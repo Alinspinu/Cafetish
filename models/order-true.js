@@ -40,6 +40,10 @@ const orderTrueSchema = new Schema({
         type: Date,
         default: Date.now(),
     },
+    completetime: {
+        type: Number,
+        default: 0
+    },
     products:
         [
             {

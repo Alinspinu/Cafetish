@@ -1,6 +1,6 @@
 
 
-let baseUrlLocal = 'http://localhost:8080/'
+let baseUrlLocal = 'http://localhost:8090/'
 const baseUrlHeroku = 'https://www.cafetish.com/'
 
 const currentUrl = window.location.href;
@@ -61,6 +61,8 @@ newOrdersDiv.addEventListener("click", (event) => {
     }
 });
 
+
+
 function addOrder(order, withding) {
     // const newOrdersDiv = document.getElementById("new-orders");
     const orderDiv = document.createElement("div");
@@ -86,6 +88,18 @@ function addOrder(order, withding) {
   <li class="list-group-item">Cash Back: - ${order.cashBack} Lei</li>
   <li class="list-group-item fw-bold">Total:  ${order.total} Lei</li>
   <button class="btn pending btn-danger">Accepta</button>
+  <select class="form-select form-select-lg hide timeSelect" aria-label="Send-time-select">
+  <option selected>Trimite timp</option>
+  <option value="300000">5 Min</option>
+  <option value="420000">7 Min</option>
+  <option value="540000">9 Min</option>
+  <option value="720000">12 Min</option>
+  <option value="900000">15 Min</option>
+  <option value="1200000">20 Min</option>
+  <option value="1500000">25 Min</option>
+  <option value="1800000">30 Min</option>
+</select>
+  <button disabled="true" class="btn hide time btn-success">Trimite Timp</button>
   <button class="btn acceptata hide btn-success">Terminat</button>
   </ul>
   `;
@@ -106,6 +120,18 @@ function addOrder(order, withding) {
         dingSound.play();
 
         const acceptaButton = orderDiv.querySelector('.pending');
+        const timeSendButton = orderDiv.querySelector('.time');
+        const terminatButton = orderDiv.querySelector('.acceptata');
+        const timeSelect = orderDiv.querySelector('.timeSelect');
+
+        timeSelect.addEventListener('change', function () {
+            console.log(timeSelect.value)
+            if (timeSelect.value !== '') {
+                timeSendButton.removeAttribute('disabled');
+            } else {
+                timeSendButton.setAttribute('disabled', true);
+            }
+        });
         acceptaButton.addEventListener('click', () => {
             clearInterval(intervalId);
             dingSound.pause();
@@ -114,8 +140,20 @@ function addOrder(order, withding) {
 
             // acceptaButton.classList.remove('pending');
             acceptaButton.classList.add('hide');
-            const terminatButton = orderDiv.querySelector('.acceptata');
-            terminatButton.classList.remove('hide');
+
+
+            timeSelect.classList.remove('hide');
+            timeSendButton.classList.remove('hide');
+            timeSendButton.addEventListener('click', () => {
+                const time = timeSelect.value
+                const orderId = order._id
+                fetch(`${baseUrlHeroku}order/set-order-time?orderId=${orderId}&time=${time}`).then(res => res.json()).then(data => {
+                    console.log(data)
+                    terminatButton.classList.remove('hide');
+                    timeSelect.classList.add('hide');
+                    timeSendButton.classList.add('hide');
+                })
+            })
         });
         newOrdersDiv.appendChild(orderDiv);
     } else {

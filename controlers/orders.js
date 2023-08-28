@@ -296,6 +296,18 @@ module.exports.orderDone = async (req, res, next) => {
     res.status(200)
 }
 
+module.exports.setOrderTime = async (req, res, next) => {
+    try {
+        const time = parseFloat(req.query.time);
+        const orderId = (req.query.orderId);
+        const order = await TrueOrder.findOneAndUpdate({ _id: orderId }, { completetime: time }, { new: true });
+        res.status(200).json({ message: 'time set' });
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: error.error.message })
+    }
+}
+
 module.exports.renderTrueOrders = async (req, res, next) => {
     res.render('comenzi')
 }

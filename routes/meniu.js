@@ -7,31 +7,31 @@ const upload = multer({ storage })
 const ExpressError = require('../utilities/expressError');
 const { produsSchema } = require('../schema.js');
 
-const meniu = require('../controlers/meniu')
+const meniu = require('../controlers/meniu');
 const Produs = require('../models/produs');
 
-const { isLoggedIn, isAdmin, validateCat, validateProdus, validateCafea } = require('../middleware')
-const catchAsync = require('../utilities/catchasync')
+const { isLoggedIn, isAdmin, validateCat, validateProdus, validateCafea } = require('../middleware');
+const catchAsync = require('../utilities/catchasync');
 
 
 router.route('/')
-    .get(catchAsync(meniu.renderMeniu))
+    .get(catchAsync(meniu.renderMeniu));
 
 router.route('/giftCard')
-    .post(isLoggedIn, catchAsync(meniu.giftCard))
+    .post(isLoggedIn, catchAsync(meniu.giftCard));
 
 router.route('/cafea')
-    .get(meniu.renderCafea)
+    .get(meniu.renderCafea);
 
 
 router.route('/cafea-nou')
     .get(isAdmin, meniu.renderCafeaNou)
-    .post(isAdmin, upload.array('cafImg'), validateCafea, catchAsync(meniu.cafeaNou))
+    .post(isAdmin, upload.array('cafImg'), validateCafea, catchAsync(meniu.cafeaNou));
 
 
 router.route('/cats')
     .get(meniu.renderCatNou)
-    .post(upload.single('catImg'), validateCat, catchAsync(meniu.catNou))
+    .post(upload.single('catImg'), validateCat, catchAsync(meniu.catNou));
 
 
 router.route('/cat/:id')
