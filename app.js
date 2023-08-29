@@ -32,10 +32,12 @@ const legalRoutes = require("./routes/legal");
 const blogRoutes = require("./routes/blog");
 const recipeRoutes = require("./routes/recipe")
 const posRoutes = require("./routes/pos")
-const apiRoutes = require("./routes/api")
+const apiRoutes = require("./routes/true-orders")
 const bodyParser = require('body-parser')
+const { helmetConfig } = require('./config/helmet')
+const { sessionConfig } = require('./config/session')
+const { fbCredentials, connectFb } = require('./config/login')
 
-const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 const dbUrl = process.env.DB_URL
 
@@ -61,140 +63,20 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
-// const { MailtrapClient } = require("mailtrap");
-
-const sessionConfig = {
-  store: MongoDbStore.create({
-    mongoUrl: dbUrl,
-    autoRemove: "interval",
-    autoRemoveInterval: 10,
-  }),
-  secret: process.env.SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    httpOnly: true,
-    // secure: true,
-    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-    maxAge: 1000 * 60 * 60 * 24 * 7,
-  },
-};
 
 
 
-const scriptSrcUrls = [
-  "https://stackpath.bootstrapcdn.com/",
-  "https://api.tiles.mapbox.com/",
-  "https://api.mapbox.com/",
-  "https://kit.fontawesome.com/",
-  "https://cdnjs.cloudflare.com/",
-  "https://cdn.jsdelivr.net",
-  "https://code.jquery.com",
-  "https://js.stripe.com/v3/",
-  "https://connect.facebook.net",
-];
-const styleSrcUrls = [
-  "https://kit-free.fontawesome.com/",
-  "https://stackpath.bootstrapcdn.com/",
-  "https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css",
-  "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css",
-  "https://api.mapbox.com/",
-  "https://kit-free.fontawesome.com/",
-  "https://api.tiles.mapbox.com/",
-  "https://fonts.googleapis.com/",
-  "https://use.fontawesome.com/",
-];
-const fontSrcUrls = [
-  "https://fonts.googleapis.com/",
-  "https://fonts.gstatic.com",
-  "https://cdn.jsdelivr.net",
-];
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: [],
-      mediaSrc: ["https://res.cloudinary.com/", "http://localhost:8080/", "https://www.cafetish.com", "http://localhost:8090"],
-      connectSrc: [
-        "https://localhost:8080",
-        "http://localhost:8090",
-        "https://www.cafetish.com/order/order-done",
-        "http://localhost:8080/",
-        "https://cafetish.com",
-        "https://connect.facebook.net",
-        "https://www.facebook.com",
-        "https://www.cafetish.com",
-      ],
-      formAction: ["'self'", "https://checkout.stripe.com"],
-      scriptSrcAttr: ["'unsafe-inline'"],
-      scriptSrc: ["'unsafe-inline'", "'unsafe-eval'", "'self'", ...scriptSrcUrls],
-      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
-      workerSrc: ["'self'", "blob:"],
-      frameSrc: [
-        "'self'",
-        "blob:",
-        "data:",
-        "https://www.youtube.com",
-        "https://js.stripe.com",
-        "https://www.facebook.com",
-      ],
-      objectSrc: [],
-      imgSrc: [
-        "'self'",
-        "blob:",
-        "data:",
-        "https://res.cloudinary.com/dhetxk68c/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
-        "https://images.unsplash.com/",
-        "https://q.stripe.com",
-        "https://api.qrserver.com",
-        "https://www.facebook.com",
-        "https://platform-lookaside.fbsbx.com",
-        "https://lh3.googleusercontent.com/",
-        "https://upload.wikimedia.org",
-        "https://s3-us-west-2.amazonaws.com/",
-      ],
-      fontSrc: ["'self'", ...fontSrcUrls],
-    },
-  })
-);
 
+app.use(helmet.contentSecurityPolicy(helmetConfig))
 app.use(flash());
-
 app.use(bodyParser.json());
 app.use(session(sessionConfig));
-
 app.disable("etag");
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 
-passport.use(
-  new FbStrategy(
-    {
-      clientID: process.env.FACEBOOK_APP_ID,
-      clientSecret: process.env.FACEBOOK_APP_SECRET,
-      callbackURL: `${process.env.AUTH_CALLBK_URL_BASE}FbLogin`,
-      profileFields: ["name", "email", "picture", "displayName"],
-    },
-    function (accessToken, refreshToken, profile, cb) {
-      const newUser = User.findOrCreate(
-        {
-          facebookId: profile.id,
-          onlineName: profile.displayName,
-          email: profile.emails[0].value,
-        },
-        function (err, user) {
-          if (user.onlinePic) {
-            return cb(err, user);
-          } else {
-            user.onlinePic = profile.photos[0].value;
-            user.save();
-          }
-          return cb(err, user);
-        }
-      );
-    }
-  )
-);
+passport.use(new FbStrategy(fbCredentials, connectFb));
 
 passport.use(
   new GoogleStrategy(
@@ -249,38 +131,6 @@ app.use("/recipes", recipeRoutes)
 app.use("/pos", posRoutes)
 app.use("/api", apiRoutes)
 
-// const TOKEN = "ff997ac8b798cceaa766fee1a78e30e7";
-// const ENDPOINT = "https://send.api.mailtrap.io/";
-
-// const client = new MailtrapClient({ endpoint: ENDPOINT, token: TOKEN });
-
-// const sender = {
-//   email: "office@cafetish.com",
-//   name: "Notificare",
-// };
-// const recipients = [
-//   {
-//     email: "alinz.spinu@gmail.com",
-//   }
-// ];
-
-// app.get('/sendMail', (req,res) => {
-//     client
-//   .send({
-//     from: sender,
-//     to: recipients,
-//     subject: "You are awesome!",
-//     text: "Congrats for sending test email with Mailtrap!",
-//     category: "Integration Test",
-//   })
-//   .then(console.log, console.error);
-//   res.redirect('/meniu')
-
-// })
-
-// app.all('*', (err, req, res, next) => {
-//     next(new ExpressError('page not found', 404))
-// })
 
 app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;
