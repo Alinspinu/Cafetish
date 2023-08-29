@@ -113,7 +113,7 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: [],
-      mediaSrc: ["https://res.cloudinary.com/", "http://localhost:8080/", "https://www.cafetish.com"],
+      mediaSrc: ["https://res.cloudinary.com/", "http://localhost:8080/", "https://www.cafetish.com", "http://localhost:8090"],
       connectSrc: [
         "https://localhost:8080",
         "http://localhost:8090",
@@ -126,7 +126,7 @@ app.use(
       ],
       formAction: ["'self'", "https://checkout.stripe.com"],
       scriptSrcAttr: ["'unsafe-inline'"],
-      scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+      scriptSrc: ["'unsafe-inline'", "'unsafe-eval'", "'self'", ...scriptSrcUrls],
       styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
       workerSrc: ["'self'", "blob:"],
       frameSrc: [

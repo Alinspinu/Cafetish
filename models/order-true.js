@@ -36,10 +36,6 @@ const orderTrueSchema = new Schema({
         type: String,
         default: "open",
     },
-    createdAt: {
-        type: Date,
-        default: Date.now(),
-    },
     completetime: {
         type: Number,
         default: 0
@@ -67,7 +63,7 @@ const orderTrueSchema = new Schema({
         ]
 
 
-})
+}, { timestamps: true, })
 
 
 orderTrueSchema.pre("save", function (next) {
