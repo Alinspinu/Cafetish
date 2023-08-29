@@ -11,8 +11,8 @@ if (currentUrl.startsWith(baseUrlLocal)) {
 }
 
 
-const url = `${baseUrlLocal}order/recive-order`;
-const urlLocalSend = `${baseUrlLocal}order/order-done`;
+const url = `${baseUrlLocal}api/recive-order`;
+const urlLocalSend = `${baseUrlLocal}api/order-done`;
 const eventSource = new EventSource(url);
 console.log(eventSource)
 
@@ -65,7 +65,6 @@ newOrdersDiv.addEventListener("click", (event) => {
 });
 
 function addOrder(order, withding) {
-    // const newOrdersDiv = document.getElementById("new-orders");
     const orderDiv = document.createElement("div");
     orderDiv.classList.add('col-sm-6', 'col-md-6', 'col-lg-4', "mb-4", 'order', "appear");
 
@@ -195,7 +194,7 @@ function addOrder(order, withding) {
                     const timeTo = parseFloat(el.innerText.slice(0, -3)) * 60 * 1000
                     setupCountdownTimer(timeTo, timer);
                     const orderId = order._id;
-                    fetch(`${baseUrlHeroku}order/set-order-time?orderId=${orderId}&time=${timeTo}`).then(res => res.json()).then(data => {
+                    fetch(`${baseUrlHeroku}api/set-order-time?orderId=${orderId}&time=${timeTo}`).then(res => res.json()).then(data => {
                         terminatButton.classList.remove('hide');
                         timeLi.classList.add('hide');
                         timer.classList.remove('hide')
@@ -207,7 +206,6 @@ function addOrder(order, withding) {
         });
         newOrdersDiv.appendChild(orderDiv);
     } else {
-        const timer = orderDiv.querySelector('#timer');
         hideOrderButton.classList.remove('hide');
         timer.classList.remove('hide');
         setupCountdownTimer(timeToBeReady, timer);

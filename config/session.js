@@ -1,6 +1,7 @@
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 }
+const MongoDbStore = require("connect-mongo");
 
 const sessionConfig = {
     store: MongoDbStore.create({
