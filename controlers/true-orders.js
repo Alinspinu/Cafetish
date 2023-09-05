@@ -2,7 +2,6 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
 
-const User = require('../models/user-true')
 const TrueOrder = require('../models/order-true')
 
 
@@ -52,23 +51,28 @@ module.exports.setOrderTime = async (req, res, next) => {
     }
 }
 
-module.exports.renderTrueOrders = async (req, res, next) => {
-    res.render('comenzi')
+module.exports.renderTrueOrders = (req, res) => {
+    res.render('orders-true/comenzi')
 }
 
 
+module.exports.renderTrueOrdesTerminat = (req, res) => {
+    res.render('orders-true/comenzi-terminate')
+}
+
+module.exports.getOrderDone = async (req, res, next) => {
+    try {
+        const currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0)
+        const orders = await TrueOrder.find({ createdAt: { $gte: currentDate }, status: 'done' })
+        res.status(200).json(orders)
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: err.error.message })
+    }
+}
 
 
-// module.exports.register = async (req, res, next) => {
-//     const hashedPassword = hashPassword('VefcemltfC');
-//     const newUser = new User({
-//         password: hashedPassword,
-//         name: 'allisone',
-//     });
-//     await newUser.save()
-//     res.status(200).json({ message: `allisone and allisdone ${newUser.password}` });
-
-// }
 
 function comparePasswords(password, hashedPassword) {
     const [salt, originalHash] = hashedPassword.split("$");

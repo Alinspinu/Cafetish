@@ -84,7 +84,7 @@ app.use((req, res, next) => {
   res.locals.error = req.flash("error");
   res.locals.session = req.session;
   next();
-}); ``
+});
 
 app.get("/", (req, res) => {
   res.render("index");

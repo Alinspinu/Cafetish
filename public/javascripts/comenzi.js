@@ -33,7 +33,7 @@ eventSource.onerror = (event) => {
     console.error('Error occurred with the EventSource connection:', event);
 };
 
-const getOrdersUrl = `${baseUrlLocal}order/get-order`;
+const getOrdersUrl = `${baseUrlLocal}api/get-order`;
 fetch(getOrdersUrl)
     .then((res) => res.json())
     .then(orders => {
@@ -73,7 +73,8 @@ function addOrder(order, withding) {
     const minutes = date.getMinutes();
     const localTimeString = hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0");
     const now = new Date(Date.now())
-    const timeToBeReady = (date.getTime() + order.completetime) - now
+    const timeToBeReady = (date.getTime() + order.completetime) - now;
+    console.log(order.completetime)
 
 
     const productList = order.products.map(product => `<li class="list-group-item">
@@ -90,14 +91,21 @@ function addOrder(order, withding) {
     <i class="bi bi-eye"></i>
     <span class="hide-text">Ascunde</span>
     </div>
+
     <li class="list-group-item">
     <div class="wrapper">
-    <span class="bold">Masa Nr: ${order.masa}</span>
+    <span class="bold">Nr: ${order.index}</span>
     <div class="hide bold" id="timer"></div>
-    <span class="bold">Ora: ${localTimeString}</span>
+    <span class="bold">Masa: ${order.masa}</span>
     </div>
     </li>
- 
+    <li class="list-group-item">
+    <div class="wrapper">
+    <div> <span>Primită: </span><span class="bold">${localTimeString}</span></div>
+    <div><span>ETA: </span><span class="bold" id="end"></span></div>
+    </div>
+    </li>
+
     <li class="list-group-item hide order-id">${order._id}</li>
 
     <ul class="list-group to-hide">${productList}</ul>
@@ -163,6 +171,7 @@ function addOrder(order, withding) {
     const hideIcon = orderDiv.querySelector('i')
     const hideText = orderDiv.querySelector('.hide-text');
     const elementsToHide = orderDiv.querySelectorAll('.to-hide');
+    const end = orderDiv.querySelector('#end')
     if (withding) {
         //SET INTERVAL FOR ANIMATION
         const intervalId = setInterval(() => {
@@ -188,11 +197,13 @@ function addOrder(order, withding) {
             acceptaButton.classList.remove('pending');
             acceptaButton.classList.add('hide');
 
-
+            console.log('before click')
             timeButtons.forEach((el) => {
                 el.addEventListener('click', () => {
                     const timeTo = parseFloat(el.innerText.slice(0, -3)) * 60 * 1000
+                    console.log('ceva');
                     setupCountdownTimer(timeTo, timer);
+                    calcEndTime(date, timeTo, end)
                     const orderId = order._id;
                     fetch(`${baseUrlHeroku}api/set-order-time?orderId=${orderId}&time=${timeTo}`).then(res => res.json()).then(data => {
                         terminatButton.classList.remove('hide');
@@ -208,6 +219,7 @@ function addOrder(order, withding) {
     } else {
         hideOrderButton.classList.remove('hide');
         timer.classList.remove('hide');
+        calcEndTime(date, order.completetime, end)
         setupCountdownTimer(timeToBeReady, timer);
         showHideElements(hideOrderButton, hideIcon, hideText, elementsToHide);
         const acceptaButton = orderDiv.querySelector('.pending');
@@ -216,6 +228,15 @@ function addOrder(order, withding) {
         terminatButton.classList.remove('hide');
         newOrdersDiv.appendChild(orderDiv);
     }
+}
+
+function calcEndTime(startTime, givenTime, element) {
+    const endTimeMiliseconds = startTime.getTime() + givenTime
+    const date = new Date(endTimeMiliseconds)
+    const hours = date.getHours()
+    const minutes = date.getMinutes()
+    const endTime = hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0");
+    element.innerText = endTime;
 }
 
 

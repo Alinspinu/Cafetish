@@ -3,10 +3,7 @@ const Categorie = require('../models/categorie')
 const Cafea = require('../models/cafea')
 const { cloudinary } = require('../cloudinary');
 const ExpressError = require('../utilities/expressError');
-const cafea = require('../models/cafea');
 const GiftCard = require('../models/GiftCard');
-const user = require('../models/user');
-const User = require('../models/user')
 const Cart = require('../models/cart');
 
 

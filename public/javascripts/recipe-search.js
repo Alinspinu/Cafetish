@@ -38,8 +38,4 @@ searchBar.addEventListener('input', function () {
     });
 });
 
-// profile.onclick = () => {
-//     console.log('click')
-//     showModal()
-// }
 

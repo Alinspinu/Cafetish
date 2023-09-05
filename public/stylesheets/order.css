@@ -1,10 +1,21 @@
 
 
+body{
+  background-color:#e0cebf;
+}
+
 #new-orders{
   padding: 20px 0px 60px 0px;
+  width: 100%;
 }
 .container{
-  margin: 0 0 0 0 !important;
+  /* margin: 0 0 0 0 !important; */
+  width: 100% !important;
+}
+
+.order ul{
+  border-radius: 7px !important;
+  box-shadow: 1px 2px 2px 1px, rgba(0,0,0,0.2) !important;
 }
 
 .hide-wrapper{
@@ -37,6 +48,10 @@
 
 .bold{
   font-weight: 600;
+}
+
+.actives{
+  background-color: #f4ede6;;
 }
 
 .time-group-wrapper{

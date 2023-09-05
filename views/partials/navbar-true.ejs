@@ -1,0 +1,93 @@
+
+<style>
+.navbar {
+    background-color:#f4ede6;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0 0.5rem 0 0.5rem;
+    width: 100%;
+}
+
+.logo{
+    display: flex;
+    align-items: baseline;
+}
+
+.logo span {
+    font-size: 1.5rem;
+    margin-left: 10px;
+}
+.logo img{
+    height: 40px;
+}
+
+.nav-links {
+    display: flex;
+    height: 60px;
+    margin-bottom: 0;
+}
+
+.nav-links div {
+    display: flex;
+    height: 100%;
+    margin-right: 20px;
+    font-size: 1.2rem;
+}
+
+
+.active{
+    background-color: #e0cebf;
+}
+
+.nav-links a {
+    padding: 0.5rem;
+    text-decoration: none;
+    margin-top:auto;
+    color: black;
+}
+
+
+
+</style>
+<nav class="navbar">
+    <div class="logo">
+        <img src="https://res.cloudinary.com/dhetxk68c/image/upload/v1693319361/black-coffee_okh4fc.png" alt="logo">
+       <span>Comenzi</span> 
+    </div>
+    <div class="nav-links">
+        <div class="link-1">
+            <a href="/api/order-page">Comenzi Live</a>
+        </div>
+        <div class="link-2">
+            <a href="/api/finish-order-page">Comenzi Terminate</a>
+        </div>
+    </div>
+</nav>
+
+<script>
+    const comenziLive = document.querySelector('.link-1')
+    const comenziTerminate = document.querySelector('.link-2')
+    const currentTab = window.location.href;
+    const indexTab = currentTab.lastIndexOf('/');
+    const tab = currentTab.slice(indexTab +1);
+    if(tab === 'finish-order-page'){
+       comenziTerminate.classList.add('active')     
+       comenziLive.classList.remove('active')
+    } else {
+        comenziTerminate.classList.remove('active')     
+        comenziLive.classList.add('active')
+    }
+    comenziLive.addEventListener('click', () =>{
+        comenziLive.classList.add('active')
+        comenziTerminate.classList.remove('active') 
+    })
+    comenziTerminate.addEventListener('click', () => {
+        comenziTerminate.classList.add('active')     
+       comenziLive.classList.remove('active')
+    })
+
+
+</script>
+
