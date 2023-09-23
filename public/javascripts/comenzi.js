@@ -93,7 +93,8 @@ function addOrder(order, withding) {
     <li class="list-group-item">
     <div class="wrapper">
     <span class="bold">Nr: ${order.index}</span>
-    <div class="bold" id="timer"></div>
+    <div class="bold" id="firstTimer"></div>
+    <div class="bold hide" id="timer"></div>
     <span class="bold" id="table">Masa: ${order.masa}</span>
     <span class="bold hide" id="pick">Pick UP</span>
     </div>
@@ -167,6 +168,7 @@ function addOrder(order, withding) {
     const timeLi = orderDiv.querySelector('.time-li');
     const timeButtons = orderDiv.querySelectorAll('.time-button');
     const timer = orderDiv.querySelector('#timer');
+    const firstTimer = orderDiv.querySelector('#firstTimer')
     const hideOrderButton = orderDiv.querySelector('.hide-wrapper');
     const hideIcon = orderDiv.querySelector('i')
     const hideText = orderDiv.querySelector('.hide-text');
@@ -208,7 +210,7 @@ function addOrder(order, withding) {
             console.log('inside timeout', hitOnTime)
         }, 23000)
 
-        setupCountdownTimerBeforeAccept(timer)
+        setupCountdownTimerBeforeAccept(firstTimer)
         
         acceptaButton.addEventListener('click', () => {
             if(hitOnTime){
@@ -231,6 +233,8 @@ function addOrder(order, withding) {
                         const orderId = order._id;
                         fetch(`${baseUrlHeroku}api/set-order-time?orderId=${orderId}&time=${timeTo}`).then(res => res.json()).then(data => {
                             terminatButton.classList.remove('hide');
+                            timer.classList.remove('hide');
+                            firstTimer.classList.add('hide');
                             timeLi.classList.add('hide');
                             hideOrderButton.classList.remove('hide')
                         })
@@ -262,6 +266,8 @@ function addOrder(order, withding) {
         acceptaButton.classList.add('hide');
         const terminatButton = orderDiv.querySelector('.accept');
         terminatButton.classList.remove('hide');
+        timer.classList.remove('hide');
+        firstTimer.classList.add('hide');
         newOrdersDiv.appendChild(orderDiv);
     }
 }
@@ -296,8 +302,7 @@ function setupCountdownTimerBeforeAccept(timerElement) {
 
 function setupCountdownTimer(timeToBeReady, timerElement) {
     if(timeToBeReady <= 0){
-        console.log('hit timer function')
-        timerElement.textContent = "NU A FOST DAT TIMP!!"
+        timerElement.textContent = "NU A FOST DAT TIMP!"
     } else {
         let timeToSend = timeToBeReady;
         function updateTimer() {

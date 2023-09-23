@@ -76,6 +76,10 @@ body{
   color:#df3b57;
 }
 
+#firstTimer{
+  color:#df3b57; 
+}
+
 .time-wrapper{
   display: flex;
   justify-content: space-evenly;
