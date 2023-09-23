@@ -77,6 +77,7 @@ function addOrder(order, withding) {
     console.log(order.completetime)
 
 
+
     const productList = order.products.map(product => `<li class="list-group-item">
     <div class="product-wrapper">
     <span class='prod-name'>${product.quantity} X ${product.name}</span>
@@ -96,12 +97,14 @@ function addOrder(order, withding) {
     <div class="wrapper">
     <span class="bold">Nr: ${order.index}</span>
     <div class="hide bold" id="timer"></div>
-    <span class="bold">Masa: ${order.masa}</span>
+    <span class="bold" id="table">Masa: ${order.masa}</span>
+    <span class="bold hide" id="pick">Pick UP</span>
     </div>
     </li>
     <li class="list-group-item">
     <div class="wrapper">
     <div> <span>Primită: </span><span class="bold">${localTimeString}</span></div>
+    <div class="bold hide" id="toGo"><span>La Pachet</span></div>
     <div><span>ETA: </span><span class="bold" id="end"></span></div>
     </div>
     </li>
@@ -172,6 +175,19 @@ function addOrder(order, withding) {
     const hideText = orderDiv.querySelector('.hide-text');
     const elementsToHide = orderDiv.querySelectorAll('.to-hide');
     const end = orderDiv.querySelector('#end')
+    const pick = orderDiv.querySelector("#pick")
+    const table = orderDiv.querySelector("#table")
+    const toGo = orderDiv.querySelector('#toGo')
+    
+    if(order.pickUp){
+        pick.classList.remove('hide');
+        table.classList.add('hide')
+    } 
+    if(order.toGo){
+        console.log('ceva')
+        toGo.classList.remove('hide')
+    }
+
     if (withding) {
         //SET INTERVAL FOR ANIMATION
         const intervalId = setInterval(() => {

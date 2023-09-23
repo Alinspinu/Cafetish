@@ -24,6 +24,14 @@ body{
   cursor: pointer;
 }
 
+#pick{
+  color: rgb(195, 119, 6);
+}
+
+#toGo{
+  color: red;
+}
+
 
 .product-wrapper{
   display: flex;

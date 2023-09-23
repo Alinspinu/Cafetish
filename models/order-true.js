@@ -32,6 +32,14 @@ const orderTrueSchema = new Schema({
         type: String,
         required: true
     },
+    toGo: {
+        type: Boolean,
+        default: false
+    },
+    pickUp: {
+        type: Boolean,
+        default: false
+    },
     status: {
         type: String,
         default: "open",

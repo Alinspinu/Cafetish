@@ -64,12 +64,14 @@ function addOrder(order) {
     <li class="list-group-item">
     <div class="wrapper">
     <span class="bold">Nr: ${order.index}</span>
-    <span class="bold">Masa: ${order.masa}</span>
+    <span class="bold" id="table">Masa: ${order.masa}</span>
+    <span class="bold hide" id="pick">Pick UP</span>
     </div>
     </li>
     <li class="list-group-item">
     <div class="wrapper">
     <div> <span>Primită: </span><span class="bold">${localTimeString}</span></div>
+    <div class="bold hide" id="toGo"><span>La Pachet</span></div>
     <div><span>Terminată: </span><span class="bold">${formEndDate}</span></div>
     </div>
     </li>
@@ -111,6 +113,19 @@ function addOrder(order) {
     const hideIcon = orderDiv.querySelector('i')
     const hideText = orderDiv.querySelector('.hide-text');
     const elementsToHide = orderDiv.querySelectorAll('.to-hide');
+    const pick = orderDiv.querySelector("#pick")
+    const table = orderDiv.querySelector("#table")
+    const toGo = orderDiv.querySelector('#toGo')
+
+    if(order.pickUp){
+        pick.classList.remove('hide');
+        table.classList.add('hide')
+    } 
+    if(order.toGo){
+        console.log('ceva')
+        toGo.classList.remove('hide')
+    }
+
     hideOrderButton.classList.remove('hide');
     elementsToHide.forEach((el) => {
         el.classList.add('hide')
