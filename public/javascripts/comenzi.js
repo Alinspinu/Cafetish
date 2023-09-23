@@ -14,7 +14,6 @@ if (currentUrl.startsWith(baseUrlLocal)) {
 const url = `${baseUrlLocal}api/recive-order`;
 const urlLocalSend = `${baseUrlLocal}api/order-done`;
 const eventSource = new EventSource(url);
-console.log(eventSource)
 
 eventSource.onopen = () => {
     console.log('EventSource connection is open.');
@@ -65,6 +64,7 @@ newOrdersDiv.addEventListener("click", (event) => {
 });
 
 function addOrder(order, withding) {
+    console.log('hit the create order fuction')
     const orderDiv = document.createElement("div");
     orderDiv.classList.add('col-sm-6', 'col-md-6', 'col-lg-4', "mb-4", 'order', "appear");
 
@@ -74,9 +74,6 @@ function addOrder(order, withding) {
     const localTimeString = hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0");
     const now = new Date(Date.now())
     const timeToBeReady = (date.getTime() + order.completetime) - now;
-    console.log(order.completetime)
-
-
 
     const productList = order.products.map(product => `<li class="list-group-item">
     <div class="product-wrapper">
@@ -257,20 +254,24 @@ function calcEndTime(startTime, givenTime, element) {
 
 
 function setupCountdownTimer(timeToBeReady, timerElement) {
-    let timeToSend = timeToBeReady;
-    function updateTimer() {
-        if (timeToSend <= 0) {
-            clearInterval(interval);
-            timerElement.textContent = "Time's up!";
-            return;
+    if(timeToBeReady <= 0){
+        timerElement.textContent = "NU A FOST DAT TIMP!!"
+    } else {
+        let timeToSend = timeToBeReady;
+        function updateTimer() {
+            if (timeToSend <= 0) {
+                clearInterval(interval);
+                timerElement.textContent = "TIMPUL A EXPIRAT!";
+                return;
+            }
+            const minutes = Math.floor(timeToSend / 60000);
+            const seconds = Math.floor((timeToSend % 60000) / 1000);
+            const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            timerElement.textContent = formattedTime;
+            timeToSend -= 1000;
         }
-        const minutes = Math.floor(timeToSend / 60000);
-        const seconds = Math.floor((timeToSend % 60000) / 1000);
-        const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        timerElement.textContent = formattedTime;
-        timeToSend -= 1000;
+        const interval = setInterval(updateTimer, 1000);
     }
-    const interval = setInterval(updateTimer, 1000);
 }
 
 
