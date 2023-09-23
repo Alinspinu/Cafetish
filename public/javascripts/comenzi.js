@@ -93,7 +93,7 @@ function addOrder(order, withding) {
     <li class="list-group-item">
     <div class="wrapper">
     <span class="bold">Nr: ${order.index}</span>
-    <div class="hide bold" id="timer"></div>
+    <div class="bold" id="timer"></div>
     <span class="bold" id="table">Masa: ${order.masa}</span>
     <span class="bold hide" id="pick">Pick UP</span>
     </div>
@@ -201,37 +201,60 @@ function addOrder(order, withding) {
 
         dingSound.play();
 
-        acceptaButton.addEventListener('click', () => {
-            clearInterval(intervalId);
-            dingSound.pause();
-            dingSound.currentTime = 0;
-            orderDiv.classList.remove('appear');
-            timeLi.classList.remove('hide');
-            acceptaButton.classList.remove('pending');
-            acceptaButton.classList.add('hide');
+        let hitOnTime = true;
+   
+        setTimeout(()=>{
+            hitOnTime = false
+            console.log('inside timeout', hitOnTime)
+        }, 23000)
 
-            console.log('before click')
-            timeButtons.forEach((el) => {
-                el.addEventListener('click', () => {
-                    const timeTo = parseFloat(el.innerText.slice(0, -3)) * 60 * 1000
-                    console.log('ceva');
-                    setupCountdownTimer(timeTo, timer);
-                    calcEndTime(date, timeTo, end)
-                    const orderId = order._id;
-                    fetch(`${baseUrlHeroku}api/set-order-time?orderId=${orderId}&time=${timeTo}`).then(res => res.json()).then(data => {
-                        terminatButton.classList.remove('hide');
-                        timeLi.classList.add('hide');
-                        timer.classList.remove('hide')
-                        hideOrderButton.classList.remove('hide')
+        setupCountdownTimerBeforeAccept(timer)
+        
+        acceptaButton.addEventListener('click', () => {
+            if(hitOnTime){
+                console.log("true", hitOnTime)
+                clearInterval(intervalId);
+                dingSound.pause();
+                dingSound.currentTime = 0;
+                orderDiv.classList.remove('appear');
+                timeLi.classList.remove('hide');
+                acceptaButton.classList.remove('pending');
+                acceptaButton.classList.add('hide');
+    
+                console.log('before click')
+                timeButtons.forEach((el) => {
+                    el.addEventListener('click', () => {
+                        const timeTo = parseFloat(el.innerText.slice(0, -3)) * 60 * 1000
+                        console.log('ceva');
+                        setupCountdownTimer(timeTo, timer);
+                        calcEndTime(date, timeTo, end)
+                        const orderId = order._id;
+                        fetch(`${baseUrlHeroku}api/set-order-time?orderId=${orderId}&time=${timeTo}`).then(res => res.json()).then(data => {
+                            terminatButton.classList.remove('hide');
+                            timeLi.classList.add('hide');
+                            hideOrderButton.classList.remove('hide')
+                        })
                     })
                 })
-            })
-            showHideElements(hideOrderButton, hideIcon, hideText, elementsToHide);
+            } else {
+                console.log("false",hitOnTime)
+                setupCountdownTimer(0, timer);
+                clearInterval(intervalId);
+                dingSound.pause();
+                dingSound.currentTime = 0;
+                orderDiv.classList.remove('appear');
+                timeLi.classList.remove('hide');
+                acceptaButton.classList.remove('pending');
+                acceptaButton.classList.add('hide');
+                terminatButton.classList.remove('hide');
+                timeLi.classList.add('hide');
+                hideOrderButton.classList.remove('hide')
+            }
         });
+        showHideElements(hideOrderButton, hideIcon, hideText, elementsToHide);
         newOrdersDiv.appendChild(orderDiv);
     } else {
         hideOrderButton.classList.remove('hide');
-        timer.classList.remove('hide');
         calcEndTime(date, order.completetime, end)
         setupCountdownTimer(timeToBeReady, timer);
         showHideElements(hideOrderButton, hideIcon, hideText, elementsToHide);
@@ -253,8 +276,27 @@ function calcEndTime(startTime, givenTime, element) {
 }
 
 
+function setupCountdownTimerBeforeAccept(timerElement) {
+    console.log('hit timer before function')
+        let timeToSend = 23
+        function updateTimer() {
+            if (timeToSend <= 0) {
+                clearInterval(interval);
+                timerElement.textContent = "NU A FOST DAT TIMP!";
+                return;
+            }
+            timerElement.textContent = timeToSend
+            timeToSend -= 1;
+        }
+        const interval = setInterval(updateTimer, 1000);
+}
+
+
+
+
 function setupCountdownTimer(timeToBeReady, timerElement) {
     if(timeToBeReady <= 0){
+        console.log('hit timer function')
         timerElement.textContent = "NU A FOST DAT TIMP!!"
     } else {
         let timeToSend = timeToBeReady;
