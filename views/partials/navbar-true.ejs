@@ -91,16 +91,6 @@
 </nav>
 
 <script>
-    let baseUrlLocal = 'http://localhost:8090/'
-    const baseUrlHeroku = 'https://www.cafetish.com/'
-
-    const currentUrl = window.location.href;
-    if (currentUrl.startsWith(baseUrlLocal)) {
-        baseUrlLocal = baseUrlLocal;
-    } else {
-        baseUrlLocal = baseUrlHeroku;
-    }
-    const dingSound = new Audio(`${baseUrlLocal}sounds/ding.mp3`);
     const playButton = document.querySelector('.play')
     const comenziLive = document.querySelector('.link-1')
     const comenziTerminate = document.querySelector('.link-2')
