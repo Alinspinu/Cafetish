@@ -40,6 +40,14 @@ const orderTrueSchema = new Schema({
         type: Boolean,
         default: false
     },
+    payOnline: {
+        type: Boolean,
+        default: false
+    },
+    payOnSite: {
+        type: Boolean,
+        default: false
+    },
     status: {
         type: String,
         default: "open",
@@ -48,6 +56,8 @@ const orderTrueSchema = new Schema({
         type: Number,
         default: 0
     },
+    userName: String, 
+    userTel: String,
     products:
         [
             {

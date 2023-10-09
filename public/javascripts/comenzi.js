@@ -24,6 +24,7 @@ eventSource.onmessage = (event) => {
     if (!order || order.message === 'No Orders') {
         console.log('hit the no orders')
     } else {
+        console.log(order)
         addOrder(order, true);
     }
 };
@@ -92,6 +93,13 @@ function addOrder(order, withding) {
 
     <li class="list-group-item">
     <div class="wrapper">
+    <span class="bold">Name: ${order.userName}</span>
+    <span class="bold">Tel: ${order.userTel}</span>
+    </div>
+    </li>
+
+    <li class="list-group-item">
+    <div class="wrapper">
     <span class="bold">Nr: ${order.index}</span>
     <div class="bold" id="firstTimer"></div>
     <div class="bold hide" id="timer"></div>
@@ -127,17 +135,27 @@ function addOrder(order, withding) {
 
     <li class="list-group-item to-hide">
     <div class="wrapper">
-    <span>Cash Back</span> 
+    <span>Plătit cu Cash Back</span> 
     <span>- ${order.cashBack} Lei</span>
     </div>
     </li>
 
+
     <li class="list-group-item bold to-hide">
     <div class="wrapper">
-    <span>Total</span>
+    <span id="payOnline">Plătit Online</span> 
+    <span id="payOnSite" class="hide">Rest de plata</span>
     <span>${order.total} Lei</span>
     </div>
     </li>
+
+    <li class="list-group-item bold to-hide hide" id="zero">
+    <div class="wrapper">
+    <span>Rest de plata</span>
+    <span> 0 Lei</span>
+    </div>
+    </li>
+
     <li class="list-group-item p-0 hide time-li">
     <div class="time-group-wrapper">
     <span class="time-title">Selectează timpul de așteptare!</span>
@@ -173,11 +191,21 @@ function addOrder(order, withding) {
     const hideIcon = orderDiv.querySelector('i')
     const hideText = orderDiv.querySelector('.hide-text');
     const elementsToHide = orderDiv.querySelectorAll('.to-hide');
-    const end = orderDiv.querySelector('#end')
-    const pick = orderDiv.querySelector("#pick")
-    const table = orderDiv.querySelector("#table")
-    const toGo = orderDiv.querySelector('#toGo')
-    
+    const end = orderDiv.querySelector('#end');
+    const pick = orderDiv.querySelector("#pick");
+    const table = orderDiv.querySelector("#table");
+    const toGo = orderDiv.querySelector('#toGo');
+    const payOnline = orderDiv.querySelector('#payOnline');
+    const payOnSite = orderDiv.querySelector('#payOnSite');
+    const zero = orderDiv.querySelector('#zero')
+    console.log(order)
+    if(!order.payOnline){
+        payOnline.classList.add('hide');
+        payOnSite.classList.remove('hide');
+    } else {
+        zero.classList.remove('hide')
+    }
+
     if(order.pickUp){
         pick.classList.remove('hide');
         table.classList.add('hide')
