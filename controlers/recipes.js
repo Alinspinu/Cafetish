@@ -4,7 +4,12 @@ const Recipe = require('../models/recipe')
 
 module.exports.renderSearchRecipes = async (req, res) => {
     const recipes = await Recipe.find({})
-    res.render('recipe/recipes-search', { recipes, session: req.session })
+    const sortedRecipes = recipes.sort((a, b) => {
+        if (a.name < b.name) return -1;
+        if (a.name > b.name) return 1;
+        return 0;
+    });
+    res.render('recipe/recipes-search', { sortedRecipes, session: req.session })
 }
 
 module.exports.renderAddRecipe = async (req, res) => {

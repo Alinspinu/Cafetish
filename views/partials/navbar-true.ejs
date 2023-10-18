@@ -74,12 +74,15 @@
     <div class="logo">
         <img src="https://res.cloudinary.com/dhetxk68c/image/upload/v1693319361/black-coffee_okh4fc.png" alt="logo">
        <span>Comenzi</span> 
+
     </div>
-  
         <div class="link-3 play">
             <i class="bi bi-megaphone" id="playIcon"></i>
         </div>
     <div class="nav-links">
+        <div class="link-4">
+            <a href="/recipes">Rețete Bar</a>
+        </div>
         <div class="link-1">
             <a href="/api/order-page">Comenzi Live</a>
         </div>
@@ -94,23 +97,39 @@
     const playIcon = document.querySelector('#playIcon')
     const comenziLive = document.querySelector('.link-1')
     const comenziTerminate = document.querySelector('.link-2')
+    const recipe = document.querySelector('.link-4')
     const currentTab = window.location.href;
     const indexTab = currentTab.lastIndexOf('/');
     const tab = currentTab.slice(indexTab +1);
     if(tab === 'finish-order-page'){
        comenziTerminate.classList.add('active')     
        comenziLive.classList.remove('active')
-    } else {
+       recipe.classList.remove('active')
+
+    } else if(tab === 'order-page') {
         comenziTerminate.classList.remove('active')     
         comenziLive.classList.add('active')
+        recipe.classList.remove('active')
+    } else {
+        recipe.classList.add('active')
+        comenziTerminate.classList.remove('active')     
+        comenziLive.classList.remove('active')
     }
     comenziLive.addEventListener('click', () =>{
         comenziLive.classList.add('active')
         comenziTerminate.classList.remove('active') 
+        recipe.classList.remove('active')
     })
     comenziTerminate.addEventListener('click', () => {
         comenziTerminate.classList.add('active')     
        comenziLive.classList.remove('active')
+       recipe.classList.remove('active')
+    })
+
+    recipe.addEventListener('click', () => {
+        recipe.classList.add('active')
+        comenziTerminate.classList.remove('active')     
+        comenziLive.classList.remove('active')
     })
     playButton.addEventListener('click', function(){
         if(!playIcon.classList.contains("bi-megaphone-fill")){

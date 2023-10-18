@@ -3,7 +3,7 @@ const ingredients = document.querySelectorAll('#ingredient')
 const firtsHeader = document.getElementById('first-header');
 const secondHeader = document.getElementById('second-header');
 const description = document.getElementById('description')
-const backIcon = document.getElementById('back-icon')
+const backIcons = document.getElementById('back-icon')
 const editIcon = document.getElementById('edit-icon')
 const id = window.location.href.split('/').pop()
 
@@ -26,8 +26,10 @@ for (let i = 0; i < ingredients.length; i++) {
         description.classList.add('bg-gray')
     }
 }
-backIcon.onclick = () => {
-    window.location.href = '/recipes'
+if(backIcons){
+    backIcons.onclick = () => {
+        window.location.href = '/recipes'
+    }
 }
 
 if (editIcon) {

@@ -1,4 +1,4 @@
-<% layout('layouts/boilerplate-recipe') %>
+<% layout('layouts/center') %>
         <div class="row">
             <div class="col-lg-6 offset-lg-3" id="container">
                 <% if(session.userId){ %>
@@ -11,7 +11,7 @@
                     <div class="search-input">
                         <input type="text" id="cauta" placeholder="Search Recipe...">
                         <div class="nomenclator">
-                            <%recipes.forEach(recipe => {%>
+                            <%sortedRecipes.forEach(recipe => {%>
                                 <li class="recipes m-0"><a href="/recipes/<%=recipe._id%>"> 
                                     <% if(recipe.image.path){ %>
                                         <img src="<%=recipe.image.path%>" 
