@@ -64,19 +64,8 @@ newOrdersDiv.addEventListener("click", (event) => {
     }
 });
 
-function topping(product){
-    let toppings 
-    if(product.toppings.length > 0){
-        toppings = product.toppings.join(', ')
-    } else {
-        toppings = product.toppings[0]
-    }
-    console.log(toppings)
-    return toppings
-}
 
 function addOrder(order, withding) {
-    console.log(order.products)
     console.log('hit the create order fuction')
     const orderDiv = document.createElement("div");
     orderDiv.classList.add('col-sm-6', 'col-md-6', 'col-lg-4', "mb-4", 'order', "appear");
@@ -94,7 +83,7 @@ function addOrder(order, withding) {
     <span class='prod-price'>${product.total} Lei</span>
     </div>
     <div>
-    <span class='bold'>+${product.toppings.join(', ')}</span>
+    <span class='bold toppings'>+${product.toppings.join(', ')}</span>
     </div>
     </li>`).join('');
 
@@ -196,6 +185,7 @@ function addOrder(order, withding) {
     <button class="btn accept hide btn-success">Terminat</button>
      </ul>`;
 
+    const toppings = orderDiv.querySelectorAll('.toppings')
     const acceptaButton = orderDiv.querySelector('.pending');
     const terminatButton = orderDiv.querySelector('.accept');
     const timeLi = orderDiv.querySelector('.time-li');
@@ -213,7 +203,15 @@ function addOrder(order, withding) {
     const payOnline = orderDiv.querySelector('#payOnline');
     const payOnSite = orderDiv.querySelector('#payOnSite');
     const zero = orderDiv.querySelector('#zero')
-    console.log(order)
+    if(toppings.length){
+        toppings.forEach(el => {
+            console.log(el)
+            if(el.innerText === '+'){
+                el.classList.add('hide')
+            }
+        })
+    }
+
     if(!order.payOnline){
         payOnline.classList.add('hide');
         payOnSite.classList.remove('hide');
