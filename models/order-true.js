@@ -76,7 +76,8 @@ const orderTrueSchema = new Schema({
                 total: {
                     type: String,
                     required: true
-                }
+                },
+                toppings: [String],
             }
         ]
 

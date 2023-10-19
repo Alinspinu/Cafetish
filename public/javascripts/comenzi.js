@@ -64,7 +64,19 @@ newOrdersDiv.addEventListener("click", (event) => {
     }
 });
 
+function topping(product){
+    let toppings 
+    if(product.toppings.length > 0){
+        toppings = product.toppings.join(', ')
+    } else {
+        toppings = product.toppings[0]
+    }
+    console.log(toppings)
+    return toppings
+}
+
 function addOrder(order, withding) {
+    console.log(order.products)
     console.log('hit the create order fuction')
     const orderDiv = document.createElement("div");
     orderDiv.classList.add('col-sm-6', 'col-md-6', 'col-lg-4', "mb-4", 'order', "appear");
@@ -75,11 +87,14 @@ function addOrder(order, withding) {
     const localTimeString = hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0");
     const now = new Date(Date.now())
     const timeToBeReady = (date.getTime() + order.completetime) - now;
-
+   
     const productList = order.products.map(product => `<li class="list-group-item">
     <div class="product-wrapper">
     <span class='prod-name'>${product.quantity} X ${product.name}</span>
     <span class='prod-price'>${product.total} Lei</span>
+    </div>
+    <div>
+    <span class='bold'>+${product.toppings.join(', ')}</span>
     </div>
     </li>`).join('');
 
