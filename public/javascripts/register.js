@@ -111,10 +111,10 @@ function createEntryRow(wrapper, el) {
     } else {
         mark = 'green-mark'
     }
-    entryDescription.classList.add('col-6', 'text-center', 'border');
+    entryDescription.classList.add('col-5', 'text-center', 'border');
     entryType.classList.add('col-2', 'text-center', 'border', mark);
     entryDocNumber.classList.add('col-1', 'text-center', 'offset-1', 'border');
-    entrySum.classList.add('col-1', 'text-center', 'border', mark);
+    entrySum.classList.add('col-2', 'text-center', 'border', mark);
     entryWrapper.classList.add('row', 'entry', 'my-1')
     delEntry.classList.add('col-1', 'bi', 'bi-trash3')
     entryWrapper.append(entryDocNumber, entryDescription, entryType, entrySum, delEntry)
@@ -172,9 +172,9 @@ function createHeaderEntry(wrapper, data) {
         headerPrevSum.classList.add('col-1')
         header.classList.add('row', 'heder-row')
         headerNrDoc.classList.add('col-1', 'offset-1', 'text-center', 'border')
-        headerDescription.classList.add('col-6', 'text-center', 'border')
+        headerDescription.classList.add('col-5', 'text-center', 'border')
         headerType.classList.add('col-2', 'text-center', 'border')
-        headerSum.classList.add('col-1', 'text-center', 'border')
+        headerSum.classList.add('col-2', 'text-center', 'border')
         header.append(headerNrDoc, headerDescription, headerType, headerSum, headerPrevSum)
     }
     wrapper.appendChild(header)

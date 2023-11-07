@@ -56,9 +56,10 @@ span{
     z-index: 2;
 }
 
-.container{
+.containe{
     display: flex;
     flex-direction: column;
+    padding: 0 10px 0 10px;
 }
 
 #add{
