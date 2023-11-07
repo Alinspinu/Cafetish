@@ -120,7 +120,7 @@ function createEntryRow(wrapper, el) {
     entryWrapper.append(entryDocNumber, entryDescription, entryType, entrySum, delEntry)
     wrapper.appendChild(entryWrapper)
     delEntry.addEventListener('click', function () {
-        fetch(`${baseUrlLocal}rapoarte/entry`, {
+        fetch(`${baseUrlHeroku}rapoarte/entry`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
