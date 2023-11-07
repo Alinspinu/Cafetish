@@ -104,7 +104,7 @@ function createEntryRow(wrapper, el) {
     el.tip === 'expense' ? entryTypeName = 'Cheltuială' : entryTypeName = 'Încasare';
     entryType.innerText = entryTypeName;
     entryDocNumber.innerText = el.index
-    entrySum.innerText = el.amount
+    entrySum.innerText = round(el.amount)
     let mark = ''
     if (el.tip === 'expense') {
         mark = 'red-mark'
@@ -236,3 +236,7 @@ document.getElementById("nextBtn").addEventListener("click", handleNextButtonCli
 
 // Create the initial calendar tabs
 createCalendarTabs();
+
+function round(num) {
+    return Math.round(num * 100) / 100;
+}
