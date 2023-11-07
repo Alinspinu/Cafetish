@@ -28,34 +28,38 @@ module.exports.sendEntry = async (req, res, next) => {
 
 module.exports.addEntry = async (req, res, next) => {
     const { tip, date, description, amount } = req.body.entry
-    const entryDate = new Date(date)
-    const newEntry = new Entry({
-        tip: tip,
-        date: entryDate,
-        description: description,
-        amount: tip === 'expense' ? -amount : amount,
-    })
-    newEntry.save()
-    const nextDay = new Date(entryDate);
-    nextDay.setDate(entryDate.getDate() + 1);
-    const day = await Day.findOne({ date: { $gte: entryDate, $lt: nextDay} }).populate({ path: 'entry' })
-    if (day) {
-        const daySum = day.entry.reduce((total, doc) => total + doc.amount, 0)
-        day.entry.push(newEntry)
-        const dayTotal = daySum + newEntry.amount + day.cashIn
-        day.cashOut = dayTotal
-        await day.save()
-    } else {
-        entryDate.setUTCHours(0,0,0,0)
-        const newDay = new Day({
+    if(tip && date && description && amount){
+        const entryDate = new Date(date)
+        const newEntry = new Entry({
+            tip: tip,
             date: entryDate,
-            cashOut: newEntry.amount
+            description: description,
+            amount: tip === 'expense' ? -amount : amount,
         })
-        newDay.entry.push(newEntry)
-        await newDay.save()
-        console.log('first day created')
+        newEntry.save()
+        const nextDay = new Date(entryDate);
+        nextDay.setDate(entryDate.getDate() + 1);
+        const day = await Day.findOne({ date: { $gte: entryDate, $lt: nextDay} }).populate({ path: 'entry' })
+        if (day) {
+            const daySum = day.entry.reduce((total, doc) => total + doc.amount, 0)
+            day.entry.push(newEntry)
+            const dayTotal = daySum + newEntry.amount + day.cashIn
+            day.cashOut = dayTotal
+            await day.save()
+        } else {
+            entryDate.setUTCHours(0,0,0,0)
+            const newDay = new Day({
+                date: entryDate,
+                cashOut: newEntry.amount
+            })
+            newDay.entry.push(newEntry)
+            await newDay.save()
+            console.log('first day created')
+        }
+        res.redirect('back')
+    } else {
+        res.status(226).json({message: 'Nu ai completat toate campurile mai incearca.. :)'})
     }
-    res.redirect('back')
 }
 
 module.exports.deleteEntry = async (req, res, next) => {

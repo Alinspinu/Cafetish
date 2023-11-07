@@ -188,7 +188,7 @@ function createPreviousDayHeader(wrapper, el) {
     title.innerText = 'Numerar din ziua precedentă'
     const sum = document.createElement('span')
     sum.classList.add('col-2', 'border')
-    sum.innerText = el.regDay.cashIn
+    sum.innerText = round(el.regDay.cashIn)
     dayHeader.append(title, sum)
     wrapper.appendChild(dayHeader)
 }
@@ -201,7 +201,7 @@ function createDayFooter(wrapper, el) {
     title.innerText = 'Total la sfârșit de zi';
     const sum = document.createElement('span');
     sum.classList.add('col-2', 'border', 'total-sum')
-    sum.innerText = el.regDay.cashOut
+    sum.innerText = round(el.regDay.cashOut)
     footer.append(title, sum)
     wrapper.appendChild(footer)
 }
