@@ -1,0 +1,53 @@
+<% layout('layouts/center') %>
+
+<div class="row">
+    <div class="card col-md-3" style="padding:8px 8px 8px 8px; margin-top: 50px;">
+        <form action="/register/entry" method="POST" class="validated-form" novalidate>
+            <h4 class="text-center mt-2">Adaugă intrare</h4>
+
+            <select class="form-select" name="entry[tip]" id="" aria-label="Default select example"
+            required>
+            <option value="">Tip de intrare</option>
+                <option value='income'>Încasare</option>
+                <option value='expense'>Cheltuială</option>
+             </select>
+
+             <span class="label my-2">Dată</span>
+             <input type="date" class="form-control" name="entry[date]" id="entry-date" aria-describedby="basic-addon1" required>
+             
+             <span class="label my-2">Descriere</span>
+            <textarea type="text" name="entry[description]" id="" class="form-control" 
+                aria-describedby="basic-addon1" required></textarea>
+
+            <span class="label my-1">Sumă</span>
+            <input type="number" name="entry[amount]" id="" class="form-control" 
+                aria-describedby="basic-addon1" required>
+             <div class="d-grid gap-2">
+                <button class="btn my-1 addIngBtn" style="background-color: #e0d4c9;">
+                    <i class="bi bi-plus-square"></i>
+                    Adaugă
+                </button>
+             </div>
+          
+        </form>
+        </div>
+
+    <div class="card col-md-9" style="padding:8px 8px 8px 8px; margin-top: 50px;">
+        <div class="row px-2">
+            <div class="col prev">
+                <i class="bi bi-arrow-left-square" id="prevBtn"></i>
+            </div>
+            <ul class="nav nav-tabs col-10" id="dayTab" role="tablist">
+         
+            </ul>
+            <div class="col next">
+                <i class="bi bi-arrow-right-square" id="nextBtn"></i>
+            </div>
+            <div class="tab-content" id="dayTabContent">
+                
+            </div>  
+        </div>
+    </div>
+</div>
+
+<script src="/javascripts/register.js"></script>

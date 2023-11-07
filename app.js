@@ -34,6 +34,7 @@ const apiRoutes = require("./routes/true-orders");
 const bodyParser = require('body-parser');
 const helmetConfig = require('./config/helmet');
 const sessionConfig = require('./config/session');
+const registerRoutes = require('./routes/register');
 const { fbCredentials, googleCredentials, connectFb, connectGoogle } = require('./config/login');
 
 app.use(cors())
@@ -98,6 +99,8 @@ app.use("/blog", blogRoutes);
 app.use("/recipes", recipeRoutes)
 app.use("/pos", posRoutes)
 app.use("/api", apiRoutes)
+app.use("/register", registerRoutes)
+
 
 
 app.use((err, req, res, next) => {

@@ -80,6 +80,9 @@
             <i class="bi bi-megaphone" id="playIcon"></i>
         </div>
     <div class="nav-links">
+        <div class="link-5">
+            <a href="/register/register">Registru de casă</a>
+        </div>
         <div class="link-4">
             <a href="/recipes">Rețete Bar</a>
         </div>
@@ -98,38 +101,55 @@
     const comenziLive = document.querySelector('.link-1')
     const comenziTerminate = document.querySelector('.link-2')
     const recipe = document.querySelector('.link-4')
+    const register = document.querySelector('.link-5')
     const currentTab = window.location.href;
     const indexTab = currentTab.lastIndexOf('/');
     const tab = currentTab.slice(indexTab +1);
     if(tab === 'finish-order-page'){
-       comenziTerminate.classList.add('active')     
-       comenziLive.classList.remove('active')
-       recipe.classList.remove('active')
-
+       comenziTerminate.classList.add('active');     
+       comenziLive.classList.remove('active');
+       recipe.classList.remove('active');
+        register.classList.remove('active');
     } else if(tab === 'order-page') {
-        comenziTerminate.classList.remove('active')     
-        comenziLive.classList.add('active')
-        recipe.classList.remove('active')
-    } else {
+        comenziTerminate.classList.remove('active');     
+        comenziLive.classList.add('active');
+        recipe.classList.remove('active');
+        register.classList.remove('active');
+    } else if(tab === "recipes") {
         recipe.classList.add('active')
-        comenziTerminate.classList.remove('active')     
-        comenziLive.classList.remove('active')
+        comenziTerminate.classList.remove('active');     
+        comenziLive.classList.remove('active');
+        register.classList.remove('active');
+    } else {
+        recipe.classList.remove('active')
+        comenziTerminate.classList.remove('active');     
+        comenziLive.classList.remove('active');
+        register.classList.add('active');
     }
     comenziLive.addEventListener('click', () =>{
-        comenziLive.classList.add('active')
-        comenziTerminate.classList.remove('active') 
-        recipe.classList.remove('active')
+        comenziLive.classList.add('active');
+        comenziTerminate.classList.remove('active'); 
+        recipe.classList.remove('active');
+        register.classList.remove('active');
     })
     comenziTerminate.addEventListener('click', () => {
         comenziTerminate.classList.add('active')     
        comenziLive.classList.remove('active')
        recipe.classList.remove('active')
+       register.classList.remove('active');
     })
 
     recipe.addEventListener('click', () => {
         recipe.classList.add('active')
         comenziTerminate.classList.remove('active')     
         comenziLive.classList.remove('active')
+        register.classList.remove('active');
+    });
+    register.addEventListener('click', () => {
+        recipe.classList.remove('active')
+        comenziTerminate.classList.remove('active');     
+        comenziLive.classList.remove('active');
+        register.classList.add('active');
     })
     playButton.addEventListener('click', function(){
         if(!playIcon.classList.contains("bi-megaphone-fill")){

@@ -211,8 +211,9 @@ function addOrder(order, withding) {
             }
         })
     }
-
+    console.log(order)
     if(!order.payOnline){
+        console.log('ceva')
         payOnline.classList.add('hide');
         payOnSite.classList.remove('hide');
     } else {
