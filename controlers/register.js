@@ -70,6 +70,10 @@ module.exports.deleteEntry = async (req, res, next) => {
         await Entry.findByIdAndDelete(id)
         await Day.findOneAndUpdate({ _id: day._id }, { $pull: { entry: entry._id } }).exec()
         day.cashOut = day.cashOut - entry.amount
+        if(!day.entry.length){
+            console.log("ceva")
+            day.cashOut = day.cashIn
+        }
         day.save()
         res.status(200).json({ message: `Entry ${entry.description}, with the amount ${entry.amount} was deleted` })
     } catch (err) {

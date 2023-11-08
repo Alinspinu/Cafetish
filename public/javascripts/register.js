@@ -1,10 +1,13 @@
 let baseUrlLocal = 'http://localhost:8090/'
 let baseUrlHeroku = 'https://www.cafetish.com/'
 
+
 const entryDate = document.getElementById('entry-date')
-const currentDate = new Date().toISOString().split("T")[0];  // Get the current date in ISO format (YYYY-MM-DD)
-document.getElementById('entry-date').value = currentDate;  // Set the value of the date input to the current date
-document.getElementById("entry-date").setAttribute("max", currentDate);
+
+    const currentDate = new Date().toISOString().split("T")[0];  // Get the current date in ISO format (YYYY-MM-DD)
+    document.getElementById('entry-date').value = currentDate;  // Set the value of the date input to the current date
+    document.getElementById("entry-date").setAttribute("max", currentDate);
+
 
 // Global variables to keep track of the current start date and end date
 let startDate;
@@ -72,7 +75,6 @@ function createCalendarTabs() {
 
 function clickHandler(button, wrapper) {
     fetch(`${baseUrlHeroku}register/entry?data=${button.innerText}`).then((res) => res.json().then((data) => {
-        console.log(data)
         if (data.regDay === null) {
             const template = document.createElement('div');
             template.classList.add('no-records')
@@ -128,10 +130,10 @@ function createEntryRow(wrapper, el) {
             body: JSON.stringify({ id: el._id })
         }).then((res) => res.json().then((res) => {
             createMessage(wrapper, res.message)
+            updateTotal(el.amount)
+            const parentElement = delEntry.parentNode
+            parentElement.remove()
         }))
-        updateTotal(el.amount)
-        const parentElement = delEntry.parentNode
-        parentElement.remove()
     })
 }
 
@@ -208,8 +210,8 @@ function createDayFooter(wrapper, el) {
 
 // Function to handle the previous button click
 function handlePrevButtonClick() {
-    endDate.setDate(endDate.getDate() - 4);
-    startDate.setDate(startDate.getDate() - 4);
+    endDate.setDate(endDate.getDate() - 2);
+    startDate.setDate(startDate.getDate() - 2);
     createCalendarTabs();
 }
 
@@ -218,8 +220,8 @@ function handleNextButtonClick() {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     if (endDate < today) {
-        endDate.setDate(endDate.getDate() + 4);
-        startDate.setDate(startDate.getDate() + 4);
+        endDate.setDate(endDate.getDate() + 2);
+        startDate.setDate(startDate.getDate() + 2);
         createCalendarTabs();
     }
 }
@@ -227,7 +229,7 @@ function handleNextButtonClick() {
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 startDate = new Date(today);
-startDate.setDate(today.getDate() - 8);
+startDate.setDate(today.getDate() - 3);
 endDate = new Date(today);
 
 // Attach event listeners to the buttons
