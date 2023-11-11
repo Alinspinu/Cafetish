@@ -67,7 +67,7 @@ module.exports.deleteEntry = async (req, res, next) => {
     try {
         const entry = await Entry.findById(id)
         const day = await Day.findOne({ date: entry.date })
-        await Entry.findByIdAndDelete(id)
+        await entry.deleteOne();
         await Day.findOneAndUpdate({ _id: day._id }, { $pull: { entry: entry._id } }).exec()
         day.cashOut = day.cashOut - entry.amount
         if(!day.entry.length){
