@@ -269,7 +269,7 @@ function addOrder(order, withding) {
                 timeButtons.forEach((el) => {
                     el.addEventListener('click', () => {
                         const timeTo = parseFloat(el.innerText.slice(0, -3)) * 60 * 1000
-                        console.log('ceva');
+                        console.log('ceva', el.innerText);
                         setupCountdownTimer(timeTo, timer);
                         calcEndTime(date, timeTo, end)
                         const orderId = order._id;

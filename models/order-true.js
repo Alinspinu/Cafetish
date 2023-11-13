@@ -56,6 +56,9 @@ const orderTrueSchema = new Schema({
         type: Number,
         default: 0
     },
+    endTime: {
+        type: String,
+    },
     userName: String, 
     userTel: String,
     products:
