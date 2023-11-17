@@ -8,10 +8,15 @@ const orderTrueSchema = new Schema({
         type: Number,
         index: true
     },
+    masaRest: {
+        type: Schema.Types.ObjectId,
+        ref: 'Table'
+    },
     masa: {
         type: Number,
         required: true
     },
+    production: Boolean,
     productCount: {
         type: Number,
         required: true
