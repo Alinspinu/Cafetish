@@ -15,9 +15,10 @@ module.exports.sendLiveOrders = async (req, res, next) => {
     changeStream.on("change", async (change) => {
         if (
             change.operationType === "insert" &&
-            change.fullDocument.status === 'open'
+            change.fullDocument.status === 'open' &&
+            change.fullDocument.production === false 
         ) {
-            const newOrder = await TrueOrder.findOne({ _id: change.fullDocument._id }).exec();
+            const newOrder = await TrueOrder.findOne({ _id: change.fullDocument._id, production: false }).exec();
             res.write(`data: ${JSON.stringify(newOrder)}\n\n`);
         }
     })

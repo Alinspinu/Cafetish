@@ -273,7 +273,8 @@ function addOrder(order, withding) {
                         setupCountdownTimer(timeTo, timer);
                         calcEndTime(date, timeTo, end)
                         const orderId = order._id;
-                        fetch(`${baseUrlHeroku}api/set-order-time?orderId=${orderId}&time=${timeTo}`).then(res => res.json()).then(data => {
+                        console.log(baseUrlLocal)
+                        fetch(`${baseUrlLocal}api/set-order-time?orderId=${orderId}&time=${timeTo}`).then(res => res.json()).then(data => {
                             terminatButton.classList.remove('hide');
                             timer.classList.remove('hide');
                             firstTimer.classList.add('hide');
