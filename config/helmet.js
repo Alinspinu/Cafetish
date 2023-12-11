@@ -28,10 +28,12 @@ const fontSrcUrls = [
 const helmetConfig = {
     directives: {
         defaultSrc: [],
-        mediaSrc: ["https://res.cloudinary.com/", "http://localhost:8080/", "https://www.cafetish.com", "http://localhost:8090"],
+        mediaSrc: ["https://res.cloudinary.com/", "http://localhost:8080/", "https://localhost:8080/", "https://www.cafetish.com", "http://localhost:8090", "https://172.20.110.62:8090"],
         connectSrc: [
+            "https://172.20.110.62:8090",
             "https://localhost:8080",
             "http://localhost:8090",
+            "https://localhost:8090",
             "https://www.cafetish.com/order/order-done",
             "http://localhost:8080/",
             "https://cafetish.com",

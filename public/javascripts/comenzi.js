@@ -1,14 +1,15 @@
 
 
+// let baseUrlLocal = 'https://172.20.110.62:8090/'
 let baseUrlLocal = 'http://localhost:8090/'
 const baseUrlHeroku = 'https://www.cafetish.com/'
 
-const currentUrl = window.location.href;
-if (currentUrl.startsWith(baseUrlLocal)) {
-    baseUrlLocal = baseUrlLocal;
-} else {
-    baseUrlLocal = baseUrlHeroku;
-}
+// const currentUrl = window.location.href;
+// if (currentUrl.startsWith(baseUrlLocal)) {
+//     baseUrlLocal = baseUrlLocal;
+// } else {
+//     baseUrlLocal = baseUrlHeroku;
+// }
 
 
 const url = `${baseUrlLocal}api/recive-order`;

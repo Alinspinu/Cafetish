@@ -1,4 +1,4 @@
-let baseUrlLocal = 'http://localhost:8090/'
+let baseUrlLocal = 'http://172.20.110.62:8090/'
 let baseUrlHeroku = 'https://www.cafetish.com/'
 
 
@@ -74,7 +74,7 @@ function createCalendarTabs() {
 }
 
 function clickHandler(button, wrapper) {
-    fetch(`${baseUrlHeroku}register/entry?data=${button.innerText}`).then((res) => res.json().then((data) => {
+    fetch(`${baseUrlLocal}register/entry?data=${button.innerText}`).then((res) => res.json().then((data) => {
         if (data.regDay === null) {
             const template = document.createElement('div');
             template.classList.add('no-records')
@@ -122,7 +122,7 @@ function createEntryRow(wrapper, el) {
     entryWrapper.append(entryDocNumber, entryDescription, entryType, entrySum, delEntry)
     wrapper.appendChild(entryWrapper)
     delEntry.addEventListener('click', function () {
-        fetch(`${baseUrlHeroku}register/entry`, {
+        fetch(`${baseUrlLocal}register/entry`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

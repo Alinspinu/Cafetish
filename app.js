@@ -35,6 +35,9 @@ const bodyParser = require('body-parser');
 const helmetConfig = require('./config/helmet');
 const sessionConfig = require('./config/session');
 const registerRoutes = require('./routes/register');
+
+const fs = require('fs');
+const https = require('https');
 const { fbCredentials, googleCredentials, connectFb, connectGoogle } = require('./config/login');
 
 app.use(cors())
@@ -108,6 +111,18 @@ app.use((err, req, res, next) => {
   if (!err.message) err.message = "O Noo! Something went wrong!";
   res.status(statusCode).render("error", { err });
 });
+
+
+// const keyPath = path.resolve(__dirname, 'ssl/key.pem');
+// const certPath = path.resolve(__dirname, 'ssl/cert.pem');
+
+// const certOptions = {
+//   key: fs.readFileSync(keyPath),
+//   cert: fs.readFileSync(certPath)
+// };
+
+// Create HTTPS server
+// const server = https.createServer(certOptions, app);
 
 const port = process.env.PORT || 8090;
 app.listen(port, () => {

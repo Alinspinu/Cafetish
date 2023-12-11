@@ -3,12 +3,12 @@
 let baseUrlLocal = 'http://localhost:8090/'
 const baseUrlHeroku = 'https://www.cafetish.com/'
 
-const currentUrl = window.location.href;
-if (currentUrl.startsWith(baseUrlLocal)) {
-    baseUrlLocal = baseUrlLocal;
-} else {
-    baseUrlLocal = baseUrlHeroku;
-}
+// const currentUrl = window.location.href;
+// if (currentUrl.startsWith(baseUrlLocal)) {
+//     baseUrlLocal = baseUrlLocal;
+// } else {
+//     baseUrlLocal = baseUrlHeroku;
+// }
 
 
 

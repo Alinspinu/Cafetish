@@ -19,6 +19,7 @@ module.exports.sendLiveOrders = async (req, res, next) => {
             change.fullDocument.production === false 
         ) {
             const newOrder = await TrueOrder.findOne({ _id: change.fullDocument._id, production: false }).exec();
+            console.log(newOrder);
             res.write(`data: ${JSON.stringify(newOrder)}\n\n`);
         }
     })
