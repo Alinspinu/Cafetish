@@ -30,11 +30,14 @@ const newOrdersDiv = document.getElementById("new-orders");
 function formatedDateToShow(date){
     if(date.length){
       const inputDate = new Date(date);
+      const hours = inputDate.getHours();
+      const minutes = inputDate.getMinutes();
+      const hour = hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0");
       const monthNames = [
         "Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
         "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"
       ];
-      return `${inputDate.getDate().toString().padStart(2, '0')}-${monthNames[inputDate.getMonth()]}-${inputDate.getFullYear()}`
+      return `${inputDate.getDate().toString().padStart(2, '0')}-${monthNames[inputDate.getMonth()]}-${inputDate.getFullYear()} - ${hour}  `
     } else {
       return ''
     }
@@ -52,7 +55,7 @@ function addOrder(order) {
     const minutes = date.getMinutes();
     const hour = hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0");
 
-    const localTimeString = formatedDateToShow(order.createdAt) + ' '+ 'ora'+ ' ' + hour
+    const localTimeString = formatedDateToShow(order.createdAt)
     const formEndDate = formatedDateToShow(order.preOrderPickUpDate)
     const productList = order.products.map(product => `<li class="list-group-item">
     <div class="product-wrapper">
