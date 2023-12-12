@@ -55,6 +55,11 @@ body{
   justify-content: space-between;
 }
 
+.wrapper-time{
+  display: flex;
+  flex-direction: column;
+}
+
 .bold{
   font-weight: 600;
 }

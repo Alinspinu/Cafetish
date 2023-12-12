@@ -2,7 +2,6 @@
 
 // let baseUrlLocal = 'https://172.20.110.62:8090/'
 let baseUrlLocal = 'http://localhost:8090/'
-const baseUrlHeroku = 'https://www.cafetish.com/'
 
 // const currentUrl = window.location.href;
 // if (currentUrl.startsWith(baseUrlLocal)) {
@@ -38,7 +37,6 @@ const getOrdersUrl = `${baseUrlLocal}api/get-order`;
 fetch(getOrdersUrl)
     .then((res) => res.json())
     .then(orders => {
-        console.log(orders)
         for (const order of orders) {
             addOrder(order);
         }
@@ -84,7 +82,7 @@ function addOrder(order, withding) {
     <span class='prod-price'>${product.total} Lei</span>
     </div>
     <div>
-    <span class='bold toppings'>+${product.toppings.join(', ')}</span>
+    <span class='bold toppings'>+${product.toppings.map(topping => topping.name).join('')}</span>
     </div>
     </li>`).join('');
 
@@ -276,6 +274,7 @@ function addOrder(order, withding) {
                         const orderId = order._id;
                         console.log(baseUrlLocal)
                         fetch(`${baseUrlLocal}api/set-order-time?orderId=${orderId}&time=${timeTo}`).then(res => res.json()).then(data => {
+                            console.log(data)
                             terminatButton.classList.remove('hide');
                             timer.classList.remove('hide');
                             firstTimer.classList.add('hide');

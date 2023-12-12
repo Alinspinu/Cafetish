@@ -19,7 +19,6 @@ module.exports.sendLiveOrders = async (req, res, next) => {
             change.fullDocument.production === false 
         ) {
             const newOrder = await TrueOrder.findOne({ _id: change.fullDocument._id, production: false }).exec();
-            console.log(newOrder);
             res.write(`data: ${JSON.stringify(newOrder)}\n\n`);
         }
     })
@@ -42,6 +41,7 @@ module.exports.orderDone = async (req, res, next) => {
 }
 
 module.exports.setOrderTime = async (req, res, next) => {
+    console.log('hit the route')
     try {
         const time = parseFloat(req.query.time);
         const orderId = (req.query.orderId);
@@ -57,9 +57,34 @@ module.exports.renderTrueOrders = (req, res) => {
     res.render('orders-true/comenzi')
 }
 
+module.exports.renderCakeOrders = (req, res) => {
+    res.render('orders-true/cake-orders')
+}
+
 
 module.exports.renderTrueOrdesTerminat = (req, res) => {
     res.render('orders-true/comenzi-terminate')
+}
+
+module.exports.getCakeOrders = async (req, res, next) => {
+    try{
+        const orders = await TrueOrder.find({preOrder: true})
+        res.status(200).json(orders)
+    } catch (err){
+        console.log(err);
+        res.status(500).json(err)
+    }
+}
+
+module.exports.setDelivered = async (req, res, next) => {
+    try{
+        const { id } = req.query
+        const order = await TrueOrder.findByIdAndUpdate(id, {preOrder: false})
+        res.status(200).json({message: `Comanda nr ${order.index} a fost marcată ca și ridicată!`})
+    } catch(err){
+        console.log(err);
+        res.status(500).json(err)
+    }
 }
 
 module.exports.getOrderDone = async (req, res, next) => {

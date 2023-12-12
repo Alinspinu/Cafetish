@@ -1,7 +1,6 @@
 
 
 let baseUrlLocal = 'http://localhost:8090/'
-const baseUrlHeroku = 'https://www.cafetish.com/'
 
 // const currentUrl = window.location.href;
 // if (currentUrl.startsWith(baseUrlLocal)) {
@@ -12,11 +11,10 @@ const baseUrlHeroku = 'https://www.cafetish.com/'
 
 
 
-const getOrdersUrl = `${baseUrlLocal}api/get-order-done`;
+const getOrdersUrl = `${baseUrlLocal}api/get-cake-orders`;
 fetch(getOrdersUrl)
     .then((res) => res.json())
     .then(orders => {
-        console.log(orders)
         for (const order of orders) {
             addOrder(order);
         }
@@ -29,6 +27,21 @@ fetch(getOrdersUrl)
 
 const newOrdersDiv = document.getElementById("new-orders");
 
+function formatedDateToShow(date){
+    if(date.length){
+      const inputDate = new Date(date);
+      const monthNames = [
+        "Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
+        "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"
+      ];
+      return `${inputDate.getDate().toString().padStart(2, '0')}-${monthNames[inputDate.getMonth()]}-${inputDate.getFullYear()}`
+    } else {
+      return ''
+    }
+    }
+
+
+
 
 function addOrder(order) {
     const orderDiv = document.createElement("div");
@@ -37,23 +50,17 @@ function addOrder(order) {
     const date = new Date(order.createdAt);
     const hours = date.getHours();
     const minutes = date.getMinutes();
-    const localTimeString = hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0");
-    const endDate = new Date(order.updatedAt)
-    const endHours = endDate.getHours();
-    const endMinutes = endDate.getMinutes();
-    const formEndDate = endHours.toString().padStart(2, "0") + ":" + endMinutes.toString().padStart(2, "0");
+    const hour = hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0");
 
-    const now = new Date(Date.now())
-    const timeToBeReady = (date.getTime() + order.completetime) - now
-
-
+    const localTimeString = formatedDateToShow(order.createdAt) + ' '+ 'ora'+ ' ' + hour
+    const formEndDate = formatedDateToShow(order.preOrderPickUpDate)
     const productList = order.products.map(product => `<li class="list-group-item">
     <div class="product-wrapper">
     <span class='prod-name'>${product.quantity} X ${product.name}</span>
     <span class='prod-price'>${product.total} Lei</span>
     </div>
     <div>
-    <span class='bold toppings'>+${product.toppings.map(topping => topping.name).join('')}</span>
+    <span class='bold toppings'>${product.toppings.map(topping => topping.name).join('')}</span>
     </div>
     </li>`).join('');
 
@@ -76,15 +83,12 @@ function addOrder(order) {
     <li class="list-group-item">
     <div class="wrapper">
     <span class="bold">Nr: ${order.index}</span>
-    <span class="bold" id="table">Masa: ${order.masa}</span>
-    <span class="bold hide" id="pick">Pick UP</span>
     </div>
     </li>
     <li class="list-group-item">
-    <div class="wrapper">
+    <div class="wrapper-time">
     <div> <span>Primită: </span><span class="bold">${localTimeString}</span></div>
-    <div class="bold hide" id="toGo"><span>La Pachet</span></div>
-    <div><span>Terminată: </span><span class="bold">${formEndDate}</span></div>
+    <div><span>Ridicare: </span><span class="bold">${formEndDate}</span></div>
     </div>
     </li>
  
@@ -119,24 +123,17 @@ function addOrder(order) {
     <span>${order.total} Lei</span>
     </div>
     </li>
+    <button id="pickUpButton" class="btn accept btn-success">PREDĂ COMANDA</button>
      </ul>`;
 
     const hideOrderButton = orderDiv.querySelector('.hide-wrapper');
     const hideIcon = orderDiv.querySelector('i')
     const hideText = orderDiv.querySelector('.hide-text');
     const elementsToHide = orderDiv.querySelectorAll('.to-hide');
-    const pick = orderDiv.querySelector("#pick")
     const table = orderDiv.querySelector("#table")
-    const toGo = orderDiv.querySelector('#toGo')
+    const pickUpButton = orderDiv.querySelector('#pickUpButton')
 
-    if(order.pickUp){
-        pick.classList.remove('hide');
-        table.classList.add('hide')
-    } 
-    if(order.toGo){
-        console.log('ceva')
-        toGo.classList.remove('hide')
-    }
+
 
     hideOrderButton.classList.remove('hide');
     elementsToHide.forEach((el) => {
@@ -144,8 +141,21 @@ function addOrder(order) {
     });
     showHideElements(hideOrderButton, hideIcon, hideText, elementsToHide);
     newOrdersDiv.appendChild(orderDiv);
-}
 
+    pickUpButton.addEventListener('click', function () {
+       const alerts =  confirm('Camanda va fi salvată ca și predată, ești sigur ca vres sa faci asta?')
+        if(alerts){
+            fetch(`${baseUrlLocal}api/set-delivered?id=${order._id}`).then(res => res.json()).then(data => {
+                const message = data.message
+                alert(message)
+                orderDiv.remove()
+            })
+        } else {
+            console.log('cancel')
+        }
+   
+    }); 
+}
 
 function showHideElements(hideOrderButton, hideIcon, hideText, elementsToHide) {
     hideOrderButton.addEventListener('click', () => {
